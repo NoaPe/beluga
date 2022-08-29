@@ -2,9 +2,9 @@
 
 namespace NoaPe\Beluga;
 
+use NoaPe\Beluga\Commands\BelugaCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use NoaPe\Beluga\Commands\BelugaCommand;
 
 class BelugaServiceProvider extends PackageServiceProvider
 {
