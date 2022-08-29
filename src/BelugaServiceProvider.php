@@ -8,6 +8,17 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class BelugaServiceProvider extends PackageServiceProvider
 {
+
+    public function boot()
+    {
+        //
+    }
+
+    public function register()
+    {
+        //
+    }
+
     public function configurePackage(Package $package): void
     {
         /*
