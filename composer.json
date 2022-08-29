@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "noape/beluga",
+    "description": "Extensive model management on Laravel",
     "keywords": [
-        ":vendor_name",
+        "noape",
         "laravel",
-        ":package_slug"
+        "beluga"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/NoaPe/beluga",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Noa Peguin",
+            "email": "noa.peguin@hotmail.com",
             "role": "Developer"
         }
     ],
@@ -35,31 +35,35 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories"
+            "NoaPe\\Beluga\\": "src",
+            "NoaPe\\Beluga\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "NoaPe\\Beluga\\Tests\\": "tests"
         }
     },
     "scripts": {
-        "analyse": "vendor/bin/phpstan analyse",
-        "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage",
-        "format": "vendor/bin/pint"
+        "analyse": "noape/bin/phpstan analyse",
+        "test": "noape/bin/pest",
+        "test-coverage": "noape/bin/pest --coverage",
+        "format": "noape/bin/pint"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "NoaPe\\Beluga\\BelugaServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "Beluga": "NoaPe\\Beluga\\Facades\\Beluga"
             }
         }
     },
