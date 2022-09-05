@@ -11,12 +11,18 @@ class BelugaServiceProvider extends PackageServiceProvider
 
     public function boot()
     {
-        //
+        if ($this->app->runningInConsole()) {
+
+            $this->publishes([
+                __DIR__.'/../config/beluga.php' => config_path('beluga.php'),
+            ], 'config');
+        
+        }
     }
 
     public function register()
     {
-        //
+        
     }
 
     public function configurePackage(Package $package): void
