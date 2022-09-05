@@ -12,7 +12,7 @@ return [
      */
     'default_schema_properties' => [
         'id' => true,
-        'timestamps' => true
+        'timestamps' => true,
     ],
 
     /**
@@ -20,6 +20,6 @@ return [
      */
     'default_data_properties' => [
         'type' => 'integer',
-        'required' => false
-    ]
+        'required' => false,
+    ],
 ];
