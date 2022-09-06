@@ -133,21 +133,23 @@ abstract class Shell extends Model
      */
     protected function addGroupToBlueprint($group, $blueprint)
     {
-
-        foreach ($group['datas'] as $name => $data) 
+        foreach ($group['datas'] as $name => $data) {
             if (is_callable($this, $data['type'])) {
-
                 $column = $this->{$data['type']}($name);
 
-                if ($data['nullable'])
+                if ($data['nullable']) {
                     $column->nullable();
+                }
 
-                if ($data['unique'])
+                if ($data['unique']) {
                     $column->unique();
+                }
 
-                if (isset($data['default']))
+                if (isset($data['default'])) {
                     $column->default($data['default']);
+                }
             }
+        }
 
         if (isset($group['groups'])) {
             foreach ($group['groups'] as $group2) {
