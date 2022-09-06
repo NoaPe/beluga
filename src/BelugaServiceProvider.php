@@ -2,10 +2,10 @@
 
 namespace NoaPe\Beluga;
 
+use Illuminate\Support\Facades\Route;
 use NoaPe\Beluga\Commands\BelugaCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Illuminate\Support\Facades\Route;
 
 class BelugaServiceProvider extends PackageServiceProvider
 {
@@ -32,7 +32,6 @@ class BelugaServiceProvider extends PackageServiceProvider
             $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         });
     }
-
 
     protected function routeConfiguration()
     {

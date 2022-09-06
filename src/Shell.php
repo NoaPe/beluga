@@ -47,7 +47,6 @@ abstract class Shell extends Model
             // Define by database table
         }
 
-        
         $this->schema = json_decode($data);
 
         /**

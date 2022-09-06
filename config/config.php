@@ -20,9 +20,9 @@ return [
      */
     'default_data_properties' => [
         'type' => 'integer',
-        'nullable' => true
+        'nullable' => true,
     ],
 
     'prefix' => 'beluga',
-    'middleware' => ['web']
+    'middleware' => ['web'],
 ];

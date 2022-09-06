@@ -21,12 +21,9 @@ class SchemaController extends Controller
 
     public function create($name)
     {
-
     }
 
     public function export($name)
     {
-
     }
-
 }
