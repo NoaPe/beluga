@@ -135,8 +135,19 @@ abstract class Shell extends Model
     {
 
         foreach ($group['datas'] as $name => $data) 
-            if (is_callable($this, $data['type']))
-                $this->{$data['type']}();
+            if (is_callable($this, $data['type'])) {
+
+                $column = $this->{$data['type']}($name);
+
+                if ($data['nullable'])
+                    $column->nullable();
+
+                if ($data['unique'])
+                    $column->unique();
+
+                if (isset($data['default']))
+                    $column->default($data['default']);
+            }
 
         if (isset($group['groups']))
             foreach($group['groups'] as $group2)

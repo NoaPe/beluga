@@ -20,6 +20,6 @@ return [
      */
     'default_data_properties' => [
         'type' => 'integer',
-        'required' => false
+        'nullable' => true
     ]
 ];
