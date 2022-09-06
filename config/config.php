@@ -21,5 +21,8 @@ return [
     'default_data_properties' => [
         'type' => 'integer',
         'nullable' => true
-    ]
+    ],
+
+    'prefix' => 'beluga',
+    'middleware' => ['web']
 ];

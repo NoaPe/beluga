@@ -5,6 +5,7 @@ namespace NoaPe\Beluga;
 use NoaPe\Beluga\Commands\BelugaCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class BelugaServiceProvider extends PackageServiceProvider
 {
@@ -12,13 +13,33 @@ class BelugaServiceProvider extends PackageServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/beluga.php' => config_path('beluga.php'),
+                __DIR__.'/../config/config.php' => config_path('beluga.php'),
             ], 'config');
         }
+
+        $this->registerRoutes();
+
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'beluga');
     }
 
     public function register()
     {
+    }
+
+    protected function registerRoutes()
+    {
+        Route::group($this->routeConfiguration(), function () {
+            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+        });
+    }
+
+
+    protected function routeConfiguration()
+    {
+        return [
+            'prefix' => config('beluga.prefix'),
+            'middleware' => config('beluga.middleware'),
+        ];
     }
 
     public function configurePackage(Package $package): void

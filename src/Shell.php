@@ -43,7 +43,11 @@ abstract class Shell extends Model
         $file = config('beluga.schema_path').'/'.class_basename($this).'Schema.json';
         if (! file_exists($file)) {
             $data = file_get_contents($file);
+        } else {
+            // Define by database table
         }
+
+        
         $this->schema = json_decode($data);
 
         /**
