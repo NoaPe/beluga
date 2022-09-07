@@ -38,7 +38,6 @@ abstract class Shell extends Model
          */
         $this->table_name = get_called_class()::getTableName();
 
-        
         /**
          * Schema definition
          */
@@ -70,8 +69,9 @@ abstract class Shell extends Model
          */
         $file = get_called_class()::getSchemaFileName();
 
-        if (file_exists($file))
+        if (file_exists($file)) {
             $data = file_get_contents($file);
+        }
 
         return json_decode($data);
     }
@@ -167,17 +167,21 @@ abstract class Shell extends Model
         foreach ($group->datas as $name => $data) {
             $column = $blueprint->{$data->type}($name);
 
-            if ($data->nullable)
+            if ($data->nullable) {
                 $column->nullable();
+            }
 
-            if ($data->unique)
+            if ($data->unique) {
                 $column->unique();
+            }
 
-            if (isset($data->default))
+            if (isset($data->default)) {
                 $column->default($data->default);
-            
-            if (isset($data->length))
+            }
+
+            if (isset($data->length)) {
                 $column->length($data->length);
+            }
         }
 
         if (isset($group->groups)) {
@@ -185,7 +189,6 @@ abstract class Shell extends Model
                 $this->addGroupToBlueprint($group2, $blueprint);
             }
         }
-        
     }
 
     /**
@@ -195,24 +198,23 @@ abstract class Shell extends Model
      */
     public static function up()
     {
-
         $table_name = get_called_class()::getTableName();
 
         Schema::create($table_name, function (Blueprint $blueprint) {
-
             $schema = get_called_class()::getSchema();
 
-            if ($schema->id) 
+            if ($schema->id) {
                 $blueprint->id();
+            }
 
-            if ($schema->timestamps) 
+            if ($schema->timestamps) {
                 $blueprint->timestamps();
+            }
 
-            foreach ($schema->groups as $name => $group) 
+            foreach ($schema->groups as $name => $group) {
                 self::addGroupToBlueprint($group, $blueprint);
-
+            }
         });
-         
     }
 
     /**

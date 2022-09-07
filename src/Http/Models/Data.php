@@ -4,7 +4,6 @@ namespace NoaPe\Beluga\Http\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use NoaPe\Beluga\Shell;
-use Illuminate\Support\Str;
 
 class Data extends Shell
 {
