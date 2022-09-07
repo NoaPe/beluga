@@ -6,7 +6,7 @@ class SchemaController extends Controller
 {
     public function index()
     {
-        return view('beluga::index', compact('schemas'));
+        return view('beluga::index');
     }
 
     public function show($name)
