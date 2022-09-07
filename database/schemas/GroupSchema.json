@@ -1,0 +1,41 @@
+{
+    "groups": {
+
+        "main": {
+
+            "datas": {
+                
+                "name": {
+                    "type": "string",
+                    "label": "Nom",
+                    "position": 1,
+                    "nullable": false
+                },
+
+                "label": {
+                    "type": "string",
+                    "label": "Label",
+                    "position": 2,
+                    "nullable": true
+                },
+
+                "description": {
+                    "type": "string",
+                    "label": "Description",
+                    "position": 3,
+                    "nullable": true
+                },
+
+                "position": {
+                    "type": "integer",
+                    "label": "Position",
+                    "position": 4,
+                    "nullable": true
+                }
+
+            }
+
+        }
+
+    }
+}

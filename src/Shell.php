@@ -56,7 +56,7 @@ abstract class Shell extends Model
      */
     public static function getSchemaFileName()
     {
-        return config('beluga.schema_path').'/'.get_called_class()::getTableName().'.json';
+        return config('beluga.schema_path').'/'.class_basename(get_called_class()).'Schema.json';
     }
 
     /**
@@ -71,6 +71,11 @@ abstract class Shell extends Model
 
         if (file_exists($file)) {
             $data = file_get_contents($file);
+        } else {
+            /**
+             * Throw exception if schema file does not exist with the name of the expected file.
+             */
+            throw new \Exception('Schema file does not exist: '.$file);
         }
 
         return json_decode($data);
