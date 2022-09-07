@@ -3,8 +3,6 @@
 namespace NoaPe\Beluga\Http\Models;
 
 use NoaPe\Beluga\Shell;
-use Illuminate\Support\Str;
-
 
 abstract class BasicShell extends Shell
 {

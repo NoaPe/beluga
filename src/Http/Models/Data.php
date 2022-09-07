@@ -15,5 +15,4 @@ class Data extends BasicShell
     {
         return config('beluga.table_prefix').'datas';
     }
-    
 }
