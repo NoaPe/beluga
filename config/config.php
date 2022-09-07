@@ -21,8 +21,11 @@ return [
     'default_data_properties' => [
         'type' => 'integer',
         'nullable' => true,
+        'unique' => false,
     ],
 
     'prefix' => 'beluga',
     'middleware' => ['web'],
+
+    'table_prefix' => 'beluga_',
 ];

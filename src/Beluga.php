@@ -4,4 +4,5 @@ namespace NoaPe\Beluga;
 
 class Beluga
 {
+    
 }

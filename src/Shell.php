@@ -5,6 +5,7 @@ namespace NoaPe\Beluga;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 abstract class Shell extends Model
 {
@@ -35,19 +36,13 @@ abstract class Shell extends Model
         /**
          * Table name definition
          */
-        $this->table_name = Str::snake(Str::pluralStudly(class_basename($this)));
+        $this->table_name = get_called_class()::getTableName();
 
+        
         /**
-         * Get schema information from Json file.
+         * Schema definition
          */
-        $file = config('beluga.schema_path').'/'.class_basename($this).'Schema.json';
-        if (! file_exists($file)) {
-            $data = file_get_contents($file);
-        } else {
-            // Define by database table
-        }
-
-        $this->schema = json_decode($data);
+        $this->schema = get_called_class()::getSchema();
 
         /**
          * Set default values
@@ -57,11 +52,44 @@ abstract class Shell extends Model
         dd($this->schema);
     }
 
-    public function checkStructure()
+    /**
+     * Static function for get a name of schema file.
+     */
+    public static function getSchemaFileName()
     {
-        //dd(config('beluga.schema_path'));
-        //dd(Schema::getColumnListing($this->getTable()));
-        //Schema::getColumnType($table,$column)
+        return config('beluga.schema_path').'/'.get_called_class()::getTableName().'.json';
+    }
+
+    /**
+     * Static function to get raw schema information.
+     */
+    protected static function getRawSchema()
+    {
+        /**
+         * Get schema information from Json file.
+         */
+        $file = get_called_class()::getSchemaFileName();
+
+        if (file_exists($file))
+            $data = file_get_contents($file);
+
+        return json_decode($data);
+    }
+
+    /**
+     * Static function to get schema information.
+     */
+    protected static function getSchema()
+    {
+        return self::addDefaultProperties(get_called_class()::getRawSchema());
+    }
+
+    /**
+     * Static function to get table name.
+     */
+    protected static function getTableName()
+    {
+        return Str::snake(Str::pluralStudly(class_basename(get_called_class())));
     }
 
     /**
@@ -71,13 +99,13 @@ abstract class Shell extends Model
      * @param  string  $config_name
      * @return void
      */
-    protected function addDefaultTableProperties($table, $config_name)
+    protected static function addDefaultTableProperties($table, $config_name)
     {
         $default_properties = config('beluga.'.$config_name);
 
         foreach ($default_properties as $name => $value) {
-            if (! isset($table[$name])) {
-                $table[$name] = $value;
+            if (! isset($table->$name)) {
+                $table->$name = $value;
             }
         }
 
@@ -90,22 +118,22 @@ abstract class Shell extends Model
      * @param  array  $groups
      * @return array
      */
-    protected function addDefaultPropertiesInGroups($groups)
+    protected static function addDefaultPropertiesInGroups($groups)
     {
         foreach ($groups as $name => $group) {
             /**
              * If the group have sub-groups we do a recursive call of the function.
              */
-            if (isset($group['groups'])) {
-                $groups[$name]['groups'] = $this->addDefaultPropertiesInGroups($group['groups']);
+            if (isset($group->groups)) {
+                $groups->$name->groups = self::addDefaultPropertiesInGroups($group->groups);
             }
 
             /**
              * If the groups have data definitions, we set the default values for each one.
              */
-            if (isset($group['datas'])) {
-                foreach ($group['datas'] as $nameD => $data) {
-                    $groups[$name]['datas'][$nameD] = $this->addDefaultTableProperties($data, 'default_data_properties');
+            if (isset($group->datas)) {
+                foreach ($group->datas as $nameD => $data) {
+                    $groups->$name->datas->$nameD = self::addDefaultTableProperties($data, 'default_data_properties');
                 }
             }
         }
@@ -118,13 +146,13 @@ abstract class Shell extends Model
      *
      * @return void
      */
-    protected function addDefaultProperties()
+    protected static function addDefaultProperties($schema)
     {
-        $table = $this->addDefaultTableProperties($this->table, 'default_schema_properties');
+        $table = self::addDefaultTableProperties($schema, 'default_schema_properties');
 
-        $table['groups'] = $this->addDefaultPropertiesInGroups($table['groups']);
+        $table->groups = self::addDefaultPropertiesInGroups($table->groups);
 
-        $this->table = $table;
+        return $schema;
     }
 
     /**
@@ -134,31 +162,30 @@ abstract class Shell extends Model
      * @param  Blueprint  $blueprint
      * @return void
      */
-    protected function addGroupToBlueprint($group, $blueprint)
+    protected static function addGroupToBlueprint($group, $blueprint)
     {
-        foreach ($group['datas'] as $name => $data) {
-            if (is_callable($this, $data['type'])) {
-                $column = $this->{$data['type']}($name);
+        foreach ($group->datas as $name => $data) {
+            $column = $blueprint->{$data->type}($name);
 
-                if ($data['nullable']) {
-                    $column->nullable();
-                }
+            if ($data->nullable)
+                $column->nullable();
 
-                if ($data['unique']) {
-                    $column->unique();
-                }
+            if ($data->unique)
+                $column->unique();
 
-                if (isset($data['default'])) {
-                    $column->default($data['default']);
-                }
-            }
+            if (isset($data->default))
+                $column->default($data->default);
+            
+            if (isset($data->length))
+                $column->length($data->length);
         }
 
-        if (isset($group['groups'])) {
-            foreach ($group['groups'] as $group2) {
+        if (isset($group->groups)) {
+            foreach ($group->groups as $group2) {
                 $this->addGroupToBlueprint($group2, $blueprint);
             }
         }
+        
     }
 
     /**
@@ -166,21 +193,26 @@ abstract class Shell extends Model
      *
      * @return void
      */
-    public function up()
+    public static function up()
     {
-        Schema::create($this->table_name, function (Blueprint $blueprint) {
-            if ($this->schema['id']) {
+
+        $table_name = get_called_class()::getTableName();
+
+        Schema::create($table_name, function (Blueprint $blueprint) {
+
+            $schema = get_called_class()::getSchema();
+
+            if ($schema->id) 
                 $blueprint->id();
-            }
 
-            if ($this->schema['timestamps']) {
+            if ($schema->timestamps) 
                 $blueprint->timestamps();
-            }
 
-            foreach ($this->schema['groups'] as $name => $group) {
-                $this->addGroupToBlueprint($group, $blueprint);
-            }
+            foreach ($schema->groups as $name => $group) 
+                self::addGroupToBlueprint($group, $blueprint);
+
         });
+         
     }
 
     /**
@@ -188,8 +220,8 @@ abstract class Shell extends Model
      *
      * @return void
      */
-    public function down()
+    public static function down()
     {
-        Schema::dropIfExists($this->table_name);
+        Schema::dropIfExists(get_called_class()::getTableName());
     }
 }

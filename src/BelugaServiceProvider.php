@@ -20,6 +20,8 @@ class BelugaServiceProvider extends PackageServiceProvider
         $this->registerRoutes();
 
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'beluga');
+        
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
     }
 
     public function register()
