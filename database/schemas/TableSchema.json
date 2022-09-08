@@ -1,0 +1,25 @@
+{
+    "datas": {
+
+        "name": {
+            "type": "string",
+            "required": true,
+            "label": "Name",
+            "description": "The name of the table."
+        },
+
+        "description": {
+            "type": "string",
+            "required": false,
+            "label": "Description",
+            "description": "A description of the table."
+        },
+
+        "timestamps": {
+            "type": "boolean",
+            "required": false,
+            "label": "Timestamps",
+            "description": "If the table has timestamps."
+        }
+    }
+}

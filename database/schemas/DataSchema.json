@@ -1,69 +1,92 @@
 {
-    "groups": {
-
-        "main": {
-
-            "datas": {
-
-                "name": {
-                    "type": "string",
-                    "label": "Nom",
-                    "position": 1,
-                    "nullable": false
-                },
-
-                "label": {
-                    "type": "string",
-                    "label": "Label",
-                    "position": 2,
-                    "nullable": false
-                },
-
-                "description": {
-                    "type": "text",
-                    "label": "Description",
-                    "position": 3,
-                    "nullable": true
-                },
-
-                "type": {
-                    "type": "string",
-                    "label": "Type",
-                    "position": 4,
-                    "nullable": false
-                },
-
-                "default": {
-                    "type": "string",
-                    "label": "Valeur par défaut",
-                    "position": 5,
-                    "nullable": true
-                },
-
-                "required": {
-                    "type": "boolean",
-                    "label": "Requis",
-                    "position": 6,
-                    "nullable": false
-                },
-
-                "dimension": {
-                    "type": "string",
-                    "label": "Dimension",
-                    "position": 7,
-                    "nullable": true
-                },
-
-                "position": {
-                    "type": "integer",
-                    "label": "Position",
-                    "position": 8,
-                    "nullable": true
-                }
-
+    "datas": {
+        "parent_id": {
+            "type": "unsignedInteger",
+            "required": true,
+            "nullable": false,
+            "position": 0,
+            "settings": {
+                "invisible": true
             }
+        },
+        "parent_is_group": {
+            "type": "boolean",
+            "required": true,
+            "nullable": false,
+            "position": 1,
+            "settings": {
+                "invisible": true
+            }
+        },
+        "name": {
+            "type": "string",
+            "label": "Nom",
+            "position": 2,
+            "nullable": false
+        },
+
+        "label": {
+            "type": "string",
+            "label": "Label",
+            "position": 3,
+            "nullable": false
+        },
+
+        "description": {
+            "type": "text",
+            "label": "Description",
+            "position": 4,
+            "nullable": true
+        },
+
+        "type": {
+            "type": "string",
+            "label": "Type",
+            "position": 5,
+            "nullable": false
+        },
+
+        "default": {
+            "type": "string",
+            "label": "Valeur par défaut",
+            "position": 6,
+            "nullable": true
+        },
+
+        "required": {
+            "type": "boolean",
+            "label": "Requis",
+            "position": 7,
+            "nullable": false
+        },
+
+        "dimension": {
+            "type": "string",
+            "label": "Dimension",
+            "position": 8,
+            "nullable": true
+        },
+
+        "position": {
+            "type": "integer",
+            "label": "Position",
+            "position": 9,
+            "nullable": true
+        },
+
+        "validation": {
+            "type": "string",
+            "label": "Validation",
+            "position": 10,
+            "nullable": true
+        },
+
+        "max": {
+            "type": "integer",
+            "label": "Maximum",
+            "position": 11,
+            "nullable": true
         }
 
     }
-
 }

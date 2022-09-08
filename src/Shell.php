@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
+use NoaPe\Beluga\Models\Data;
+use NoaPe\Beluga\Models\Group;
 
 abstract class Shell extends Model
 {
@@ -47,8 +49,7 @@ abstract class Shell extends Model
          * Set default values
          */
         $this->addDefaultProperties();
-
-        dd($this->schema);
+        
     }
 
     /**
@@ -68,14 +69,35 @@ abstract class Shell extends Model
          * Get schema information from Json file.
          */
         $file = get_called_class()::getSchemaFileName();
+        $data = new \stdClass();
 
         if (file_exists($file)) {
             $data = file_get_contents($file);
         } else {
+
             /**
-             * Throw exception if schema file does not exist with the name of the expected file.
+             * Get the table who has the same name as the shell.
              */
-            throw new \Exception('Schema file does not exist: '.$file);
+            $table = Table::where('table_name', get_called_class()::getTableName())->get();
+
+            /**
+             * If the table exists, get the schema information from the database.
+             */
+            if ($table->count() > 0) {
+
+                $table = $table->first();
+
+                /**
+                 * Get schema form Table model
+                 */
+                $data = $table->getSchema();
+
+            } else {
+                /**
+                 * Throw exception if schema file does not exist with the name of the expected file.
+                 */
+                throw new \Exception('Schema file does not exist: '.$file);
+            }
         }
 
         return json_decode($data);
@@ -155,21 +177,31 @@ abstract class Shell extends Model
     {
         $table = self::addDefaultTableProperties($schema, 'default_schema_properties');
 
-        $table->groups = self::addDefaultPropertiesInGroups($table->groups);
+        if (isset($table->groups)) {
+            $table->groups = self::addDefaultPropertiesInGroups($table->groups);
+        }
+
+        if (isset($table->datas)) {
+            foreach ($table->datas as $name => $data) {
+                $table->datas->$name = self::addDefaultTableProperties($data, 'default_data_properties');
+            }
+        }
 
         return $schema;
     }
 
     /**
-     * Add fields to $blueprint from a $groupe, recursive on sub-groups.
-     *
-     * @param  array  $group
+     * Add fields to $blueprint from $datas table.
+     * 
+     * @param array $datas
      * @param  Blueprint  $blueprint
+     * 
      * @return void
      */
-    protected static function addGroupToBlueprint($group, $blueprint)
+    protected static function addDatasToBlueprint($datas, $blueprint)
     {
-        foreach ($group->datas as $name => $data) {
+
+        foreach ($datas as $name => $data) {
             $column = $blueprint->{$data->type}($name);
 
             if ($data->nullable) {
@@ -189,9 +221,23 @@ abstract class Shell extends Model
             }
         }
 
+    }
+
+    /**
+     * Add fields to $blueprint from a $groupe, recursive on sub-groups.
+     *
+     * @param  array  $group
+     * @param  Blueprint  $blueprint
+     * 
+     * @return void
+     */
+    protected static function addGroupToBlueprint($group, $blueprint)
+    {
+        self::addDatasToBlueprint($group->datas, $blueprint);
+
         if (isset($group->groups)) {
             foreach ($group->groups as $group2) {
-                $this->addGroupToBlueprint($group2, $blueprint);
+                self::addGroupToBlueprint($group2, $blueprint);
             }
         }
     }
@@ -216,8 +262,14 @@ abstract class Shell extends Model
                 $blueprint->timestamps();
             }
 
-            foreach ($schema->groups as $name => $group) {
-                self::addGroupToBlueprint($group, $blueprint);
+            if (isset($schema->datas)) {
+                self::addDatasToBlueprint($schema->datas, $blueprint);
+            }
+
+            if (isset($schema->groups)) {
+                foreach ($schema->groups as $group) {
+                    self::addGroupToBlueprint($group, $blueprint);
+                }
             }
         });
     }
@@ -230,5 +282,48 @@ abstract class Shell extends Model
     public static function down()
     {
         Schema::dropIfExists(get_called_class()::getTableName());
+    }
+
+    /**
+     * Static function to get a validation rules in array format.
+     * 
+     * @return array
+     */
+    public static function getValidationRules()
+    {
+        $rules = [];
+
+        $schema = get_called_class()::getSchema();
+
+        foreach ($schema->groups as $name => $group) {
+
+            foreach ($group->datas as $nameD => $data) {
+                if ($data->nullable) {
+                    $rules[$nameD] = 'nullable';
+                }
+
+                if ($data->unique) {
+                    $rules[$nameD] .= '|unique:'.get_called_class()::getTableName();
+                }
+
+                if ($data->required) {
+                    $rules[$nameD] .= '|required';
+                }
+
+                if (isset($data->validation)) {
+                    $rules[$nameD] .= '|'.$data->validation;
+                }
+
+                /**
+                 * If the max is set, add the max rule.
+                 */
+                if (isset($data->max)) {
+                    $rules[$nameD] .= '|max:'.$data->max;
+                }
+            }
+            
+        }
+
+        return $rules;
     }
 }

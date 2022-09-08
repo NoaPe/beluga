@@ -4,35 +4,24 @@ namespace NoaPe\Beluga\Http\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Group extends BasicShell
+class Table extends BasicShell
 {
     use HasFactory;
 
     /**
-     * Define hasMany relation with Group model only the Group have parent_is_group to true.
+     * Define hasMany relation with Group model only the Group have parent_is_group to false.
      */
     public function groups()
     {
-        return $this->hasMany(Group::class, 'parent_id')->where('parent_is_group', true);
-    }
-    
-    /**
-     * Belongs to relation Group model if parent_is_group is true, Table model if parent_is_group is false.
-     */
-    public function parent()
-    {
-        return $this->belongsTo(
-            $this->parent_is_group ? Group::class : Table::class,
-            'parent_id'
-        );
+        return $this->hasMany(Group::class, 'parent_id')->where('parent_is_group', false);
     }
 
     /**
-     * Has many relation with Data model only the Data have parent_is_group to true.
+     * Has many relation with Data model only the Data have parent_is_group to false.
      */
     public function datas()
     {
-        return $this->hasMany(Data::class, 'parent_id')->where('parent_is_group', true);
+        return $this->hasMany(Data::class, 'parent_id')->where('parent_is_group', false);
     }
 
     /**
@@ -46,7 +35,7 @@ class Group extends BasicShell
         $schema = parent::getSchema();
 
         /**
-         * Set groups property with a recursive call
+         * Set groups property with a mapping and group getSchema function
          */
         $schema->groups = $this->groups->map(function ($group) {
             return $group->getSchema();
@@ -59,5 +48,5 @@ class Group extends BasicShell
             return $data->getSchema();
         });
     }
-    
+
 }

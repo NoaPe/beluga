@@ -21,4 +21,25 @@ abstract class BasicShell extends Shell
     {
         return __DIR__.'/../../../database/schemas/'.class_basename(get_called_class()).'Schema.json';
     }
+    
+    /**
+     * Function who return the stdClass object of the schema.
+     */
+    public function getSchema()
+    {
+        $schema = new \stdClass();
+
+        /**
+         * Set properties from the model with loop only if the settings invisible is not true.
+         */
+        foreach ($this->schema as $key => $value) {
+            if ($value->settings->invisible ?? false) {
+                continue;
+            }
+
+            $schema->{$key} = $this->{$key};
+        }
+
+        return $schema;
+    }
 }

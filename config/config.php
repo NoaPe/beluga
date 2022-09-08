@@ -28,4 +28,14 @@ return [
     'middleware' => ['web'],
 
     'table_prefix' => 'beluga_',
+    
+    /**
+     * Shell namespace.
+     */
+    'shell_namespace' => 'App\\Shells',
+
+    /**
+     * Shell namespace for internal shell.
+     */
+    'internal_shell_namespace' => 'NoaPe\\Beluga\\Models',
 ];

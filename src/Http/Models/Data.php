@@ -15,4 +15,15 @@ class Data extends BasicShell
     {
         return config('beluga.table_prefix').'datas';
     }
+
+    /**
+     * Belongs to relation Group model if parent_is_group is true, Table model if parent_is_group is false.
+     */
+    public function parent()
+    {
+        return $this->belongsTo(
+            $this->parent_is_group ? Group::class : Table::class,
+            'parent_id'
+        );
+    }
 }
