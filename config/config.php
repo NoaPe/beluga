@@ -28,7 +28,7 @@ return [
     'middleware' => ['web'],
 
     'table_prefix' => 'beluga_',
-    
+
     /**
      * Shell namespace.
      */

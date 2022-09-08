@@ -26,11 +26,10 @@ class SchemaController extends Controller
         return view('beluga::edit', compact('schema'));
     }
 
-
     /**
      * Return Shell class from name. If the name contains the prefix, take the internal namespace and remove the prefix, otherwise the external.
-     * 
-     * @param string $name
+     *
+     * @param  string  $name
      * @return string
      */
     public function getShellClass($name)
@@ -45,12 +44,11 @@ class SchemaController extends Controller
 
         return $shell_namespace.'\\'.$name;
     }
-    
 
     /**
      * Save or store a new line in the shell table.
-     * 
-     * @param string $shell
+     *
+     * @param  string  $shell
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -72,8 +70,8 @@ class SchemaController extends Controller
 
     /**
      * Export the schema to a json response.
-     * 
-     * @param string $shell
+     *
+     * @param  string  $shell
      * @return \Illuminate\Http\Response
      */
     public function export($shell)

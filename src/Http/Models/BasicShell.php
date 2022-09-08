@@ -21,7 +21,7 @@ abstract class BasicShell extends Shell
     {
         return __DIR__.'/../../../database/schemas/'.class_basename(get_called_class()).'Schema.json';
     }
-    
+
     /**
      * Function who return the stdClass object of the schema.
      */

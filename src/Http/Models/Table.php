@@ -28,7 +28,7 @@ class Table extends BasicShell
      * Function who return the stdClass object of the schema.
      */
     public function getSchema()
-    {  
+    {
         /**
          * Get the schema from the parent.
          */
@@ -48,5 +48,4 @@ class Table extends BasicShell
             return $data->getSchema();
         });
     }
-
 }

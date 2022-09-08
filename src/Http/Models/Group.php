@@ -15,7 +15,7 @@ class Group extends BasicShell
     {
         return $this->hasMany(Group::class, 'parent_id')->where('parent_is_group', true);
     }
-    
+
     /**
      * Belongs to relation Group model if parent_is_group is true, Table model if parent_is_group is false.
      */
@@ -39,7 +39,7 @@ class Group extends BasicShell
      * Function who return the stdClass object of the schema.
      */
     public function getSchema()
-    {  
+    {
         /**
          * Get the schema from the parent.
          */
@@ -59,5 +59,4 @@ class Group extends BasicShell
             return $data->getSchema();
         });
     }
-    
 }

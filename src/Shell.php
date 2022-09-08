@@ -49,7 +49,6 @@ abstract class Shell extends Model
          * Set default values
          */
         $this->addDefaultProperties();
-        
     }
 
     /**
@@ -74,7 +73,6 @@ abstract class Shell extends Model
         if (file_exists($file)) {
             $data = file_get_contents($file);
         } else {
-
             /**
              * Get the table who has the same name as the shell.
              */
@@ -84,14 +82,12 @@ abstract class Shell extends Model
              * If the table exists, get the schema information from the database.
              */
             if ($table->count() > 0) {
-
                 $table = $table->first();
 
                 /**
                  * Get schema form Table model
                  */
                 $data = $table->getSchema();
-
             } else {
                 /**
                  * Throw exception if schema file does not exist with the name of the expected file.
@@ -192,15 +188,13 @@ abstract class Shell extends Model
 
     /**
      * Add fields to $blueprint from $datas table.
-     * 
-     * @param array $datas
+     *
+     * @param  array  $datas
      * @param  Blueprint  $blueprint
-     * 
      * @return void
      */
     protected static function addDatasToBlueprint($datas, $blueprint)
     {
-
         foreach ($datas as $name => $data) {
             $column = $blueprint->{$data->type}($name);
 
@@ -220,7 +214,6 @@ abstract class Shell extends Model
                 $column->length($data->length);
             }
         }
-
     }
 
     /**
@@ -228,7 +221,6 @@ abstract class Shell extends Model
      *
      * @param  array  $group
      * @param  Blueprint  $blueprint
-     * 
      * @return void
      */
     protected static function addGroupToBlueprint($group, $blueprint)
@@ -286,7 +278,7 @@ abstract class Shell extends Model
 
     /**
      * Static function to get a validation rules in array format.
-     * 
+     *
      * @return array
      */
     public static function getValidationRules()
@@ -296,7 +288,6 @@ abstract class Shell extends Model
         $schema = get_called_class()::getSchema();
 
         foreach ($schema->groups as $name => $group) {
-
             foreach ($group->datas as $nameD => $data) {
                 if ($data->nullable) {
                     $rules[$nameD] = 'nullable';
@@ -321,7 +312,6 @@ abstract class Shell extends Model
                     $rules[$nameD] .= '|max:'.$data->max;
                 }
             }
-            
         }
 
         return $rules;
