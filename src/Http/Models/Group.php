@@ -46,17 +46,18 @@ class Group extends BasicShell
         $schema = parent::getSchema();
 
         /**
-         * Set groups property with a recursive call
+         * Set groups property with a recursive call and with the group name as key.
          */
-        $schema->groups = $this->groups->map(function ($group) {
-            return $group->getSchema();
+        $schema->groups = $this->groups->mapWithKeys(function ($group) {
+            return [$group->name => $group->getSchema()];
         });
 
         /**
-         * Set datas property with a mapping and data getSchema function
+         * Set datas property with a mapping and data getSchema function with the data name as key.
          */
-        $schema->datas = $this->datas->map(function ($data) {
-            return $data->getSchema();
+        $schema->datas = $this->datas->mapWithKeys(function ($data) {
+            return [$data->name => $data->getSchema()];
         });
+
     }
 }

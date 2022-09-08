@@ -20,7 +20,10 @@
             "type": "string",
             "label": "Nom",
             "position": 1,
-            "nullable": false
+            "nullable": false,
+            "settings": {
+                "invisible": true
+            }
         },
 
         "label": {

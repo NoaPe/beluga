@@ -22,6 +22,8 @@ class BelugaServiceProvider extends PackageServiceProvider
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'beluga');
 
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        
+        $this->registerDirectives();
     }
 
     public function register()
@@ -57,4 +59,15 @@ class BelugaServiceProvider extends PackageServiceProvider
             ->hasMigration('create_beluga_table')
             ->hasCommand(BelugaCommand::class);
     }
+
+    /**
+     * Register all the components for all the shells.
+     * 
+     * @return void
+     */
+    public function registerDirectives()
+    {
+        ShellComponentProvider::registerDirectives();
+    }
+
 }

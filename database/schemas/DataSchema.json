@@ -22,7 +22,10 @@
             "type": "string",
             "label": "Nom",
             "position": 2,
-            "nullable": false
+            "nullable": false,
+            "settings": {
+                "invisible": true
+            }
         },
 
         "label": {

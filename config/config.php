@@ -37,5 +37,5 @@ return [
     /**
      * Shell namespace for internal shell.
      */
-    'internal_shell_namespace' => 'NoaPe\\Beluga\\Models',
+    'internal_shell_namespace' => 'NoaPe\\Beluga\\Http\\Models',
 ];
