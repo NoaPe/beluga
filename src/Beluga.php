@@ -13,7 +13,7 @@ class Beluga
         if (isset($data_types[$type])) {
             return $data_types[$type];
         }
-        
+
         throw new \Exception('Unknown data type: '.$type);
     }
 }

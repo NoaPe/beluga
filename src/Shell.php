@@ -134,7 +134,6 @@ abstract class Shell extends Model
         return get_called_class()::getGroupSchema($schema);
     }
 
-
     /**
      * Static function to get table name.
      */
@@ -145,7 +144,7 @@ abstract class Shell extends Model
 
     /**
      * Add data to $blueprint from a $datas array.
-     * 
+     *
      * @param  array  $datas
      * @param  Blueprint  $blueprint
      * @return void
@@ -202,7 +201,7 @@ abstract class Shell extends Model
             }
         });
     }
-    
+
     /**
      * Cancel a creation of table in the database.
      *

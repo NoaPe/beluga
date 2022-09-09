@@ -6,5 +6,4 @@ use NoaPe\Beluga\DataType;
 
 class Integer extends DataType
 {
-
 }

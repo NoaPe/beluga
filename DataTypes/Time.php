@@ -6,5 +6,4 @@ use NoaPe\Beluga\DataType;
 
 class Time extends DataType
 {
-
 }

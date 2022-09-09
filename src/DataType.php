@@ -135,7 +135,6 @@ abstract class DataType
      */
     public function getValidationRules()
     {
-        
         $rules = '';
 
         if ($this->nullable) {
@@ -163,5 +162,4 @@ abstract class DataType
 
         return $rules;
     }
-
 }

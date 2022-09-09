@@ -6,5 +6,4 @@ use NoaPe\Beluga\DataType;
 
 class Timestamp extends DataType
 {
-
 }

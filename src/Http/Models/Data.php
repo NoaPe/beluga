@@ -3,7 +3,6 @@
 namespace NoaPe\Beluga\Http\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use NoaPe\Beluga\Beluga;
 
 class Data extends BasicShell
 {
