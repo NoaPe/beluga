@@ -2,21 +2,21 @@
     "datas": {
 
         "name": {
-            "type": "string",
+            "type": "String",
             "required": true,
             "label": "Name",
             "description": "The name of the table."
         },
 
         "description": {
-            "type": "string",
+            "type": "String",
             "required": false,
             "label": "Description",
             "description": "A description of the table."
         },
 
         "timestamps": {
-            "type": "boolean",
+            "type": "Boolean",
             "required": false,
             "label": "Timestamps",
             "description": "If the table has timestamps."

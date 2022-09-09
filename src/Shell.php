@@ -44,11 +44,6 @@ abstract class Shell extends Model
          * Schema definition
          */
         $this->schema = get_called_class()::getSchema();
-
-        /**
-         * Set default values
-         */
-        $this->addDefaultProperties();
     }
 
     /**
@@ -87,7 +82,7 @@ abstract class Shell extends Model
                 /**
                  * Get schema form Table model
                  */
-                $data = $table->getSchema();
+                $data = $table->getRawSchema();
             } else {
                 /**
                  * Throw exception if schema file does not exist with the name of the expected file.
@@ -100,12 +95,45 @@ abstract class Shell extends Model
     }
 
     /**
-     * Static function to get schema information.
+     * Recursive static function for get the schema of group with instanciate data types.
+     */
+    protected static function getGroupSchema($group)
+    {
+        /**
+         * If groups is set, replace each sub group with call to this function.
+         */
+        if (isset($group->groups)) {
+            foreach ($group->groups as $key => $value) {
+                $group->groups[$key] = get_called_class()::getGroupSchema($value);
+            }
+        }
+
+        /**
+         * If data is set, replace each data with instanciate data type.
+         */
+        if (isset($group->datas)) {
+            foreach ($group->datas as $key => $data) {
+                $class = Beluga::getDataType($data->type);
+                $group->datas->{$key} = new $class($data);
+            }
+        }
+
+        return $group;
+    }
+
+    /**
+     * Static function who take raw schema array and return a schema array with the correct instanciate data types.
      */
     protected static function getSchema()
     {
-        return self::addDefaultProperties(get_called_class()::getRawSchema());
+        /**
+         * Get raw schema information.
+         */
+        $schema = get_called_class()::getRawSchema();
+
+        return get_called_class()::getGroupSchema($schema);
     }
+
 
     /**
      * Static function to get table name.
@@ -116,108 +144,21 @@ abstract class Shell extends Model
     }
 
     /**
-     * Add default value on a table from a list of default value in the $config_name.
-     *
-     * @param  array  $table
-     * @param  string  $config_name
-     * @return void
-     */
-    protected static function addDefaultTableProperties($table, $config_name)
-    {
-        $default_properties = config('beluga.'.$config_name);
-
-        foreach ($default_properties as $name => $value) {
-            if (! isset($table->$name)) {
-                $table->$name = $value;
-            }
-        }
-
-        return $table;
-    }
-
-    /**
-     * Recursive function on groups for add default properties to data table.
-     *
-     * @param  array  $groups
-     * @return array
-     */
-    protected static function addDefaultPropertiesInGroups($groups)
-    {
-        foreach ($groups as $name => $group) {
-            /**
-             * If the group have sub-groups we do a recursive call of the function.
-             */
-            if (isset($group->groups)) {
-                $groups->$name->groups = self::addDefaultPropertiesInGroups($group->groups);
-            }
-
-            /**
-             * If the groups have data definitions, we set the default values for each one.
-             */
-            if (isset($group->datas)) {
-                foreach ($group->datas as $nameD => $data) {
-                    $groups->$name->datas->$nameD = self::addDefaultTableProperties($data, 'default_data_properties');
-                }
-            }
-        }
-
-        return $groups;
-    }
-
-    /**
-     * Add default properties to a schema.
-     *
-     * @return void
-     */
-    protected static function addDefaultProperties($schema)
-    {
-        $table = self::addDefaultTableProperties($schema, 'default_schema_properties');
-
-        if (isset($table->groups)) {
-            $table->groups = self::addDefaultPropertiesInGroups($table->groups);
-        }
-
-        if (isset($table->datas)) {
-            foreach ($table->datas as $name => $data) {
-                $table->datas->$name = self::addDefaultTableProperties($data, 'default_data_properties');
-            }
-        }
-
-        return $schema;
-    }
-
-    /**
-     * Add fields to $blueprint from $datas table.
-     *
+     * Add data to $blueprint from a $datas array.
+     * 
      * @param  array  $datas
      * @param  Blueprint  $blueprint
      * @return void
      */
-    protected static function addDatasToBlueprint($datas, $blueprint)
+    protected static function addDataToBlueprint($datas, $blueprint)
     {
-        foreach ($datas as $name => $data) {
-            $column = $blueprint->{$data->type}($name);
-
-            if ($data->nullable) {
-                $column->nullable();
-            }
-
-            if ($data->unique) {
-                $column->unique();
-            }
-
-            if (isset($data->default)) {
-                $column->default($data->default);
-            }
-
-            if (isset($data->length)) {
-                $column->length($data->length);
-            }
+        foreach ($datas as $data) {
+            $data->addToBlueprint($blueprint);
         }
     }
 
     /**
-     * Add fields to $blueprint from a $groupe, recursive on sub-groups.
+     * Add fields to $blueprint from a $group, recursive on sub-groups.
      *
      * @param  array  $group
      * @param  Blueprint  $blueprint
@@ -246,13 +187,9 @@ abstract class Shell extends Model
         Schema::create($table_name, function (Blueprint $blueprint) {
             $schema = get_called_class()::getSchema();
 
-            if ($schema->id) {
-                $blueprint->id();
-            }
+            $blueprint->id();
 
-            if ($schema->timestamps) {
-                $blueprint->timestamps();
-            }
+            $blueprint->timestamps();
 
             if (isset($schema->datas)) {
                 self::addDatasToBlueprint($schema->datas, $blueprint);
@@ -265,7 +202,7 @@ abstract class Shell extends Model
             }
         });
     }
-
+    
     /**
      * Cancel a creation of table in the database.
      *
@@ -287,32 +224,7 @@ abstract class Shell extends Model
 
         $schema = get_called_class()::getSchema();
 
-        foreach ($schema->groups as $name => $group) {
-            foreach ($group->datas as $nameD => $data) {
-                if ($data->nullable) {
-                    $rules[$nameD] = 'nullable';
-                }
-
-                if ($data->unique) {
-                    $rules[$nameD] .= '|unique:'.get_called_class()::getTableName();
-                }
-
-                if ($data->required) {
-                    $rules[$nameD] .= '|required';
-                }
-
-                if (isset($data->validation)) {
-                    $rules[$nameD] .= '|'.$data->validation;
-                }
-
-                /**
-                 * If the max is set, add the max rule.
-                 */
-                if (isset($data->max)) {
-                    $rules[$nameD] .= '|max:'.$data->max;
-                }
-            }
-        }
+        // TO DO
 
         return $rules;
     }

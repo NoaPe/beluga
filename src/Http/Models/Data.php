@@ -3,10 +3,19 @@
 namespace NoaPe\Beluga\Http\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use NoaPe\Beluga\Beluga;
 
 class Data extends BasicShell
 {
     use HasFactory;
+
+    /**
+     * Constructor
+     */
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+    }
 
     /**
      * Static function for set the table name to "datas" with the config prefix.

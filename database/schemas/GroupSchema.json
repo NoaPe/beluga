@@ -1,14 +1,15 @@
 {
     "datas": {
         "parent_id": {
-            "type": "unsignedInteger",
+            "type": "Integer",
             "settings": {
-                "invisible": true
+                "invisible": true,
+                "unsigned": true
             }
         },
 
         "parent_is_group": {
-            "type": "boolean",
+            "type": "Boolean",
             "required": true,
             "nullable": false,
             "settings": {
@@ -17,7 +18,7 @@
         },
 
         "name": {
-            "type": "string",
+            "type": "String",
             "label": "Nom",
             "position": 1,
             "nullable": false,
@@ -27,21 +28,21 @@
         },
 
         "label": {
-            "type": "string",
+            "type": "String",
             "label": "Label",
             "position": 2,
             "nullable": true
         },
 
         "description": {
-            "type": "string",
+            "type": "String",
             "label": "Description",
             "position": 3,
             "nullable": true
         },
 
         "position": {
-            "type": "integer",
+            "type": "Integer",
             "label": "Position",
             "position": 4,
             "nullable": true

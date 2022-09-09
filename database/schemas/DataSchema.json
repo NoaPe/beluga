@@ -1,16 +1,17 @@
 {
     "datas": {
         "parent_id": {
-            "type": "unsignedInteger",
+            "type": "Integer",
             "required": true,
             "nullable": false,
             "position": 0,
             "settings": {
-                "invisible": true
+                "invisible": true,
+                "unsigned": true
             }
         },
         "parent_is_group": {
-            "type": "boolean",
+            "type": "Boolean",
             "required": true,
             "nullable": false,
             "position": 1,
@@ -19,7 +20,7 @@
             }
         },
         "name": {
-            "type": "string",
+            "type": "String",
             "label": "Nom",
             "position": 2,
             "nullable": false,
@@ -29,63 +30,63 @@
         },
 
         "label": {
-            "type": "string",
+            "type": "String",
             "label": "Label",
             "position": 3,
             "nullable": false
         },
 
         "description": {
-            "type": "text",
+            "type": "Text",
             "label": "Description",
             "position": 4,
             "nullable": true
         },
 
         "type": {
-            "type": "string",
+            "type": "String",
             "label": "Type",
             "position": 5,
             "nullable": false
         },
 
         "default": {
-            "type": "string",
+            "type": "String",
             "label": "Valeur par défaut",
             "position": 6,
             "nullable": true
         },
 
         "required": {
-            "type": "boolean",
+            "type": "Boolean",
             "label": "Requis",
             "position": 7,
             "nullable": false
         },
 
         "dimension": {
-            "type": "string",
+            "type": "String",
             "label": "Dimension",
             "position": 8,
             "nullable": true
         },
 
         "position": {
-            "type": "integer",
+            "type": "Integer",
             "label": "Position",
             "position": 9,
             "nullable": true
         },
 
         "validation": {
-            "type": "string",
+            "type": "String",
             "label": "Validation",
             "position": 10,
             "nullable": true
         },
 
         "max": {
-            "type": "integer",
+            "type": "Integer",
             "label": "Maximum",
             "position": 11,
             "nullable": true

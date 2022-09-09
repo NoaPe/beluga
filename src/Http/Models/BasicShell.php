@@ -25,7 +25,7 @@ abstract class BasicShell extends Shell
     /**
      * Function who return the stdClass object of the schema.
      */
-    public function getSchema()
+    public function getRawSchema()
     {
         $schema = new \stdClass();
 

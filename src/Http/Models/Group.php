@@ -38,25 +38,25 @@ class Group extends BasicShell
     /**
      * Function who return the stdClass object of the schema.
      */
-    public function getSchema()
+    public function getRawSchema()
     {
         /**
          * Get the schema from the parent.
          */
-        $schema = parent::getSchema();
+        $schema = parent::getRawSchema();
 
         /**
          * Set groups property with a recursive call and with the group name as key.
          */
         $schema->groups = $this->groups->mapWithKeys(function ($group) {
-            return [$group->name => $group->getSchema()];
+            return [$group->name => $group->getRawSchema()];
         });
 
         /**
          * Set datas property with a mapping and data getSchema function with the data name as key.
          */
         $schema->datas = $this->datas->mapWithKeys(function ($data) {
-            return [$data->name => $data->getSchema()];
+            return [$data->name => $data->getRawSchema()];
         });
 
     }

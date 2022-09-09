@@ -27,25 +27,25 @@ class Table extends BasicShell
     /**
      * Function who return the stdClass object of the schema.
      */
-    public function getSchema()
+    public function getRawSchema()
     {
         /**
          * Get the schema from the parent.
          */
-        $schema = parent::getSchema();
+        $schema = parent::getRawSchema();
 
         /**
          * Set groups property with a mapping and group getSchema function
          */
         $schema->groups = $this->groups->map(function ($group) {
-            return $group->getSchema();
+            return $group->getRawSchema();
         });
 
         /**
          * Set datas property with a mapping and data getSchema function
          */
         $schema->datas = $this->datas->map(function ($data) {
-            return $data->getSchema();
+            return $data->getRawSchema();
         });
     }
 }
