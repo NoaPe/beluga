@@ -2,8 +2,8 @@
 
 namespace NoaPe\Beluga;
 
-use Illuminate\View\Component;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\View\Component;
 
 class ShellComponentProvider
 {
@@ -17,7 +17,8 @@ class ShellComponentProvider
          */
         Blade::directive('load-shell', function ($shell_name) {
             ShellComponentProvider::register(config('beluga.shell_namespace').'\\'.$shell_name);
-            return "";
+
+            return '';
         });
 
         /**
@@ -25,14 +26,15 @@ class ShellComponentProvider
          */
         Blade::directive('load-internal-shell', function ($shell_name) {
             ShellComponentProvider::register(config('beluga.internal_shell_namespace').'\\'.$shell_name);
-            return "";
+
+            return '';
         });
     }
 
     /**
      * Register all the components for a shell.
      *
-     * @param string $shell_name
+     * @param  string  $shell_name
      * @return void
      */
     public static function register($shell_name)
@@ -56,19 +58,17 @@ class ShellComponentProvider
          * Register the inputs component for datas property and registerInputs function.
          */
         self::registerInputs($shell, $shell->datas);
-
-
     }
 
     /**
      * Register inputs component from datas array and a prefix.
-     * 
-     * @param  $shell
-     * @param  array $datas
-     * @param  string $prefix
+     *
+     * @param    $shell
+     * @param  array  $datas
+     * @param  string  $prefix
      * @return void
      */
-    public static function registerInputs($shell, $datas, $prefix = "")
+    public static function registerInputs($shell, $datas, $prefix = '')
     {
         /**
          * Register inputs component from datas property.
@@ -78,12 +78,10 @@ class ShellComponentProvider
         }
     }
 
-
-
     /**
      * Register recursivly all the components for a group
      */
-    public static function registerGroup($shell, $group, $prefix = "")
+    public static function registerGroup($shell, $group, $prefix = '')
     {
         /**
          * Register inputs component from datas property.
@@ -94,9 +92,8 @@ class ShellComponentProvider
          * Register inputs component from groups property.
          */
         foreach ($group->groups as $key => $group) {
-            self::registerGroup($shell, $group, $prefix.$key."-");
+            self::registerGroup($shell, $group, $prefix.$key.'-');
         }
-
     }
 
     /**
@@ -132,6 +129,7 @@ class ShellComponentProvider
         return new class($shell, $render_settings) extends Component
         {
             public $shell;
+
             public $render_settings;
 
             public function __construct($shell, $render_settings)
@@ -158,7 +156,9 @@ class ShellComponentProvider
         return new class($shell, $prefix, $key) extends Component
         {
             public $shell;
+
             public $prefix;
+
             public $key;
 
             public function __construct($shell, $prefix, $key)

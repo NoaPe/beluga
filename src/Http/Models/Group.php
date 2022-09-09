@@ -58,6 +58,5 @@ class Group extends BasicShell
         $schema->datas = $this->datas->mapWithKeys(function ($data) {
             return [$data->name => $data->getRawSchema()];
         });
-
     }
 }
