@@ -227,4 +227,72 @@ abstract class Shell extends Model
 
         return $rules;
     }
+
+    /**
+     * Function who use set function of appropriate data type and set attrbute
+     * 
+     * @param  string  $key
+     * @param  string  $value
+     */
+    public function setAttribute($key, $value)
+    {
+        $data = $this->getDataType($key);
+
+        if ($data) {
+            $value = $data->set($value);
+        }
+
+        return parent::setAttribute($key, $value);
+    }
+
+    /**
+     * Function who use get function of appropriate data type and return attribute.
+     * 
+     * @param  string  $key
+     */
+    public function getAttribute($key)
+    {
+        $data = $this->getDataType($key);
+
+        if ($data) {
+            return $data->get(parent::getAttribute($key));
+        }
+
+        return parent::getAttribute($key);
+    }
+
+    /**
+     * Function for get a data type from exploration of the schema.
+     * 
+     * @param  string  $key
+     * @param array  $group
+     * @return \Beluga\DataTypes\DataType
+     */
+    public function getDataType($key, $group = null)
+    {
+        if ($group == null) {
+            $group = $this->schema;
+        }
+
+        if (isset($group->datas)) {
+            foreach ($group->datas as $data) {
+                if ($data->name == $key) {
+                    return $data;
+                }
+            }
+        }
+
+        if (isset($group->groups)) {
+            foreach ($group->groups as $group2) {
+                $data = $this->getDataType($key, $group2);
+
+                if ($data) {
+                    return $data;
+                }
+            }
+        }
+
+        return null;
+    }
+
 }

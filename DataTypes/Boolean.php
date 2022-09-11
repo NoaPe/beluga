@@ -6,4 +6,8 @@ use NoaPe\Beluga\DataType;
 
 class Boolean extends DataType
 {
+    /**
+     * The blueprint_type of the data.
+     */
+    public $blueprint_type = 'boolean';
 }

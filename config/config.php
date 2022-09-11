@@ -51,4 +51,9 @@ return [
         'File' => NoaPe\Beluga\DataTypes\File::class,
         'Image' => NoaPe\Beluga\DataTypes\Image::class,
     ],
+
+    /**
+     * Image path.
+     */
+    'image_path' => 'images',
 ];

@@ -106,8 +106,12 @@ abstract class DataType
 
     /**
      * Function for add the column to the blueprint schema.
+     * 
+     * @param Blueprint $blueprint
+     * 
+     * @return void
      */
-    public function addToBlueprint(Blueprint $blueprint)
+    public function addToBlueprint($blueprint)
     {
         $column = $blueprint->{$this->blueprint_type}($this->name);
 
@@ -161,5 +165,21 @@ abstract class DataType
         }
 
         return $rules;
+    }
+
+    /**
+     * Set function.
+     */
+    public function set($value)
+    {
+        return $value;
+    }
+
+    /**
+     * Get function.
+     */
+    public function get($value)
+    {
+        return $value;
     }
 }
