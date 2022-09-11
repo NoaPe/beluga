@@ -230,7 +230,7 @@ abstract class Shell extends Model
 
     /**
      * Function who use set function of appropriate data type and set attrbute
-     * 
+     *
      * @param  string  $key
      * @param  string  $value
      */
@@ -247,7 +247,7 @@ abstract class Shell extends Model
 
     /**
      * Function who use get function of appropriate data type and return attribute.
-     * 
+     *
      * @param  string  $key
      */
     public function getAttribute($key)
@@ -263,9 +263,9 @@ abstract class Shell extends Model
 
     /**
      * Function for get a data type from exploration of the schema.
-     * 
+     *
      * @param  string  $key
-     * @param array  $group
+     * @param  array  $group
      * @return \Beluga\DataTypes\DataType
      */
     public function getDataType($key, $group = null)
@@ -294,5 +294,4 @@ abstract class Shell extends Model
 
         return null;
     }
-
 }

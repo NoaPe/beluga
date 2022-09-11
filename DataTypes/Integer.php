@@ -36,5 +36,4 @@ class Integer extends DataType
 
         return $column;
     }
-
 }
