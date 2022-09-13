@@ -58,9 +58,9 @@ class ShellRenderer
 
     /**
      * Function for render a group.
-     * 
-     * @param array $group
-     * @param string $prefix
+     *
+     * @param  array  $group
+     * @param  string  $prefix
      * @return \Illuminate\View\View
      */
     public static function group($group, $prefix = '', $internal = false)
@@ -85,12 +85,11 @@ class ShellRenderer
      */
     public static function input($shell, $prefix, $name, $internal = false)
     {
-
         $schema = $shell->schema;
 
         if ($prefix) {
             $parent = $schema;
-            
+
             /**
              * We explode the prefix with "-" and we take successive sub groups of the schema.
              */
@@ -99,7 +98,7 @@ class ShellRenderer
             foreach ($groupsName as $groupName) {
                 $parent = $parent->groups->$groupName;
             }
-            
+
             $data = $parent->datas->$name;
         } else {
             $data = $schema->datas->$name;

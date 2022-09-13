@@ -47,7 +47,6 @@ class Table extends BasicShell
             $schema->groups = $groups;
         }
 
-
         /**
          * Set datas property with a mapping and data getSchema function
          */

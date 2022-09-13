@@ -1,10 +1,11 @@
 <?php
+
 namespace NoaPe\Beluga\Http\Components;
 
 use Illuminate\View\Component;
 use NoaPe\Beluga\Shell;
 
-abstract class ComponentWithShell extends Component 
+abstract class ComponentWithShell extends Component
 {
     public $shell;
 
@@ -18,9 +19,9 @@ abstract class ComponentWithShell extends Component
             } else {
                 $shell = config('beluga.shell_namespace').'\\'.$shell;
             }
-    
+
             $this->shell = new $shell();
-        } else if ($shell instanceof Shell) {
+        } elseif ($shell instanceof Shell) {
             $this->shell = $shell;
         } else {
             throw new \Exception('Invalid shell provided to component.');

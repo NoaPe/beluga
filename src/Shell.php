@@ -142,8 +142,6 @@ abstract class Shell extends Model
         return Str::snake(Str::pluralStudly(class_basename(get_called_class())));
     }
 
-    
-
     /**
      * Static function for register itself to the ShellComponentProvider
      */

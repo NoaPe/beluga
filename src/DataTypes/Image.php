@@ -15,7 +15,7 @@ class Image extends DataType
      * The image file path from the config.
      */
     public $image_path;
-    
+
     /**
      * Html input type.
      */

@@ -13,14 +13,14 @@ class Integer extends DataType
 
     /**
      * Constructor
-     * 
-     * @param string $name
-     * @param array $data
+     *
+     * @param  string  $name
+     * @param  array  $data
      */
     public function __construct($name, $data)
     {
         parent::__construct($name, $data);
-        
+
         /**
          * If the scale setting is set to big or tiny, set the appropriate $blueprint_type.
          */

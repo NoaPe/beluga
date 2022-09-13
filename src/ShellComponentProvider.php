@@ -4,9 +4,9 @@ namespace NoaPe\Beluga;
 
 use Illuminate\Support\Facades\Blade;
 use NoaPe\Beluga\Http\Components\Form;
+use NoaPe\Beluga\Http\Components\Group;
 use NoaPe\Beluga\Http\Components\Input;
 use NoaPe\Beluga\Http\Components\Table;
-use NoaPe\Beluga\Http\Components\Group;
 
 class ShellComponentProvider
 {

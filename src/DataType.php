@@ -83,9 +83,9 @@ abstract class DataType
 
     /**
      * Constructor
-     * 
-     * @param string $name
-     * @param array $data
+     *
+     * @param  string  $name
+     * @param  array  $data
      */
     public function __construct($name, $data)
     {
@@ -110,7 +110,7 @@ abstract class DataType
         if (isset($data->position)) {
             $this->position = $data->position;
         }
-        
+
         // If is set required, set it.
         if (isset($data->required)) {
             $this->required = $data->required;
@@ -244,7 +244,7 @@ abstract class DataType
     public function renderInput()
     {
         return view('beluga::components.inputs.'.$this->input_type, [
-            'data' => $this
+            'data' => $this,
         ]);
     }
 }

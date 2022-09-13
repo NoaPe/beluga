@@ -10,7 +10,7 @@ class Input extends ComponentWithShell
 
     public $name;
 
-    public function __construct($shell, $prefix = '', $name, $internal = false)
+    public function __construct($shell, $prefix, $name, $internal = false)
     {
         parent::__construct($shell, $internal);
 

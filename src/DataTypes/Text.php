@@ -18,9 +18,9 @@ class Text extends DataType
 
     /**
      * Constructor
-     * 
-     * @param string $name
-     * @param array $data
+     *
+     * @param  string  $name
+     * @param  array  $data
      */
     public function __construct($name, $data)
     {

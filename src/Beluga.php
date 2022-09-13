@@ -33,5 +33,4 @@ class Beluga
     {
         ShellComponentProvider::register(config('beluga.internal_shell_namespace').'\\'.class_basename($shell));
     }
-
 }

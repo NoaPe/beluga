@@ -24,4 +24,3 @@ class Table extends ComponentWithShell
         return ShellRenderer::table($this->shell, $this->render_settings, $this->internal);
     }
 }
-        

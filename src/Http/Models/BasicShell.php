@@ -2,8 +2,8 @@
 
 namespace NoaPe\Beluga\Http\Models;
 
-use NoaPe\Beluga\Shell;
 use NoaPe\Beluga\Beluga;
+use NoaPe\Beluga\Shell;
 
 abstract class BasicShell extends Shell
 {
@@ -53,5 +53,4 @@ abstract class BasicShell extends Shell
     {
         Beluga::registerInternalShell(get_called_class());
     }
-
 }
