@@ -16,7 +16,7 @@ abstract class Shell extends Model
      *
      * @var array
      */
-    protected $schema = [];
+    public $schema = [];
 
     /**
      * The name of the table.
@@ -114,7 +114,7 @@ abstract class Shell extends Model
         if (isset($group->datas)) {
             foreach ($group->datas as $key => $data) {
                 $class = Beluga::getDataType($data->type);
-                $group->datas->{$key} = new $class($data);
+                $group->datas->{$key} = new $class($key, $data);
             }
         }
 
@@ -140,6 +140,16 @@ abstract class Shell extends Model
     protected static function getTableName()
     {
         return Str::snake(Str::pluralStudly(class_basename(get_called_class())));
+    }
+
+    
+
+    /**
+     * Static function for register itself to the ShellComponentProvider
+     */
+    public static function register()
+    {
+        Beluga::registerShell(get_called_class());
     }
 
     /**

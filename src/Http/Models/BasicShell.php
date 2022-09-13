@@ -3,6 +3,7 @@
 namespace NoaPe\Beluga\Http\Models;
 
 use NoaPe\Beluga\Shell;
+use NoaPe\Beluga\Beluga;
 
 abstract class BasicShell extends Shell
 {
@@ -25,21 +26,32 @@ abstract class BasicShell extends Shell
     /**
      * Function who return the stdClass object of the schema.
      */
-    public function getRawSchema()
+    public static function getRawSchema()
     {
         $schema = new \stdClass();
+
+        $parent_schema = parent::getRawSchema();
 
         /**
          * Set properties from the model with loop only if the settings invisible is not true.
          */
-        foreach ($this->schema as $key => $value) {
+        foreach ($parent_schema as $key => $value) {
             if ($value->settings->invisible ?? false) {
                 continue;
             }
 
-            $schema->{$key} = $this->{$key};
+            $schema->{$key} = $parent_schema->{$key};
         }
 
         return $schema;
     }
+
+    /**
+     * Static function for register itself to the ShellComponentProvider
+     */
+    public static function register()
+    {
+        Beluga::registerInternalShell(get_called_class());
+    }
+
 }

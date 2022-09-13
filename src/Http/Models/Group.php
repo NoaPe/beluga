@@ -3,6 +3,7 @@
 namespace NoaPe\Beluga\Http\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use NoaPe\Beluga\Beluga;
 
 class Group extends BasicShell
 {
@@ -38,7 +39,7 @@ class Group extends BasicShell
     /**
      * Function who return the stdClass object of the schema.
      */
-    public function getRawSchema()
+    public static function getRawSchema()
     {
         /**
          * Get the schema from the parent.
@@ -46,17 +47,32 @@ class Group extends BasicShell
         $schema = parent::getRawSchema();
 
         /**
-         * Set groups property with a recursive call and with the group name as key.
+         * Set groups property with a recursive call and use $group->name as $key.
          */
-        $schema->groups = $this->groups->mapWithKeys(function ($group) {
-            return [$group->name => $group->getRawSchema()];
-        });
+        if (isset($schema->groups) && is_array($schema->groups)) {
+            $groups = new Group();
+
+            foreach ($schema->groups as $key => $group) {
+                $groups->{$key} = $group::getRawSchema();
+            }
+
+            $schema->groups = $groups;
+        }
 
         /**
          * Set datas property with a mapping and data getSchema function with the data name as key.
          */
-        $schema->datas = $this->datas->mapWithKeys(function ($data) {
-            return [$data->name => $data->getRawSchema()];
-        });
+        if (isset($schema->datas) && is_array($schema->datas)) {
+            $datas = new \stdClass();
+
+            foreach ($schema->datas as $key => $data) {
+                $class = Beluga::getDataType($data->type);
+                $datas->{$key} = $class;
+            }
+
+            $schema->datas = $datas;
+        }
+
+        return $schema;
     }
 }

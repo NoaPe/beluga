@@ -3,11 +3,21 @@
 namespace NoaPe\Beluga\Http\Controllers;
 
 use Illuminate\Http\Request;
+use NoaPe\Beluga\Http\Models\Data;
+use NoaPe\Beluga\Http\Models\Group;
+use NoaPe\Beluga\Http\Models\Table;
 
 class SchemaController extends Controller
 {
     public function index()
     {
+        /**
+         * Register shell
+         */
+        Data::register();
+        Group::register();
+        Table::register();
+
         return view('beluga::index');
     }
 

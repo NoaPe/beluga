@@ -10,18 +10,19 @@ class ShellRenderer
      * @param $shell
      * @return \Illuminate\View\View
      */
-    public static function form($shell)
+    public static function form($shell, $internal = false)
     {
         /**
          * Get the schema from the shell.
          */
-        $schema = $shell->getSchema();
+        $schema = $shell::getSchema();
 
         /**
          * Return the form view with the schema.
          */
         return view('beluga::components.form', [
             'schema' => $schema,
+            'internal' => $internal,
         ]);
     }
 
@@ -32,12 +33,12 @@ class ShellRenderer
      * @param  array  $settings
      * @return \Illuminate\View\View
      */
-    public static function table($shell, $render_settings = [])
+    public static function table($shell, $render_settings = [], $internal = false)
     {
         /**
          * Get the schema from the shell.
          */
-        $schema = $shell->getSchema();
+        $schema = $shell::getSchema();
 
         /**
          * Get all lines from the shell.
@@ -51,6 +52,26 @@ class ShellRenderer
             'schema' => $schema,
             'lines' => $lines,
             'render_settings' => $render_settings,
+            'internal' => $internal,
+        ]);
+    }
+
+    /**
+     * Function for render a group.
+     * 
+     * @param array $group
+     * @param string $prefix
+     * @return \Illuminate\View\View
+     */
+    public static function group($group, $prefix = '', $internal = false)
+    {
+        /**
+         * Return the group view with the group and the prefix.
+         */
+        return view('beluga::components.group', [
+            'group' => $group,
+            'prefix' => $prefix,
+            'internal' => $internal,
         ]);
     }
 
@@ -62,22 +83,29 @@ class ShellRenderer
      * @param  string  $name
      * @return \Illuminate\View\View
      */
-    public static function input($shell, $prefix, $name)
+    public static function input($shell, $prefix, $name, $internal = false)
     {
-        $parent = $shell;
+
+        $schema = $shell->schema;
 
         if ($prefix) {
+            $parent = $schema;
+            
             /**
-             * We explode the prefix with "-" and we take successive sub groups of the shell.
+             * We explode the prefix with "-" and we take successive sub groups of the schema.
              */
             $groupsName = explode('-', $prefix);
+            dd($groupsName);
             foreach ($groupsName as $groupName) {
                 $parent = $parent->groups->$groupName;
             }
+            
+            $data = $parent->datas->$name;
+        } else {
+            $data = $schema->datas->$name;
         }
 
-        return view('beluga::components.input', [
-            'data' => $parent->datas->$name,
-        ]);
+        // Return the view from the data type
+        return $data->renderInput();
     }
 }

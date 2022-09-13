@@ -77,23 +77,79 @@ abstract class DataType
     public $blueprint_type = 'string';
 
     /**
-     * Constructor
+     * Html input type.
      */
-    public function __construct($data)
+    public $input_type = 'text';
+
+    /**
+     * Constructor
+     * 
+     * @param string $name
+     * @param array $data
+     */
+    public function __construct($name, $data)
     {
-        $this->name = $data->name;
-        $this->table_name = $data->table_name;
-        $this->label = $data->label;
-        $this->description = $data->description;
-        $this->position = $data->position;
-        $this->required = $data->required;
-        $this->default = $data->default;
-        $this->unique = $data->unique;
-        $this->nullable = $data->nullable;
-        $this->settings = $data->settings;
-        $this->validation = $data->validation;
-        $this->dimension = $data->dimension;
-        $this->max = $data->max;
+        // Set the name. Throw an exception if the name is not set.
+        if (isset($name)) {
+            $this->name = $name;
+        } else {
+            throw new \Exception('The name of the data is not set.');
+        }
+
+        // If is set label, set it.
+        if (isset($data->label)) {
+            $this->label = $data->label;
+        }
+
+        // If is set description, set it.
+        if (isset($data->description)) {
+            $this->description = $data->description;
+        }
+
+        // If is set position, set it.
+        if (isset($data->position)) {
+            $this->position = $data->position;
+        }
+        
+        // If is set required, set it.
+        if (isset($data->required)) {
+            $this->required = $data->required;
+        }
+
+        // If is set default, set it.
+        if (isset($data->default)) {
+            $this->default = $data->default;
+        }
+
+        // If is set unique, set it.
+        if (isset($data->unique)) {
+            $this->unique = $data->unique;
+        }
+
+        // If is set nullable, set it.
+        if (isset($data->nullable)) {
+            $this->nullable = $data->nullable;
+        }
+
+        // If is set settings, set it.
+        if (isset($data->settings)) {
+            $this->settings = $data->settings;
+        }
+
+        // If is set validation, set it.
+        if (isset($data->validation)) {
+            $this->validation = $data->validation;
+        }
+
+        // If is set dimension, set it.
+        if (isset($data->dimension)) {
+            $this->dimension = $data->dimension;
+        }
+
+        // If is set max, set it.
+        if (isset($data->max)) {
+            $this->max = $data->max;
+        }
     }
 
     /**
@@ -180,5 +236,15 @@ abstract class DataType
     public function get($value)
     {
         return $value;
+    }
+
+    /**
+     * Render input.
+     */
+    public function renderInput()
+    {
+        return view('beluga::components.inputs.'.$this->input_type, [
+            'data' => $this
+        ]);
     }
 }

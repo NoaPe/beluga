@@ -27,7 +27,7 @@ class Table extends BasicShell
     /**
      * Function who return the stdClass object of the schema.
      */
-    public function getRawSchema()
+    public static function getRawSchema()
     {
         /**
          * Get the schema from the parent.
@@ -37,15 +37,31 @@ class Table extends BasicShell
         /**
          * Set groups property with a mapping and group getSchema function
          */
-        $schema->groups = $this->groups->map(function ($group) {
-            return $group->getRawSchema();
-        });
+        if (isset($schema->groups) && is_array($schema->groups)) {
+            $groups = new Group();
+
+            foreach ($schema->groups as $key => $group) {
+                $groups->{$key} = $group::getRawSchema();
+            }
+
+            $schema->groups = $groups;
+        }
+
 
         /**
          * Set datas property with a mapping and data getSchema function
          */
-        $schema->datas = $this->datas->map(function ($data) {
-            return $data->getRawSchema();
-        });
+        if (isset($schema->datas) && is_array($schema->datas)) {
+            $datas = new \stdClass();
+
+            foreach ($schema->datas as $key => $data) {
+                $class = Beluga::getDataType($data->type);
+                $datas->{$key} = $class;
+            }
+
+            $schema->datas = $datas;
+        }
+
+        return $schema;
     }
 }

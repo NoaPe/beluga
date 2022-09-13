@@ -15,11 +15,16 @@ class Image extends DataType
      * The image file path from the config.
      */
     public $image_path;
+    
+    /**
+     * Html input type.
+     */
+    public $input_type = 'image';
 
     /**
      * Constructor
      */
-    public function __construct($data = null)
+    public function __construct($name, $data)
     {
         parent::__construct($data);
         $this->image_path = config('beluga.image_path');
