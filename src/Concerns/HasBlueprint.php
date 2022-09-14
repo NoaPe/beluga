@@ -2,8 +2,8 @@
 
 namespace NoaPe\Beluga\Concerns;
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 trait HasBlueprint
 {
@@ -39,7 +39,6 @@ trait HasBlueprint
         }
     }
 
-    
     /**
      * Create database table of the model.
      *

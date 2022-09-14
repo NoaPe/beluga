@@ -2,10 +2,9 @@
 
 namespace NoaPe\Beluga\Concerns;
 
+use NoaPe\Beluga\Beluga;
 use NoaPe\Beluga\Http\Models\Data;
 use NoaPe\Beluga\Http\Models\Group;
-use NoaPe\Beluga\Http\Models\Table;
-use NoaPe\Beluga\Beluga;
 
 trait HasJsonSchema
 {
@@ -23,7 +22,7 @@ trait HasJsonSchema
     {
         return config('beluga.schema_path').'/'.class_basename(get_called_class()).'Schema.json';
     }
-    
+
     /**
      * Static function to get raw schema information.
      */

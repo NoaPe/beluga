@@ -94,7 +94,7 @@ class ShellRenderer
              * We explode the prefix with "-" and we take successive sub groups of the schema.
              */
             $groupsName = explode('-', $prefix);
-            
+
             foreach ($groupsName as $groupName) {
                 $parent = $parent->groups->$groupName;
             }

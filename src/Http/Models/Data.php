@@ -2,8 +2,8 @@
 
 namespace NoaPe\Beluga\Http\Models;
 
-use NoaPe\Beluga\Beluga;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use NoaPe\Beluga\Beluga;
 
 class Data extends BasicShell
 {
