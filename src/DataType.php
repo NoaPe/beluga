@@ -86,7 +86,7 @@ abstract class DataType
      *
      * @param  string  $name
      * @param  array  $data
-     * @param  $shell
+     * @param    $shell
      */
     public function __construct($name, $data, $shell = null)
     {

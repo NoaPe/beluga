@@ -2,7 +2,7 @@
 
 namespace NoaPe\Beluga\Http\Models\Concerns;
 
-trait HasSubGroups 
+trait HasSubGroups
 {
     /**
      * Function who return the stdClass object of the schema.
@@ -44,11 +44,10 @@ trait HasSubGroups
         return $schema;
     }
 
-
     /**
      * Call register function of each datas of the table.
-     * 
-     * @param \NoaPe\Beluga\Shell $shell
+     *
+     * @param  \NoaPe\Beluga\Shell  $shell
      * @return void
      */
     public function registerDatas($shell)
