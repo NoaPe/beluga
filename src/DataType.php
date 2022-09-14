@@ -86,8 +86,9 @@ abstract class DataType
      *
      * @param  string  $name
      * @param  array  $data
+     * @param  $shell
      */
-    public function __construct($name, $data)
+    public function __construct($name, $data, $shell = null)
     {
         // Set the name. Throw an exception if the name is not set.
         if (isset($name)) {
@@ -170,20 +171,20 @@ abstract class DataType
     {
         $column = $blueprint->{$this->blueprint_type}($this->name);
 
-        if ($data->nullable) {
+        if ($this->nullable) {
             $column->nullable();
         }
 
-        if ($data->unique) {
+        if ($this->unique) {
             $column->unique();
         }
 
-        if (isset($data->default)) {
-            $column->default($data->default);
+        if (isset($this->default)) {
+            $column->default($this->default);
         }
 
-        if (isset($data->length)) {
-            $column->length($data->length);
+        if (isset($this->length)) {
+            $column->length($this->length);
         }
 
         return $column;
@@ -246,5 +247,13 @@ abstract class DataType
         return view('beluga::components.inputs.'.$this->input_type, [
             'data' => $this,
         ]);
+    }
+
+    /**
+     * Public function register.
+     */
+    public function register()
+    {
+        //
     }
 }

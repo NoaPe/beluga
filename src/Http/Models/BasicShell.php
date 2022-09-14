@@ -18,7 +18,7 @@ abstract class BasicShell extends Shell
     /**
      * Static function to get a name of schema file.
      */
-    public static function getSchemaFileName()
+    public static function getJsonSchemaFileName()
     {
         return __DIR__.'/../../../database/schemas/'.class_basename(get_called_class()).'Schema.json';
     }

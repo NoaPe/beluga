@@ -2,6 +2,7 @@
 
 namespace NoaPe\Beluga\Http\Models;
 
+use NoaPe\Beluga\Beluga;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Data extends BasicShell
@@ -33,5 +34,21 @@ class Data extends BasicShell
             $this->parent_is_group ? Group::class : Table::class,
             'parent_id'
         );
+    }
+
+    /**
+     * Function for get data type
+     */
+    public function getType()
+    {
+        return Beluga::getDataType($this->type);
+    }
+
+    /**
+     * Register function who call the register function of the data type.
+     */
+    public function register($shell)
+    {
+        $this->getType()->register($shell);
     }
 }

@@ -19,18 +19,24 @@ class Beluga
     }
 
     /**
-     * Static function for register a shell ine the ShellComponentProvider.
+     * Static function for get shell from his name.
      */
-    public static function registerShell($shell)
+    public static function getShell($name)
     {
-        ShellComponentProvider::register(config('beluga.shell_namespace').'\\'.class_basename($shell));
-    }
+        // Test if the shell exist in the config namespace.
+        $class = config('beluga.shell_namespace').'\\'.$name;
 
-    /**
-     * Static function for register a internal shell ine the ShellComponentProvider.
-     */
-    public static function registerInternalShell($shell)
-    {
-        ShellComponentProvider::register(config('beluga.internal_shell_namespace').'\\'.class_basename($shell));
+        if (class_exists($class)) {
+            return $class;
+        }
+
+        // Test if the shell exist in the internal shell namespace.
+        $class = config('beluga.internal_shell_namespace').'\\'.$name;
+
+        if (class_exists($class)) {
+            return $class;
+        }
+
+        return $name;
     }
 }
