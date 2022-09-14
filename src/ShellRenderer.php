@@ -15,7 +15,7 @@ class ShellRenderer
         /**
          * Get the schema from the shell.
          */
-        $schema = $shell::getSchema();
+        $schema = $shell->getSchema();
 
         /**
          * Return the form view with the schema.
@@ -38,7 +38,7 @@ class ShellRenderer
         /**
          * Get the schema from the shell.
          */
-        $schema = $shell::getSchema();
+        $schema = $shell->getSchema();
 
         /**
          * Get all lines from the shell.
@@ -85,7 +85,7 @@ class ShellRenderer
      */
     public static function input($shell, $prefix, $name, $internal = false)
     {
-        $schema = $shell->schema;
+        $schema = $shell->getSchema();
 
         if ($prefix) {
             $parent = $schema;

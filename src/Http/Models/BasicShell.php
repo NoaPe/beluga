@@ -8,6 +8,11 @@ use NoaPe\Beluga\Shell;
 abstract class BasicShell extends Shell
 {
     /**
+     * Table definition bypass
+     */
+    protected $table_bypass = true;
+
+    /**
      * Static function to get table name.
      */
     public static function getTableName()
@@ -44,13 +49,5 @@ abstract class BasicShell extends Shell
         }
 
         return $schema;
-    }
-
-    /**
-     * Static function for register itself to the ShellComponentProvider
-     */
-    public static function register()
-    {
-        Beluga::registerInternalShell(get_called_class());
     }
 }

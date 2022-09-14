@@ -24,6 +24,11 @@ abstract class Shell extends Model
     protected $table;
 
     /**
+     * Table definition bypass
+     */
+    protected $table_bypass = false;
+
+    /**
      * Create a new Shell instance.
      *
      * @param  array  $attributes
@@ -42,14 +47,15 @@ abstract class Shell extends Model
          * Table instance definition
          * If the table exist in the database, we get it, else test if hasJsonSchema.
          */
+        if (!$this->table_bypass) {
+            $this->table = Table::where('table_name', $this->table_name)->first();
+            
+            if (!$this->table) {
+                throw new \Exception('Table '.$this->table_name.' not found in the database please migrate it.');
+            }
 
-        $this->table = Table::where('table_name', $this->table_name)->first();
-        
-        if (!$this->table) {
-            throw new \Exception('Table '.$this->table_name.' not found in the database please migrate it.');
+            $this->table->registerDatas($this);
         }
-
-        $this->table->registerDatas($this);
         /**
          * Schema definition
          */
@@ -62,14 +68,6 @@ abstract class Shell extends Model
     protected static function getTableName()
     {
         return Str::snake(Str::pluralStudly(class_basename(get_called_class())));
-    }
-
-    /**
-     * Static function for register itself to the ShellComponentProvider
-     */
-    public static function register()
-    {
-        Beluga::registerShell(get_called_class());
     }
 
     /**
@@ -103,5 +101,13 @@ abstract class Shell extends Model
         }
 
         return parent::getAttribute($key);
+    }
+
+    /**
+     * Getter schema.
+     */
+    public function getSchema()
+    {
+        return $this->schema;
     }
 }

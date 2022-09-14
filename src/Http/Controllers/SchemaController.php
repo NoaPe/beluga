@@ -11,13 +11,6 @@ class SchemaController extends Controller
 {
     public function index()
     {
-        /**
-         * Register shell
-         */
-        Data::register();
-        Group::register();
-        Table::register();
-
         return view('beluga::index');
     }
 

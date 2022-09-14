@@ -14,7 +14,7 @@ trait HasJsonSchema
      *
      * @var array
      */
-    public $schema;
+    protected $schema;
 
     /**
      * Static function for get a name of schema file.
