@@ -47,10 +47,10 @@ abstract class Shell extends Model
          * Table instance definition
          * If the table exist in the database, we get it, else test if hasJsonSchema.
          */
-        if (!$this->table_bypass) {
+        if (! $this->table_bypass) {
             $this->table = Table::where('table_name', $this->table_name)->first();
-            
-            if (!$this->table) {
+
+            if (! $this->table) {
                 throw new \Exception('Table '.$this->table_name.' not found in the database please migrate it.');
             }
 
