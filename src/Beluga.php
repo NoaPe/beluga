@@ -24,7 +24,7 @@ class Beluga
      * @param  string  $name
      * @return string
      */
-    public static function getShellClass($name)
+    public static function qualifyShell($name)
     {
         // Test if the shell exist in the config namespace.
         $class = config('beluga.shell_namespace').'\\'.$name;

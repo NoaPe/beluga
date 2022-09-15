@@ -3,7 +3,9 @@
 namespace NoaPe\Beluga;
 
 use Illuminate\Support\Facades\Route;
-use NoaPe\Beluga\Commands\BelugaCommand;
+use NoaPe\Beluga\Console\InstallBelugaPackage;
+use NoaPe\Beluga\Console\MakeMigrationCommand;
+use NoaPe\Beluga\Console\MakeShellCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -12,6 +14,11 @@ class BelugaServiceProvider extends PackageServiceProvider
     public function boot()
     {
         if ($this->app->runningInConsole()) {
+            $this->commands([
+                InstallBelugaPackage::class,
+                MakeMigrationCommand::class,
+                MakeShellCommand::class,
+            ]);
             $this->publishes([
                 __DIR__.'/../config/config.php' => config_path('beluga.php'),
             ], 'config');
@@ -58,7 +65,6 @@ class BelugaServiceProvider extends PackageServiceProvider
             ->name('beluga')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_beluga_table')
-            ->hasCommand(BelugaCommand::class);
+            ->hasMigration('create_beluga_table');
     }
 }
