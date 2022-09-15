@@ -5,7 +5,7 @@ return [
     /**
      * Schema path
      */
-    'schema_path' => __DIR__.'/../database/schemas',
+    'schema_path' => base_path().'/database/schemas',
 
     /**
      * Default schema information value.
