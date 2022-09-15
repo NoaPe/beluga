@@ -3,9 +3,8 @@
 namespace NoaPe\Beluga\Console;
 
 use Illuminate\Console\GeneratorCommand;
-use Illuminate\Filesystem\Filesystem;
-use NoaPe\Beluga\Beluga;
 use Illuminate\Support\Str;
+use NoaPe\Beluga\Beluga;
 
 class MakeMigrationCommand extends GeneratorCommand
 {
@@ -72,6 +71,7 @@ class MakeMigrationCommand extends GeneratorCommand
     protected function getPath($name)
     {
         $name = Str::snake(trim($this->getNameInput()));
+
         return $this->getMigrationPath().'/'.$this->getDatePrefix().'_'.$name.'.php';
     }
 

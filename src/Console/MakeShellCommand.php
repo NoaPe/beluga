@@ -3,9 +3,6 @@
 namespace NoaPe\Beluga\Console;
 
 use Illuminate\Console\GeneratorCommand;
-use Illuminate\Filesystem\Filesystem;
-use NoaPe\Beluga\Beluga;
-use Illuminate\Support\Str;
 
 class MakeShellCommand extends GeneratorCommand
 {

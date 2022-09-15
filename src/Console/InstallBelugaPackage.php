@@ -49,13 +49,13 @@ class InstallBelugaPackage extends Command
     {
         $params = [
             '--provider' => "NoaPe\Beluga\BelugaPackageServiceProvider",
-            '--tag' => "config"
+            '--tag' => 'config',
         ];
 
         if ($forcePublish === true) {
             $params['--force'] = true;
         }
 
-       $this->call('vendor:publish', $params);
+        $this->call('vendor:publish', $params);
     }
 }
