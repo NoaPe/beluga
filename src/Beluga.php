@@ -20,8 +20,8 @@ class Beluga
 
     /**
      * Static function for get shell from his name.
-     * 
-     * @param string $name
+     *
+     * @param  string  $name
      * @return string
      */
     public static function getShellClass($name)

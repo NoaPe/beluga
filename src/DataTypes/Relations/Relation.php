@@ -2,8 +2,8 @@
 
 namespace NoaPe\Beluga\DataTypes\Relations;
 
-use NoaPe\Beluga\DataType;
 use NoaPe\Beluga\Beluga;
+use NoaPe\Beluga\DataType;
 
 class Relation extends DataType
 {
