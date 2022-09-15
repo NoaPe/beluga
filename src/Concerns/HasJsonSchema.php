@@ -2,9 +2,7 @@
 
 namespace NoaPe\Beluga\Concerns;
 
-use NoaPe\Beluga\Beluga;
 use NoaPe\Beluga\Http\Models\Data;
-use NoaPe\Beluga\Http\Models\Group;
 
 trait HasJsonSchema
 {
@@ -35,7 +33,6 @@ trait HasJsonSchema
 
         return json_decode($data);
     }
-
 
     /**
      * Static function who take raw schema array and return a schema array with the correct instanciate data types.

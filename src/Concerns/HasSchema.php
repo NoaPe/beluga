@@ -67,7 +67,7 @@ trait HasSchema
 
     /**
      * Recursive static function for get the schema of group with instanciate data types.
-     * 
+     *
      * @param  mixed  $group
      * @return mixed
      */
@@ -95,7 +95,6 @@ trait HasSchema
         return $group;
     }
 
-
     /**
      * Filter datas from boolean callback.
      */
@@ -116,7 +115,7 @@ trait HasSchema
                 $datas[] = $data;
             }
         }
-        
+
         // Recursive call in sub groups
         if (isset($group->groups)) {
             foreach ($group->groups as $group2) {
@@ -146,7 +145,7 @@ trait HasSchema
             return $data->hidden;
         });
     }
-    
+
     /**
      * Get guarded attributes from schema.
      */
