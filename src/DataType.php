@@ -85,17 +85,13 @@ abstract class DataType
      * Constructor
      *
      * @param  string  $name
-     * @param  array  $data
-     * @param    $shell
+     * @param  \stdClass  $data
+     * @return void
      */
-    public function __construct($name, $data, $shell = null)
+    public function __construct($name, $data)
     {
         // Set the name. Throw an exception if the name is not set.
-        if (isset($name)) {
-            $this->name = $name;
-        } else {
-            throw new \Exception('The name of the data is not set.');
-        }
+        $this->name = $name;
 
         // If is set label, set it.
         if (isset($data->label)) {
@@ -165,7 +161,7 @@ abstract class DataType
      * Function for add the column to the blueprint schema.
      *
      * @param  Blueprint  $blueprint
-     * @return void
+     * @return mixed
      */
     public function addToBlueprint($blueprint)
     {
@@ -213,11 +209,8 @@ abstract class DataType
             $rules .= '|'.$this->validation;
         }
 
-        /**
-         * If the max is set, add the max rule.
-         */
         if (isset($this->max)) {
-            $rules[$nameD] .= '|max:'.$this->max;
+            $rules .= '|max:'.$this->max;
         }
 
         return $rules;
@@ -252,7 +245,7 @@ abstract class DataType
     /**
      * Public function register.
      */
-    public function register()
+    public function register($shell)
     {
         //
     }

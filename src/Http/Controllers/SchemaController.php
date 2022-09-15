@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use NoaPe\Beluga\Http\Models\Data;
 use NoaPe\Beluga\Http\Models\Group;
 use NoaPe\Beluga\Http\Models\Table;
+use Illuminate\Support\Str;
 
 class SchemaController extends Controller
 {
@@ -16,6 +17,8 @@ class SchemaController extends Controller
 
     public function show($name)
     {
+        $schema = $this->getShellClass($name)::getSchema();
+
         return view('beluga::show', compact('schema'));
     }
 
@@ -53,7 +56,7 @@ class SchemaController extends Controller
      *
      * @param  string  $shell
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store($shell, Request $request)
     {
@@ -75,7 +78,7 @@ class SchemaController extends Controller
      * Export the schema to a json response.
      *
      * @param  string  $shell
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function export($shell)
     {

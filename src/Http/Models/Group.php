@@ -10,6 +10,13 @@ class Group extends BasicShell
         Concerns\HasSubGroups;
 
     /**
+     * Boolean, true is the parent is group.
+     * 
+     * @var bool
+     */
+    public $parent_is_group;
+
+    /**
      * Define hasMany relation with Group model only the Group have parent_is_group to true.
      */
     public function groups()

@@ -21,15 +21,12 @@ class Relation extends DataType
      */
     public function register($shell)
     {
-        // Get the shell class from $shellName
-        $class = Beluga::getShell($this->settings->class);
-
         $relation = $shell->{$this->relation_function}(
             $this->settings->class,
         );
 
         // Add the method to the shell.
-        $this->shell->{$this->name} = function () use ($relation) {
+        $shell->{$this->name} = function () use ($relation) {
             return $relation;
         };
     }

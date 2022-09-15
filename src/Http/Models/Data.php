@@ -10,6 +10,20 @@ class Data extends BasicShell
     use HasFactory;
 
     /**
+     * Boolean, true is the parent is group.
+     * 
+     * @var bool
+     */
+    public $parent_is_group;
+
+    /**
+     * Data type.
+     * 
+     * @var string
+     */
+    public $type;
+
+    /**
      * Constructor
      */
     public function __construct(array $attributes = [])

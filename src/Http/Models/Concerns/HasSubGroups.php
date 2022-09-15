@@ -2,8 +2,20 @@
 
 namespace NoaPe\Beluga\Http\Models\Concerns;
 
+use NoaPe\Beluga\Beluga;
+
 trait HasSubGroups
 {
+    /**
+     * Subgroups
+     */
+    public $groups;
+
+    /**
+     * Datas
+     */
+    public $datas;
+
     /**
      * Function who return the stdClass object of the schema.
      */

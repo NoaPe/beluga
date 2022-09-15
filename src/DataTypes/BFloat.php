@@ -11,6 +11,12 @@ class BFloat extends DataType
      */
     public $blueprint_type = 'float';
 
+    /**
+     * Add to blueprint.
+     * 
+     * @param \Illuminate\Database\Schema\Blueprint $blueprint
+     * @return mixed
+     */
     public function addToBlueprint($blueprint)
     {
         /**
