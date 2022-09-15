@@ -2,7 +2,6 @@
 
 namespace NoaPe\Beluga\Http\Models;
 
-use NoaPe\Beluga\Beluga;
 use NoaPe\Beluga\Shell;
 
 abstract class BasicShell extends Shell
