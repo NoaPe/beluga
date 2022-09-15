@@ -3,6 +3,7 @@
 namespace NoaPe\Beluga\DataTypes\Relations;
 
 use NoaPe\Beluga\DataType;
+use NoaPe\Beluga\Beluga;
 
 class Relation extends DataType
 {
@@ -21,6 +22,9 @@ class Relation extends DataType
      */
     public function register($shell)
     {
+        // Get the shell class name.
+        $class = Beluga::getShellClass($shell);
+
         $relation = $shell->{$this->relation_function}(
             $this->settings->class,
         );

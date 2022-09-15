@@ -17,6 +17,8 @@ class BelugaServiceProvider extends PackageServiceProvider
             ], 'config');
         }
 
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'beluga');
+
         $this->registerRoutes();
 
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'beluga');

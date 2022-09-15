@@ -20,8 +20,11 @@ class Beluga
 
     /**
      * Static function for get shell from his name.
+     * 
+     * @param string $name
+     * @return string
      */
-    public static function getShell($name)
+    public static function getShellClass($name)
     {
         // Test if the shell exist in the config namespace.
         $class = config('beluga.shell_namespace').'\\'.$name;
