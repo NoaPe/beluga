@@ -11,7 +11,7 @@ class Group extends BasicShell
 
     /**
      * Boolean, true is the parent is group.
-     * 
+     *
      * @var bool
      */
     public $parent_is_group;

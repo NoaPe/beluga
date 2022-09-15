@@ -3,8 +3,8 @@
 namespace NoaPe\Beluga\Http\Controllers;
 
 use Illuminate\Http\Request;
-use NoaPe\Beluga\Http\Models\Table;
 use Illuminate\Support\Str;
+use NoaPe\Beluga\Http\Models\Table;
 
 class SchemaController extends Controller
 {

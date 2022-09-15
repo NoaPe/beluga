@@ -11,14 +11,14 @@ class Data extends BasicShell
 
     /**
      * Boolean, true is the parent is group.
-     * 
+     *
      * @var bool
      */
     public $parent_is_group;
 
     /**
      * Data type.
-     * 
+     *
      * @var string
      */
     public $type;

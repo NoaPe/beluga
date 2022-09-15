@@ -13,8 +13,8 @@ class BFloat extends DataType
 
     /**
      * Add to blueprint.
-     * 
-     * @param \Illuminate\Database\Schema\Blueprint $blueprint
+     *
+     * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
      * @return mixed
      */
     public function addToBlueprint($blueprint)
