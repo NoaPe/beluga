@@ -24,7 +24,7 @@ trait HasBlueprint
     /**
      * Add fields to $blueprint from a $group, recursive on sub-groups.
      *
-     * @param  array  $group
+     * @param  mixed  $group
      * @param  Blueprint  $blueprint
      * @return void
      */

@@ -103,8 +103,8 @@ trait HasJsonSchema
      * Function for get a data type from exploration of the schema.
      *
      * @param  string  $key
-     * @param  array  $group
-     * @return \Beluga\DataTypes\DataType
+     * @param  mixed  $group
+     * @return mixed Data type or null
      */
     public function getDataType($key, $group = null)
     {
@@ -124,7 +124,7 @@ trait HasJsonSchema
             foreach ($group->groups as $group2) {
                 $data = $this->getDataType($key, $group2);
 
-                if ($data) {
+                if ($data !== null) {
                     return $data;
                 }
             }

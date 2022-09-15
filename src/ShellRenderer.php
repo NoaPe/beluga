@@ -30,7 +30,7 @@ class ShellRenderer
      * Function for render a table of all lines in the database for a shell with render settings.
      *
      * @param    $shell
-     * @param  array  $settings
+     * @param  array  $render_settings
      * @return \Illuminate\View\View
      */
     public static function table($shell, $render_settings = [], $internal = false)
