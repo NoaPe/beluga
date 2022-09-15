@@ -9,6 +9,7 @@ use NoaPe\Beluga\Http\Models\Table;
 abstract class Shell extends Model
 {
     use Concerns\HasBlueprint,
+        Concerns\HasSchema,
         Concerns\HasJsonSchema;
 
     /**
@@ -60,6 +61,21 @@ abstract class Shell extends Model
          * Schema definition
          */
         $this->schema = get_called_class()::getJsonSchema();
+
+        /**
+         * Set fillable attributes
+         */
+        $this->fillable = $this->getFillables();
+
+        /**
+         * Set guarded attributes
+         */
+        $this->guarded = $this->getGuardeds();
+
+        /**
+         * Set hidden attributes
+         */
+        $this->hidden = $this->getHiddens();
     }
 
     /**

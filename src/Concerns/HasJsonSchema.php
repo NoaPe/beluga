@@ -9,13 +9,6 @@ use NoaPe\Beluga\Http\Models\Group;
 trait HasJsonSchema
 {
     /**
-     * Schema information array.
-     *
-     * @var array
-     */
-    protected $schema;
-
-    /**
      * Static function for get a name of schema file.
      */
     public static function getJsonSchemaFileName()
@@ -43,32 +36,6 @@ trait HasJsonSchema
         return json_decode($data);
     }
 
-    /**
-     * Recursive static function for get the schema of group with instanciate data types.
-     */
-    protected static function getGroupSchema($group)
-    {
-        /**
-         * If groups is set, replace each sub group with call to this function.
-         */
-        if (isset($group->groups)) {
-            foreach ($group->groups as $key => $value) {
-                $group->groups->{$key} = get_called_class()::getGroupSchema($value);
-            }
-        }
-
-        /**
-         * If data is set, replace each data with instanciate data type.
-         */
-        if (isset($group->datas)) {
-            foreach ($group->datas as $key => $data) {
-                $class = Beluga::getDataType($data->type);
-                $group->datas->{$key} = new $class($key, $data);
-            }
-        }
-
-        return $group;
-    }
 
     /**
      * Static function who take raw schema array and return a schema array with the correct instanciate data types.
@@ -81,56 +48,6 @@ trait HasJsonSchema
         $schema = get_called_class()::getRawSchema();
 
         return get_called_class()::getGroupSchema($schema);
-    }
-
-    /**
-     * Static function to get a validation rules in array format.
-     *
-     * @return array
-     */
-    public static function getValidationRules()
-    {
-        $rules = [];
-
-        $schema = get_called_class()::getJsonSchema();
-
-        // TO DO
-
-        return $rules;
-    }
-
-    /**
-     * Function for get a data type from exploration of the schema.
-     *
-     * @param  string  $key
-     * @param  mixed  $group
-     * @return mixed Data type or null
-     */
-    public function getDataType($key, $group = null)
-    {
-        if ($group == null) {
-            $group = $this->schema;
-        }
-
-        if (isset($group->datas)) {
-            foreach ($group->datas as $data) {
-                if ($data->name == $key) {
-                    return $data;
-                }
-            }
-        }
-
-        if (isset($group->groups)) {
-            foreach ($group->groups as $group2) {
-                $data = $this->getDataType($key, $group2);
-
-                if ($data !== null) {
-                    return $data;
-                }
-            }
-        }
-
-        return null;
     }
 
     /**

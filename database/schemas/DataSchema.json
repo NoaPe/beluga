@@ -90,6 +90,30 @@
             "label": "Maximum",
             "position": 11,
             "nullable": true
+        },
+
+        "fillable": {
+            "type": "Boolean",
+            "label": "Remplissable",
+            "position": 12,
+            "nullable": false,
+            "default": false
+        },
+
+        "hidden": {
+            "type": "Boolean",
+            "label": "Visible",
+            "position": 13,
+            "nullable": false,
+            "default": false
+        },
+
+        "guarded": {
+            "type": "Boolean",
+            "label": "Protégé",
+            "position": 14,
+            "nullable": false,
+            "default": false
         }
     }
 }
