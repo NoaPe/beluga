@@ -24,9 +24,9 @@ class Image extends DataType
     /**
      * Constructor
      */
-    public function __construct($name, $data)
+    public function __construct($name, $shell)
     {
-        parent::__construct($name, $data);
+        parent::__construct($name, $shell);
         $this->image_path = config('beluga.image_path');
     }
 }

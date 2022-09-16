@@ -20,17 +20,17 @@ class Text extends DataType
      * Constructor
      *
      * @param  string  $name
-     * @param  array  $data
+     * @param  array  $shell
      */
-    public function __construct($name, $data)
+    public function __construct($name, $shell)
     {
-        parent::__construct($name, $data);
+        parent::__construct($name, $shell);
 
         /**
          * If the scale setting of $data is set to medium or long, set the appropriate $blueprint_type and the $input_type.
          */
-        if (isset($this->settings->scale)) {
-            switch ($this->settings->scale) {
+        if (isset($this->schema->settings->scale)) {
+            switch ($this->schema->settings->scale) {
                 case 'medium':
                     $this->blueprint_type = 'mediumText';
                     $this->input_type = 'textarea';

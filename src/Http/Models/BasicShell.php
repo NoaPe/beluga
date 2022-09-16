@@ -30,11 +30,11 @@ abstract class BasicShell extends Shell
     /**
      * Function who return the stdClass object of the schema.
      */
-    public static function getRawSchema()
+    public static function rawSchema()
     {
         $schema = new \stdClass();
 
-        $parent_schema = parent::getRawSchema();
+        $parent_schema = parent::rawSchema();
 
         /**
          * Set properties from the model with loop only if the settings invisible is not true.

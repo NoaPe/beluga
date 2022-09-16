@@ -24,9 +24,7 @@ trait HasSchema
     {
         $rules = [];
 
-        $schema = get_called_class()::getJsonSchema();
-
-        // TO DO
+        //
 
         return $rules;
     }
@@ -36,9 +34,9 @@ trait HasSchema
      *
      * @param  string  $key
      * @param  mixed  $group
-     * @return mixed Data type or null
+     * @return mixed DataType or null
      */
-    public function getDataType($key, $group = null)
+    public function getData($key, $group = null)
     {
         if ($group == null) {
             $group = $this->schema;
@@ -54,7 +52,7 @@ trait HasSchema
 
         if (isset($group->groups)) {
             foreach ($group->groups as $group2) {
-                $data = $this->getDataType($key, $group2);
+                $data = $this->getData($key, $group2);
 
                 if ($data !== null) {
                     return $data;
@@ -71,14 +69,14 @@ trait HasSchema
      * @param  mixed  $group
      * @return mixed
      */
-    protected static function getGroupSchema($group)
+    protected function getGroupSchema($group)
     {
         /**
          * If groups is set, replace each sub group with call to this function.
          */
         if (isset($group->groups)) {
             foreach ($group->groups as $key => $value) {
-                $group->groups->{$key} = get_called_class()::getGroupSchema($value);
+                $group->groups->{$key} = $this->getGroupSchema($value);
             }
         }
 
@@ -88,7 +86,7 @@ trait HasSchema
         if (isset($group->datas)) {
             foreach ($group->datas as $key => $data) {
                 $class = Beluga::getDataType($data->type);
-                $group->datas->{$key} = new $class($key, $data);
+                $group->datas->{$key} = new $class($key, $this);
             }
         }
 

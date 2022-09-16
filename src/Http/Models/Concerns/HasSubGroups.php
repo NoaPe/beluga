@@ -19,12 +19,12 @@ trait HasSubGroups
     /**
      * Function who return the stdClass object of the schema.
      */
-    public static function getRawSchema()
+    public static function rawSchema()
     {
         /**
          * Get the schema from the parent.
          */
-        $schema = parent::getRawSchema();
+        $schema = parent::rawSchema();
 
         /**
          * Set groups property with a recursive call and use $group->name as $key.
@@ -33,7 +33,7 @@ trait HasSubGroups
             $groups = new \stdClass();
 
             foreach ($schema->groups as $key => $group) {
-                $groups->{$key} = $group::getRawSchema();
+                $groups->{$key} = $group::rawSchema();
             }
 
             $schema->groups = $groups;
@@ -59,19 +59,18 @@ trait HasSubGroups
     /**
      * Call register function of each datas of the table.
      *
-     * @param  \NoaPe\Beluga\Shell  $shell
      * @return void
      */
-    public function registerDatas($shell)
+    public function registerDatas()
     {
         // Call register function of each data in $this->datas
         foreach ($this->datas as $data) {
-            $data->register($shell);
+            $data->register();
         }
 
         // Call registerDatas for each group
         foreach ($this->groups as $group) {
-            $group->registerDatas($shell);
+            $group->registerDatas();
         }
     }
 }

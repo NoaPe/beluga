@@ -27,15 +27,15 @@ class BFloat extends DataType
         /**
          * If the unsigned setting is set and true, add it to the column.
          */
-        if (isset($this->settings->unsigned) && $this->settings->unsigned) {
+        if (isset($this->schema->settings->unsigned) && $this->schema->settings->unsigned) {
             $column->unsigned();
         }
 
         /**
          * If the precision setting is set, add it to the column.
          */
-        if (isset($this->settings->precision)) {
-            $column->precision($this->settings->precision);
+        if (isset($this->schema->settings->precision)) {
+            $column->precision($this->schema->settings->precision);
         }
 
         return $column;

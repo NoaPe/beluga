@@ -55,7 +55,7 @@ abstract class Shell extends Model
                 throw new \Exception('Table '.$this->table_name.' not found in the database please migrate it.');
             }
 
-            $this->table->registerDatas($this);
+            $this->table->registerDatas();
         }
         /**
          * Schema definition
@@ -94,7 +94,7 @@ abstract class Shell extends Model
      */
     public function setAttribute($key, $value)
     {
-        $data = $this->getDataType($key);
+        $data = $this->getData($key);
 
         if ($data) {
             $value = $data->set($value);
@@ -110,10 +110,10 @@ abstract class Shell extends Model
      */
     public function getAttribute($key)
     {
-        $data = $this->getDataType($key);
+        $data = $this->getData($key);
 
         if ($data) {
-            return $data->get(parent::getAttribute($key));
+            return $data->get();
         }
 
         return parent::getAttribute($key);

@@ -7,69 +7,21 @@ use Illuminate\Database\Schema\Blueprint;
 abstract class DataType
 {
     /**
-     * The name of the data.
+     * Name of the data.
      */
     public $name;
 
     /**
-     * The table name.
+     * Shell
+     * 
+     * @var \NoaPe\Beluga\Shell
      */
-    public $table_name;
+    public $shell;
 
     /**
-     * The label of the data
+     * Schema information.
      */
-    public $label;
-
-    /**
-     * The description.
-     */
-    public $description;
-
-    /**
-     * The position.
-     */
-    public $position;
-
-    /**
-     * If the value is required.
-     */
-    public $required = false;
-
-    /**
-     * The default value.
-     */
-    public $default;
-
-    /**
-     * If unique.
-     */
-    public $unique = false;
-
-    /**
-     * If nullable.
-     */
-    public $nullable = true;
-
-    /**
-     * Settings array.
-     */
-    public $settings;
-
-    /**
-     * Validation rules.
-     */
-    public $validation;
-
-    /**
-     * The dimension.
-     */
-    public $dimension;
-
-    /**
-     * Maximum length.
-     */
-    public $max;
+    public $schema;
 
     /**
      * Blueprint type.
@@ -85,68 +37,16 @@ abstract class DataType
      * Constructor
      *
      * @param  string  $name
-     * @param  \stdClass  $data
+     * @param  \NoaPe\Beluga\Shell  $shell
      * @return void
      */
-    public function __construct($name, $data)
+    public function __construct($name, $shell)
     {
         // Set the name. Throw an exception if the name is not set.
         $this->name = $name;
+        $this->shell = $shell;
 
-        // If is set label, set it.
-        if (isset($data->label)) {
-            $this->label = $data->label;
-        }
-
-        // If is set description, set it.
-        if (isset($data->description)) {
-            $this->description = $data->description;
-        }
-
-        // If is set position, set it.
-        if (isset($data->position)) {
-            $this->position = $data->position;
-        }
-
-        // If is set required, set it.
-        if (isset($data->required)) {
-            $this->required = $data->required;
-        }
-
-        // If is set default, set it.
-        if (isset($data->default)) {
-            $this->default = $data->default;
-        }
-
-        // If is set unique, set it.
-        if (isset($data->unique)) {
-            $this->unique = $data->unique;
-        }
-
-        // If is set nullable, set it.
-        if (isset($data->nullable)) {
-            $this->nullable = $data->nullable;
-        }
-
-        // If is set settings, set it.
-        if (isset($data->settings)) {
-            $this->settings = $data->settings;
-        }
-
-        // If is set validation, set it.
-        if (isset($data->validation)) {
-            $this->validation = $data->validation;
-        }
-
-        // If is set dimension, set it.
-        if (isset($data->dimension)) {
-            $this->dimension = $data->dimension;
-        }
-
-        // If is set max, set it.
-        if (isset($data->max)) {
-            $this->max = $data->max;
-        }
+        $this->schema = $shell->getDataSchema($name);
     }
 
     /**
@@ -167,20 +67,20 @@ abstract class DataType
     {
         $column = $blueprint->{$this->blueprint_type}($this->name);
 
-        if ($this->nullable) {
+        if ($this->schema->nullable) {
             $column->nullable();
         }
 
-        if ($this->unique) {
+        if ($this->schema->unique) {
             $column->unique();
         }
 
-        if (isset($this->default)) {
-            $column->default($this->default);
+        if (isset($this->schema->default)) {
+            $column->default($this->schema->default);
         }
 
-        if (isset($this->length)) {
-            $column->length($this->length);
+        if (isset($this->schema->length)) {
+            $column->length($this->schema->length);
         }
 
         return $column;
@@ -193,24 +93,24 @@ abstract class DataType
     {
         $rules = '';
 
-        if ($this->nullable) {
+        if ($this->schema->nullable) {
             $rules = 'nullable';
         }
 
-        if ($this->unique) {
+        if ($this->schema->unique) {
             $rules .= '|unique:'.get_called_class()::getTableName();
         }
 
-        if ($this->required) {
+        if ($this->schema->required) {
             $rules .= '|required';
         }
 
-        if (isset($this->validation)) {
-            $rules .= '|'.$this->validation;
+        if (isset($this->schema->validation)) {
+            $rules .= '|'.$this->schema->validation;
         }
 
-        if (isset($this->max)) {
-            $rules .= '|max:'.$this->max;
+        if (isset($this->schema->max)) {
+            $rules .= '|max:'.$this->schema->max;
         }
 
         return $rules;
@@ -221,15 +121,15 @@ abstract class DataType
      */
     public function set($value)
     {
-        return $value;
+        return $this->shell->setAttribute($this->name, $value);
     }
 
     /**
      * Get function.
      */
-    public function get($value)
+    public function get()
     {
-        return $value;
+        return $this->shell->getAttribute($this->name);
     }
 
     /**
@@ -245,7 +145,7 @@ abstract class DataType
     /**
      * Public function register.
      */
-    public function register($shell)
+    public function register()
     {
         //
     }
