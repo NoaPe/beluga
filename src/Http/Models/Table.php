@@ -11,7 +11,7 @@ class Table extends BasicShell
 
     /**
      * The name of the table.
-     * 
+     *
      * @var string
      */
     protected $table = 'beluga_tables';

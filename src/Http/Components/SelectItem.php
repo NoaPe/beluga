@@ -6,8 +6,8 @@ use Illuminate\View\Component;
 
 class SelectItem extends Component
 {
-
     public $value;
+
     public $text;
 
     /**

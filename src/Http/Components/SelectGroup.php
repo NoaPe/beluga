@@ -6,7 +6,6 @@ use Illuminate\View\Component;
 
 class SelectGroup extends Component
 {
-
     public $group;
 
     /**

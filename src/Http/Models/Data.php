@@ -35,7 +35,7 @@ class Data extends BasicShell
     {
         parent::__construct($attributes);
     }
-    
+
     /**
      * Belongs to relation Group model if parent_is_group is true, Table model if parent_is_group is false.
      */

@@ -56,10 +56,10 @@ abstract class DataType
     {
         return class_basename(get_called_class());
     }
-    
+
     /**
      * is function.
-     * 
+     *
      * @param  string  $property
      */
     public function is($property)
@@ -74,8 +74,6 @@ abstract class DataType
     {
         return isset($this->schema->$property);
     }
-
-
 
     /**
      * Function for add the column to the blueprint schema.

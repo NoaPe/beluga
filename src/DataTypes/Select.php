@@ -10,7 +10,7 @@ class Select extends DataType
      * Blueprint type.
      */
     public $blueprint_type = 'string';
-    
+
     /**
      * Html input type.
      */
