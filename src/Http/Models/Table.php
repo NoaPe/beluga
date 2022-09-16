@@ -17,6 +17,11 @@ class Table extends BasicShell
     protected $table = 'beluga_tables';
 
     /**
+     * Name
+     */
+    public $name;
+
+    /**
      * Define hasMany relation with Group model only the Group have parent_is_group to false.
      */
     public function groups()

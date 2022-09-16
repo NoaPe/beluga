@@ -11,7 +11,7 @@ trait HasSchema
     /**
      * Schema information array.
      *
-     * @var array
+     * @var \stdClass
      */
     protected $schema;
 

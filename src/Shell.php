@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use NoaPe\Beluga\Http\Models\Table;
 
-abstract class Shell extends Model
+class Shell extends Model
 {
     use Concerns\HasBlueprint,
         Concerns\HasSchema,
@@ -48,7 +48,7 @@ abstract class Shell extends Model
          * Table instance definition
          * If the table exist in the database, we get it, else test if hasJsonSchema.
          */
-        if (! $this->table_bypass && ! $migration && false) {
+        if (!$this->table_bypass && !$migration) {
             $this->table = Table::where('name', $this->table_name)->first();
 
             if (! $this->table) {
