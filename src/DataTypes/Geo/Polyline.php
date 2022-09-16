@@ -3,7 +3,7 @@
 namespace NoaPe\Beluga\DataTypes\Geo;
 
 class Polyline extends MultiPoint
-{   
+{
     /**
      * Render input.
      */

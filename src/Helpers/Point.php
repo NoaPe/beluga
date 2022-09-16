@@ -6,23 +6,23 @@ class Point
 {
     /**
      * Latitude.
-     * 
+     *
      * @var float
      */
     public $lat;
 
     /**
      * Longitude.
-     * 
+     *
      * @var float
      */
     public $lng;
 
     /**
      * Constructor for instantiate a point.
-     * 
-     * @param float $lat
-     * @param float $lng
+     *
+     * @param  float  $lat
+     * @param  float  $lng
      * @return void
      */
     public function __construct($lat, $lng)
@@ -33,7 +33,7 @@ class Point
 
     /**
      * Get the distance between two points.
-     * 
+     *
      * @param  Point  $point
      * @return float
      */
@@ -62,7 +62,7 @@ class Point
 
     /**
      * Get the point as an array.
-     * 
+     *
      * @return array
      */
     public function toArray()
@@ -75,11 +75,11 @@ class Point
 
     /**
      * Get the point as a string.
-     * 
+     *
      * @return string
      */
     public function __toString()
     {
-        return $this->lat . ':' . $this->lng;
+        return $this->lat.':'.$this->lng;
     }
 }

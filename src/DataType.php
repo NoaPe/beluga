@@ -13,7 +13,7 @@ abstract class DataType
 
     /**
      * Shell
-     * 
+     *
      * @var \NoaPe\Beluga\Shell
      */
     public $shell;

@@ -41,7 +41,7 @@ trait HasJsonSchema
 
     /**
      * Return raw schema.
-     * 
+     *
      * @return \stdClass
      */
     protected function getRawSchema()
@@ -78,7 +78,7 @@ trait HasJsonSchema
 
     /**
      * Get a data raw schema from a key.
-     * 
+     *
      * @param  string  $key
      */
     public function getDataSchema($key)
@@ -113,6 +113,4 @@ trait HasJsonSchema
 
         return null;
     }
-
-    
 }

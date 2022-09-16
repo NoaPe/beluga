@@ -18,7 +18,7 @@ abstract class MultiPoint extends DataType
      */
     public function set($value)
     {
-        $result = "";
+        $result = '';
 
         // For each position in $value, add the lat and lng to the string.
         foreach ($value as $position) {

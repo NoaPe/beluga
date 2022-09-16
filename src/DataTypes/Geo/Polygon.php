@@ -3,7 +3,7 @@
 namespace NoaPe\Beluga\DataTypes\Geo;
 
 class Polygon extends MultiPoint
-{   
+{
     /**
      * Render input.
      */
