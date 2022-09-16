@@ -48,7 +48,7 @@ class Shell extends Model
          * Table instance definition
          * If the table exist in the database, we get it, else test if hasJsonSchema.
          */
-        if (!$this->table_bypass && !$migration) {
+        if (! $this->table_bypass && ! $migration) {
             $this->table = Table::where('name', $this->table_name)->first();
 
             if (! $this->table) {
