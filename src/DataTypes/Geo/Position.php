@@ -6,7 +6,7 @@ use Illuminate\Database\Schema\Blueprint;
 use NoaPe\Beluga\DataType;
 use NoaPe\Beluga\Helpers\Point;
 
-abstract class Position extends DataType
+class Position extends DataType
 {
     /**
      * Blueprint type.

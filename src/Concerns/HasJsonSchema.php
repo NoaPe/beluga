@@ -94,8 +94,8 @@ trait HasJsonSchema
     public static function getDataSchemaFromGroup($key, $group)
     {
         if (isset($group->datas)) {
-            foreach ($group->datas as $data) {
-                if ($data->name == $key) {
+            foreach ($group->datas as $name => $data) {
+                if ($name == $key) {
                     return $data;
                 }
             }

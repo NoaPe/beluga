@@ -35,7 +35,7 @@ abstract class Shell extends Model
      * @param  array  $attributes
      * @return void
      */
-    public function __construct(array $attributes = [])
+    public function __construct(array $attributes = [], $migration = false)
     {
         parent::__construct($attributes);
 
@@ -48,8 +48,8 @@ abstract class Shell extends Model
          * Table instance definition
          * If the table exist in the database, we get it, else test if hasJsonSchema.
          */
-        if (! $this->table_bypass) {
-            $this->table = Table::where('table_name', $this->table_name)->first();
+        if (!$this->table_bypass && !$migration && false) {
+            $this->table = Table::where('name', $this->table_name)->first();
 
             if (! $this->table) {
                 throw new \Exception('Table '.$this->table_name.' not found in the database please migrate it.');
@@ -57,6 +57,7 @@ abstract class Shell extends Model
 
             $this->table->registerDatas();
         }
+
         /**
          * Schema definition
          */
@@ -117,13 +118,5 @@ abstract class Shell extends Model
         }
 
         return parent::getAttribute($key);
-    }
-
-    /**
-     * Getter schema.
-     */
-    public function getSchema()
-    {
-        return $this->schema;
     }
 }

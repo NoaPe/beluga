@@ -50,10 +50,15 @@ return [
         'Timestamp' => NoaPe\Beluga\DataTypes\Timestamp::class,
         'File' => NoaPe\Beluga\DataTypes\File::class,
         'Image' => NoaPe\Beluga\DataTypes\Image::class,
+        'Select' => NoaPe\Beluga\DataTypes\Select::class,
 
         'BelongsTo' => NoaPe\Beluga\DataTypes\Relations\BelongsTo::class,
         'HasMany' => NoaPe\Beluga\DataTypes\Relations\HasMany::class,
         'HasOne' => NoaPe\Beluga\DataTypes\Relations\HasOne::class,
+
+        'Geo\Position' => NoaPe\Beluga\DataTypes\Geo\Position::class,
+        'Geo\Polyline' => NoaPe\Beluga\DataTypes\Geo\Polyline::class,
+        'Geo\Polygon' => NoaPe\Beluga\DataTypes\Geo\Polygon::class,
     ],
 
     /**

@@ -12,14 +12,6 @@ abstract class BasicShell extends Shell
     protected $table_bypass = true;
 
     /**
-     * Static function to get table name.
-     */
-    public static function getTableName()
-    {
-        return config('beluga.table_prefix').parent::getTableName();
-    }
-
-    /**
      * Static function to get a name of schema file.
      */
     public static function getJsonSchemaFileName()

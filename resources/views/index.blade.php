@@ -6,5 +6,5 @@
 @section('content')
     <p>Show Tables</p>
 
-    <x-beluga-form shell="Data" internal=true />
+    <x-beluga-form shell="Place" />
 @endsection

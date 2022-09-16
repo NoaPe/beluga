@@ -10,6 +10,13 @@ class Group extends BasicShell
         Concerns\HasSubGroups;
 
     /**
+     * The name of the table.
+     * 
+     * @var string
+     */
+    protected $table = 'beluga_groups';
+
+    /**
      * Boolean, true is the parent is group.
      *
      * @var bool

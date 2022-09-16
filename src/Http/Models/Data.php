@@ -24,21 +24,18 @@ class Data extends BasicShell
     public $type;
 
     /**
+     * Name of the table.
+     */
+    protected $table = 'beluga_datas';
+
+    /**
      * Constructor
      */
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
     }
-
-    /**
-     * Static function for set the table name to "datas" with the config prefix.
-     */
-    public static function getTableName()
-    {
-        return config('beluga.table_prefix').'datas';
-    }
-
+    
     /**
      * Belongs to relation Group model if parent_is_group is true, Table model if parent_is_group is false.
      */

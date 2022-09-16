@@ -56,6 +56,26 @@ abstract class DataType
     {
         return class_basename(get_called_class());
     }
+    
+    /**
+     * is function.
+     * 
+     * @param  string  $property
+     */
+    public function is($property)
+    {
+        return isset($this->schema->$property) && $this->schema->$property;
+    }
+
+    /**
+     * has function.
+     */
+    public function has($property)
+    {
+        return isset($this->schema->$property);
+    }
+
+
 
     /**
      * Function for add the column to the blueprint schema.
@@ -67,19 +87,19 @@ abstract class DataType
     {
         $column = $blueprint->{$this->blueprint_type}($this->name);
 
-        if ($this->schema->nullable) {
+        if ($this->is('nullable')) {
             $column->nullable();
         }
 
-        if ($this->schema->unique) {
+        if ($this->is('unique')) {
             $column->unique();
         }
 
-        if (isset($this->schema->default)) {
+        if ($this->has('default')) {
             $column->default($this->schema->default);
         }
 
-        if (isset($this->schema->length)) {
+        if ($this->has('length')) {
             $column->length($this->schema->length);
         }
 
@@ -93,23 +113,23 @@ abstract class DataType
     {
         $rules = '';
 
-        if ($this->schema->nullable) {
+        if ($this->is('nullable')) {
             $rules = 'nullable';
         }
 
-        if ($this->schema->unique) {
+        if ($this->is('unique')) {
             $rules .= '|unique:'.get_called_class()::getTableName();
         }
 
-        if ($this->schema->required) {
+        if ($this->is('required')) {
             $rules .= '|required';
         }
 
-        if (isset($this->schema->validation)) {
+        if ($this->has('validation')) {
             $rules .= '|'.$this->schema->validation;
         }
 
-        if (isset($this->schema->max)) {
+        if ($this->has('max')) {
             $rules .= '|max:'.$this->schema->max;
         }
 
@@ -138,7 +158,8 @@ abstract class DataType
     public function renderInput()
     {
         return view('beluga::components.inputs.'.$this->input_type, [
-            'data' => $this,
+            'data' => $this->schema,
+            'name' => $this->name,
         ]);
     }
 

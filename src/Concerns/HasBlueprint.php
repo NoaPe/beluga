@@ -49,7 +49,8 @@ trait HasBlueprint
         $table_name = get_called_class()::getTableName();
 
         Schema::create($table_name, function (Blueprint $blueprint) {
-            $schema = get_called_class()::getJsonSchema();
+            $class = get_called_class();
+            $schema = (new $class([], true))->schema;
 
             $blueprint->id();
 

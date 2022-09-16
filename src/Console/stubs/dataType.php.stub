@@ -5,7 +5,7 @@ namespace NoaPe\Beluga\DataTypes\DummySubNamespace;
 use Illuminate\Database\Schema\Blueprint;
 use NoaPe\Beluga\DataType;
 
-abstract class DummyName extends DataType
+class DummyName extends DataType
 {
     /**
      * Blueprint type.
@@ -42,17 +42,7 @@ abstract class DummyName extends DataType
     {
         return $value;
     }
-
-    /**
-     * Render input.
-     */
-    public function renderInput()
-    {
-        return view('beluga::components.inputs.'.$this->input_type, [
-            'data' => $this,
-        ]);
-    }
-
+    
     /**
      * Register things on the shell.
      */

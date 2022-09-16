@@ -5,8 +5,8 @@
     </div>
     <div class="col-6">
         <input type="text"
-            name="{{ $data->name }}"
-            id="{{ $data->name }}"
+            name="{{ $name }}"
+            id="{{ $name }}"
             style="{{ isset($data->style) ? 'style' : '' }}"
             placeholder="{{ $data->placeholder ? 'placeholder' : '' }}"
             class=" {{ isset($data->settings->class) ? $data->settings->class : '' }}"

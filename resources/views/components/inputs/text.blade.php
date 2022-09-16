@@ -1,12 +1,12 @@
 <!-- Html text for string $data dataType -->
 <div class="row">
     <div class="col-6">
-        <label>{{ $data->label }}</label>
+        <label>{{ isset($data->label) ? $data->label : '' }}</label>
     </div>
     <div class="col-6">
         <input type="text"
-            name="{{ $data->name }}"
-            id="{{ $data->name }}"
+            name="{{ $name }}"
+            id="{{ $name }}"
             style="{{ isset($data->style) ? 'style' : '' }}"
             placeholder="{{ isset($data->placeholder) ? $data->placeholder : '' }}"
             class=" {{ isset($data->settings->class) ? $data->settings->class : '' }}"

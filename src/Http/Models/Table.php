@@ -10,6 +10,13 @@ class Table extends BasicShell
         Concerns\HasSubGroups;
 
     /**
+     * The name of the table.
+     * 
+     * @var string
+     */
+    protected $table = 'beluga_tables';
+
+    /**
      * Define hasMany relation with Group model only the Group have parent_is_group to false.
      */
     public function groups()

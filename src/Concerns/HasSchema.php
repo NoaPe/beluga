@@ -130,7 +130,7 @@ trait HasSchema
     public function getFillables()
     {
         return $this->filterDatas(function ($data) {
-            return $data->fillable;
+            return isset($data->fillable) && $data->fillable;
         });
     }
 
@@ -140,7 +140,7 @@ trait HasSchema
     public function getHiddens()
     {
         return $this->filterDatas(function ($data) {
-            return $data->hidden;
+            return isset($data->hidden) && $data->hidden;
         });
     }
 
@@ -150,7 +150,15 @@ trait HasSchema
     public function getGuardeds()
     {
         return $this->filterDatas(function ($data) {
-            return $data->guarded;
+            return isset($data->guarded) && $data->guarded;
         });
+    }
+
+    /**
+     * Getter schema.
+     */
+    public function getSchema()
+    {
+        return $this->schema;
     }
 }

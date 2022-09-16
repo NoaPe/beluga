@@ -5,8 +5,8 @@
     </div>
     <div class="col-6">
         <input type="checkbox"
-            name="{{ $data->name }}"
-            id="{{ $data->name }}"
+            name="{{ $name }}"
+            id="{{ $name }}"
             value="1" 
             style="{{ isset($data->style) ? 'style' : '' }}"
             class=" {{ isset($data->settings->class) ? $data->settings->class : '' }}"

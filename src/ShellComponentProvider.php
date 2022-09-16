@@ -21,5 +21,7 @@ class ShellComponentProvider
         Blade::component(Table::class, 'beluga-table');
         Blade::component(Group::class, 'beluga-group');
         Blade::component(Input::class, 'beluga-input');
+
+        Blade::componentNamespace('NoaPe\Beluga\Http\Components', 'beluga');
     }
 }
