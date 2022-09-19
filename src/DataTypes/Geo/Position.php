@@ -41,16 +41,14 @@ class Position extends DataType
      */
     public function set($value)
     {
-        return parent::set($value->lat.':'.$value->lng);
+        return $value->lat.':'.$value->lng;
     }
 
     /**
      * Get function.
      */
-    public function get()
+    public function get($value)
     {
-        $value = parent::get();
-
         $value = explode(':', $value);
 
         return new Point($value[0], $value[1]);

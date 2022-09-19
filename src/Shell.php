@@ -10,17 +10,14 @@ class Shell extends Model
 {
     use Concerns\HasBlueprint,
         Concerns\HasSchema,
-        Concerns\HasJsonSchema;
+        Concerns\HasJsonSchema,
+        Concerns\HasInternalJsonSchema,
+        Concerns\HasDatabaseSchema;
 
     /**
      * The name of the table.
      *
      * @var string
-     */
-    protected $table_name;
-
-    /**
-     * Table instance.
      */
     protected $table;
 
@@ -30,38 +27,30 @@ class Shell extends Model
     protected $table_bypass = false;
 
     /**
+     * Schema origin
+     * 
+     * @var string
+     */
+    protected $schema_origin = 'Json';
+
+    /**
      * Create a new Shell instance.
      *
      * @param  array  $attributes
      * @return void
      */
-    public function __construct(array $attributes = [], $migration = false)
+    public function __construct(array $attributes = [])
     {
-        parent::__construct($attributes);
-
         /**
          * Table name definition
          */
-        $this->table_name = get_called_class()::getTableName();
+        $this->table = static::getTableName();
 
-        /**
-         * Table instance definition
-         * If the table exist in the database, we get it, else test if hasJsonSchema.
-         */
-        if (! $this->table_bypass && ! $migration) {
-            $this->table = Table::where('name', $this->table_name)->first();
+        $this->schema = $this->getSchema();
 
-            if (! $this->table) {
-                throw new \Exception('Table '.$this->table_name.' not found in the database please migrate it.');
-            }
-
-            $this->table->registerDatas();
+        if ($this->schema instanceof Table) {
+            $this->schema->registerDatas($this);
         }
-
-        /**
-         * Schema definition
-         */
-        $this->schema = get_called_class()::getJsonSchema();
 
         /**
          * Set fillable attributes
@@ -77,10 +66,24 @@ class Shell extends Model
          * Set hidden attributes
          */
         $this->hidden = $this->getHiddens();
+        
+        parent::__construct($attributes);
+    }
+
+    /**
+     * Return class name.
+     * 
+     * @return string
+     */
+    protected function getName()
+    {
+        return class_basename(get_called_class());
     }
 
     /**
      * Static function to get table name.
+     * 
+     * @return string
      */
     protected static function getTableName()
     {
@@ -95,10 +98,10 @@ class Shell extends Model
      */
     public function setAttribute($key, $value)
     {
-        $data = $this->getData($key);
+        $data = $this->getDataType($key);
 
         if ($data) {
-            $value = $data->set($value);
+            $value = (new $data($key, $this))->set($value);
         }
 
         return parent::setAttribute($key, $value);
@@ -111,12 +114,14 @@ class Shell extends Model
      */
     public function getAttribute($key)
     {
-        $data = $this->getData($key);
+        $data = $this->getDataType($key);
+
+        $value = parent::getAttribute($key);
 
         if ($data) {
-            return $data->get();
+            $value = (new $data($key, $this))->get($value);
         }
 
-        return parent::getAttribute($key);
+        return $value;
     }
 }

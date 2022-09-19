@@ -5,36 +5,16 @@ namespace NoaPe\Beluga\Http\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use NoaPe\Beluga\Beluga;
 
+/**
+ * Data model.
+ * 
+ * @property boolean $parent_is_group
+ * @property string $name
+ * @property string $type
+ */
 class Data extends BasicShell
 {
     use HasFactory;
-
-    /**
-     * Boolean, true is the parent is group.
-     *
-     * @var bool
-     */
-    public $parent_is_group;
-
-    /**
-     * Data type.
-     *
-     * @var string
-     */
-    public $type;
-
-    /**
-     * Name of the table.
-     */
-    protected $table = 'beluga_datas';
-
-    /**
-     * Constructor
-     */
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-    }
 
     /**
      * Belongs to relation Group model if parent_is_group is true, Table model if parent_is_group is false.
@@ -49,10 +29,14 @@ class Data extends BasicShell
 
     /**
      * Function for get data type
+     * 
+     * @param \NoaPe\Beluga\Shell $shell
+     * @return \NoaPe\Beluga\DataType
      */
-    public function getType()
+    public function getType($shell)
     {
-        return Beluga::getDataType($this->type);
+        $class = Beluga::getDataType($this->type);
+        return new $class($this->name, $shell);
     }
 
     /**
@@ -60,6 +44,11 @@ class Data extends BasicShell
      */
     public function register($shell)
     {
-        $this->getType()->register($shell);
+        $this->getType($shell)->register();
+    }
+
+    public static function getTableName()
+    {
+        return 'beluga_datas';
     }
 }

@@ -2,6 +2,7 @@
     "datas": {
         "parent_id": {
             "type": "Integer",
+            "fillable": true,
             "settings": {
                 "invisible": true,
                 "unsigned": true
@@ -12,6 +13,7 @@
             "type": "Boolean",
             "required": true,
             "nullable": false,
+            "fillable": true,
             "settings": {
                 "invisible": true
             }
@@ -22,6 +24,7 @@
             "label": "Nom",
             "position": 1,
             "nullable": false,
+            "fillable": true,
             "settings": {
                 "invisible": true
             }
@@ -30,6 +33,7 @@
         "label": {
             "type": "String",
             "label": "Label",
+            "fillable": true,
             "position": 2,
             "nullable": true
         },
@@ -37,6 +41,7 @@
         "description": {
             "type": "String",
             "label": "Description",
+            "fillable": true,
             "position": 3,
             "nullable": true
         },
@@ -44,6 +49,7 @@
         "position": {
             "type": "Integer",
             "label": "Position",
+            "fillable": true,
             "position": 4,
             "nullable": true
         }

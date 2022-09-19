@@ -10,13 +10,6 @@ class Table extends BasicShell
         Concerns\HasSubGroups;
 
     /**
-     * The name of the table.
-     *
-     * @var string
-     */
-    protected $table = 'beluga_tables';
-
-    /**
      * Name
      */
     public $name;

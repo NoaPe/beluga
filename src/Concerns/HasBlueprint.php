@@ -17,7 +17,8 @@ trait HasBlueprint
     protected static function addDatasToBlueprint($datas, $blueprint)
     {
         foreach ($datas as $data) {
-            $data->addToBlueprint($blueprint);
+            $class = static::class;
+            $data->getType(new $class())->addToBlueprint($blueprint);
         }
     }
 
@@ -46,11 +47,11 @@ trait HasBlueprint
      */
     public static function up()
     {
-        $table_name = get_called_class()::getTableName();
+        $table_name = static::getTableName();
 
         Schema::create($table_name, function (Blueprint $blueprint) {
-            $class = get_called_class();
-            $schema = (new $class([], true))->schema;
+            $class = static::class;
+            $schema = (new $class())->schema;
 
             $blueprint->id();
 
@@ -75,6 +76,6 @@ trait HasBlueprint
      */
     public static function down()
     {
-        Schema::dropIfExists(get_called_class()::getTableName());
+        Schema::dropIfExists(static::getTableName());
     }
 }

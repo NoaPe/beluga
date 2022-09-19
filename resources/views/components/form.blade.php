@@ -9,8 +9,6 @@
         </div>
     @endif
 
-    <?php $schema = $shell->getSchema() ?>
-
     {{-- Loop for each data in $shell->schema->datas --}}
     @if(isset($schema->datas)) 
         @foreach($schema->datas as $name => $data)

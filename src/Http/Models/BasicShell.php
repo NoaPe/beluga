@@ -3,6 +3,8 @@
 namespace NoaPe\Beluga\Http\Models;
 
 use NoaPe\Beluga\Shell;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Str;
 
 abstract class BasicShell extends Shell
 {
@@ -12,6 +14,13 @@ abstract class BasicShell extends Shell
     protected $table_bypass = true;
 
     /**
+     * Schema origin
+     * 
+     * @var string
+     */
+    protected $schema_origin = 'InternalJson';
+    
+    /**
      * Static function to get a name of schema file.
      */
     public static function getJsonSchemaFileName()
@@ -20,25 +29,10 @@ abstract class BasicShell extends Shell
     }
 
     /**
-     * Function who return the stdClass object of the schema.
+     * Static function to get a name of table.
      */
-    public static function rawSchema()
+    public static function getTableName()
     {
-        $schema = new \stdClass();
-
-        $parent_schema = parent::rawSchema();
-
-        /**
-         * Set properties from the model with loop only if the settings invisible is not true.
-         */
-        foreach ($parent_schema as $key => $value) {
-            if ($value->settings->invisible ?? false) {
-                continue;
-            }
-
-            $schema->{$key} = $parent_schema->{$key};
-        }
-
-        return $schema;
+        return config('beluga.table_prefix').parent::getTableName();
     }
 }

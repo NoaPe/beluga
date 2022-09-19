@@ -11,7 +11,7 @@ trait HasSchema
     /**
      * Schema information array.
      *
-     * @var \stdClass
+     * @var mixed
      */
     protected $schema;
 
@@ -32,65 +32,35 @@ trait HasSchema
     /**
      * Function for get a data type from exploration of the schema.
      *
-     * @param  string  $key
+     * @param  string  $name
      * @param  mixed  $group
      * @return mixed DataType or null
      */
-    public function getData($key, $group = null)
+    public function getDataType($name, $group = null)
     {
         if ($group == null) {
             $group = $this->schema;
         }
 
         if (isset($group->datas)) {
-            foreach ($group->datas as $data) {
-                if ($data->name == $key) {
-                    return $data;
+            foreach ($group->datas as $key => $data) {
+                if ($key == $name) {
+                    return $data->getType($this);
                 }
             }
         }
 
         if (isset($group->groups)) {
             foreach ($group->groups as $group2) {
-                $data = $this->getData($key, $group2);
+                $data = $this->getDataType($name, $group2);
 
                 if ($data !== null) {
-                    return $data;
+                    return $data->getType($this);
                 }
             }
         }
 
         return null;
-    }
-
-    /**
-     * Recursive static function for get the schema of group with instanciate data types.
-     *
-     * @param  mixed  $group
-     * @return mixed
-     */
-    protected function getGroupSchema($group)
-    {
-        /**
-         * If groups is set, replace each sub group with call to this function.
-         */
-        if (isset($group->groups)) {
-            foreach ($group->groups as $key => $value) {
-                $group->groups->{$key} = $this->getGroupSchema($value);
-            }
-        }
-
-        /**
-         * If data is set, replace each data with instanciate data type.
-         */
-        if (isset($group->datas)) {
-            foreach ($group->datas as $key => $data) {
-                $class = Beluga::getDataType($data->type);
-                $group->datas->{$key} = new $class($key, $this);
-            }
-        }
-
-        return $group;
     }
 
     /**
@@ -108,9 +78,9 @@ trait HasSchema
     {
         $datas = [];
 
-        foreach ($group->datas as $data) {
+        foreach ($group->datas as $key => $data) {
             if ($callback($data)) {
-                $datas[] = $data;
+                $datas[] = $key;
             }
         }
 
@@ -156,9 +126,56 @@ trait HasSchema
 
     /**
      * Getter schema.
+     * 
+     * @return \NoaPe\Beluga\Http\Models\Table
      */
     public function getSchema()
     {
-        return $this->schema;
+        if ($this->schema) {
+            return $this->schema;
+        }
+
+        if (method_exists($this, 'getSchemaFrom'.$this->schema_origin)) {
+            $this->schema = $this->{'getSchemaFrom'.$this->schema_origin}();
+            return $this->schema;
+        } else {
+            throw new \Exception('Schema origin "'.$this->schema_origin.'" not found.');
+        }
+    }
+
+    /**
+     * Get a data raw schema from a key.
+     *
+     * @param  string  $key
+     */
+    public function getDataSchema($key)
+    {
+        return self::getDataSchemaFromGroup($key, $this->schema);
+    }
+
+    /**
+     * Get a data raw schema from a key.
+     */
+    public static function getDataSchemaFromGroup($key, $group)
+    {
+        if (isset($group->datas)) {
+            foreach ($group->datas as $name => $data) {
+                if ($name == $key) {
+                    return $data;
+                }
+            }
+        }
+
+        if (isset($group->groups)) {
+            foreach ($group->groups as $group2) {
+                $data = self::getDataSchemaFromGroup($key, $group2);
+
+                if ($data !== null) {
+                    return $data;
+                }
+            }
+        }
+
+        return null;
     }
 }

@@ -23,7 +23,6 @@ class Relation extends DataType
     public function register()
     {
         // Get the shell class name.
-        $class = Beluga::qualifyShell($this->shell);
 
         $relation = $this->shell->{$this->relation_function}(
             $this->schema->settings->class,

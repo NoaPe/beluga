@@ -42,12 +42,4 @@ class DummyName extends DataType
     {
         return $value;
     }
-    
-    /**
-     * Register things on the shell.
-     */
-    public function register($shell)
-    {
-        //
-    }
 }

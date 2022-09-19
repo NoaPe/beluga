@@ -4,21 +4,24 @@
             "type": "String",
             "required": true,
             "label": "Name",
-            "description": "The name of the table."
+            "description": "The name of the table.",
+            "fillable": true
         },
 
         "description": {
             "type": "String",
             "required": false,
             "label": "Description",
-            "description": "A description of the table."
+            "description": "A description of the table.",
+            "fillable": true
         },
 
         "timestamps": {
             "type": "Boolean",
             "required": false,
             "label": "Timestamps",
-            "description": "If the table has timestamps."
+            "description": "If the table has timestamps.",
+            "fillable": true
         }
     }
 }

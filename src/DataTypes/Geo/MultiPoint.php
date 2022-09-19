@@ -28,16 +28,14 @@ abstract class MultiPoint extends DataType
         // Remove the last semicolon.
         $result = substr($result, 0, -1);
 
-        return parent::set($result);
+        return $result;
     }
 
     /**
      * Get function.
      */
-    public function get()
+    public function get($value)
     {
-        $value = parent::get();
-
         $value = explode(';', $value);
 
         $result = [];

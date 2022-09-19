@@ -51,6 +51,7 @@ return [
         'File' => NoaPe\Beluga\DataTypes\File::class,
         'Image' => NoaPe\Beluga\DataTypes\Image::class,
         'Select' => NoaPe\Beluga\DataTypes\Select::class,
+        'Json' => NoaPe\Beluga\DataTypes\Json::class,
 
         'BelongsTo' => NoaPe\Beluga\DataTypes\Relations\BelongsTo::class,
         'HasMany' => NoaPe\Beluga\DataTypes\Relations\HasMany::class,

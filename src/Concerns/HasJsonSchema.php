@@ -3,6 +3,9 @@
 namespace NoaPe\Beluga\Concerns;
 
 use NoaPe\Beluga\Http\Models\Data;
+use NoaPe\Beluga\Http\Models\Group;
+use NoaPe\Beluga\Http\Models\Table;
+use NoaPe\Beluga\Beluga;
 
 trait HasJsonSchema
 {
@@ -16,7 +19,7 @@ trait HasJsonSchema
      */
     public static function getJsonSchemaFileName()
     {
-        return config('beluga.schema_path').'/'.class_basename(get_called_class()).'Schema.json';
+        return config('beluga.schema_path').'/'.class_basename(static::class).'Schema.json';
     }
 
     /**
@@ -27,7 +30,7 @@ trait HasJsonSchema
         /**
          * Get schema information from Json file.
          */
-        $file = get_called_class()::getJsonSchemaFileName();
+        $file = static::getJsonSchemaFileName();
         $data = new \stdClass();
 
         if (file_exists($file)) {
@@ -50,67 +53,123 @@ trait HasJsonSchema
             return $this->raw_schema;
         }
 
-        $this->raw_schema = get_called_class()::rawSchema();
+        $this->raw_schema = static::rawSchema();
 
         return $this->raw_schema;
     }
+    
+    protected function getDatasSchemaFromArray($datas)
+    {
+        $schema = new \stdClass();
+
+        foreach ($datas as $key => $data) {
+            $data->name = $key;
+            $data = json_decode(json_encode($data), true);
+            $schema->{$key} = Data::firstOrNew((array) $data);
+        }
+
+        return $schema;
+    }
+
+    protected function getGroupsSchemaFromArray($groups)
+    {
+        
+        $schema = new \stdClass();
+
+        foreach ($groups as $key => $value) {
+            $schema->{$key} = $this->getGroupSchemaFromArray($value, $key);
+        }
+
+        return $schema;
+    }
 
     /**
-     * Static function who take raw schema array and return a schema array with the correct instanciate data types.
+     * Recursive static function for get the schema of group with instanciate data types.
+     *
+     * @param  mixed  $group
+     * @return \NoaPe\Beluga\Http\Models\Group
      */
-    protected function getJsonSchema()
+    protected function getGroupSchemaFromArray($group, $name)
+    {
+        $group->name = $name;
+
+        /**
+         * Remove the datas and groups from the schema.
+         */
+        if (isset($group->datas)) {
+            $datas = $group->datas;
+            unset($group->datas);
+        }
+
+        if (isset($group->groups)) {
+            $groups = $group->groups;
+            unset($group->groups);
+        }
+
+        $schema = new Group((array) $group);
+        
+        if (isset($groups)) {
+            $schema->groups = $this->getGroupsSchemaFromArray($groups);
+        }
+
+        if (isset($datas)) {
+            $schema->datas = $this->getDatasSchemaFromArray($datas);
+        }
+
+        return $schema;
+    }
+
+    /**
+     * Function who take raw schema array and return a schema array with the correct instanciate data types.
+     * 
+     * @return Table
+     */
+    protected function getSchemaFromJson()
     {
         /**
          * Get raw schema information.
          */
         $schema = $this->getRawSchema();
 
-        return $this->getGroupSchema($schema);
+        $schema->name = $this->getName();
+
+        /**
+         * Remove the datas and groups from the schema.
+         */
+        if (isset($schema->datas)) {
+            $datas = $schema->datas;
+            unset($schema->datas);
+        }
+
+        if (isset($schema->groups)) {
+            $groups = $schema->groups;
+            unset($schema->groups);
+        }
+
+        $table = new Table((array) $schema);
+
+        if (isset($datas)) {
+            $table->datas = $this->getDatasSchemaFromArray($datas);
+        } else {
+            $table->datas = new \stdClass();
+        }
+
+        if (isset($groups)) {
+            $table->groups = $this->getGroupsSchemaFromArray($groups);
+        } else {
+            $table->groups = new \stdClass();
+        }
+
+        return $table;
     }
 
     /**
      * Test if the JSON Schema file exists
+     * 
+     * @return bool
      */
     public static function hasJsonSchema()
     {
-        return file_exists(get_called_class()::getJsonSchemaFileName());
-    }
-
-    /**
-     * Get a data raw schema from a key.
-     *
-     * @param  string  $key
-     */
-    public function getDataSchema($key)
-    {
-        $schema = $this->getRawSchema();
-
-        return self::getDataSchemaFromGroup($key, $schema);
-    }
-
-    /**
-     * Get a data raw schema from a key.
-     */
-    public static function getDataSchemaFromGroup($key, $group)
-    {
-        if (isset($group->datas)) {
-            foreach ($group->datas as $name => $data) {
-                if ($name == $key) {
-                    return $data;
-                }
-            }
-        }
-
-        if (isset($group->groups)) {
-            foreach ($group->groups as $group2) {
-                $data = self::getDataSchemaFromGroup($key, $group2);
-
-                if ($data !== null) {
-                    return $data;
-                }
-            }
-        }
-
-        return null;
+        return file_exists(static::getJsonSchemaFileName());
     }
 }

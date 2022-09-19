@@ -20,7 +20,7 @@ class Polyline extends MultiPoint
     public function length()
     {
         $length = 0;
-        $points = $this->get();
+        $points = $this->shell->getAttribute($this->name);
 
         for ($i = 0; $i < count($points) - 1; $i++) {
             $length += $points[$i]->distanceTo($points[$i + 1]);

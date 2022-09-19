@@ -105,6 +105,6 @@ class ShellRenderer
         }
 
         // Return the view from the data type
-        return $data->renderInput();
+        return $data->getType($shell)->renderInput();
     }
 }

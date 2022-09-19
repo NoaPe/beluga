@@ -61,16 +61,16 @@ trait HasSubGroups
      *
      * @return void
      */
-    public function registerDatas()
+    public function registerDatas($shell)
     {
         // Call register function of each data in $this->datas
         foreach ($this->datas as $data) {
-            $data->register();
+            $data->register($shell);
         }
 
         // Call registerDatas for each group
         foreach ($this->groups as $group) {
-            $group->registerDatas();
+            $group->registerDatas($shell);
         }
     }
 }

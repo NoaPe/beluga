@@ -139,15 +139,15 @@ abstract class DataType
      */
     public function set($value)
     {
-        return $this->shell->setAttribute($this->name, $value);
+        return $value;
     }
 
     /**
      * Get function.
      */
-    public function get()
+    public function get($value)
     {
-        return $this->shell->getAttribute($this->name);
+        return $value;
     }
 
     /**
