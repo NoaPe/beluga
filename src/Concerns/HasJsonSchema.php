@@ -5,7 +5,6 @@ namespace NoaPe\Beluga\Concerns;
 use NoaPe\Beluga\Http\Models\Data;
 use NoaPe\Beluga\Http\Models\Group;
 use NoaPe\Beluga\Http\Models\Table;
-use NoaPe\Beluga\Beluga;
 
 trait HasJsonSchema
 {
@@ -57,7 +56,7 @@ trait HasJsonSchema
 
         return $this->raw_schema;
     }
-    
+
     protected function getDatasSchemaFromArray($datas)
     {
         $schema = new \stdClass();
@@ -73,7 +72,6 @@ trait HasJsonSchema
 
     protected function getGroupsSchemaFromArray($groups)
     {
-        
         $schema = new \stdClass();
 
         foreach ($groups as $key => $value) {
@@ -107,7 +105,7 @@ trait HasJsonSchema
         }
 
         $schema = new Group((array) $group);
-        
+
         if (isset($groups)) {
             $schema->groups = $this->getGroupsSchemaFromArray($groups);
         }
@@ -121,7 +119,7 @@ trait HasJsonSchema
 
     /**
      * Function who take raw schema array and return a schema array with the correct instanciate data types.
-     * 
+     *
      * @return Table
      */
     protected function getSchemaFromJson()
@@ -165,7 +163,7 @@ trait HasJsonSchema
 
     /**
      * Test if the JSON Schema file exists
-     * 
+     *
      * @return bool
      */
     public static function hasJsonSchema()

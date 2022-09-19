@@ -28,7 +28,7 @@ class Shell extends Model
 
     /**
      * Schema origin
-     * 
+     *
      * @var string
      */
     protected $schema_origin = 'Json';
@@ -66,13 +66,13 @@ class Shell extends Model
          * Set hidden attributes
          */
         $this->hidden = $this->getHiddens();
-        
+
         parent::__construct($attributes);
     }
 
     /**
      * Return class name.
-     * 
+     *
      * @return string
      */
     protected function getName()
@@ -82,7 +82,7 @@ class Shell extends Model
 
     /**
      * Static function to get table name.
-     * 
+     *
      * @return string
      */
     protected static function getTableName()

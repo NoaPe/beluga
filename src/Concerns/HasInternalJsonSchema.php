@@ -9,7 +9,7 @@ trait HasInternalJsonSchema
 {
     /**
      * Function who take raw schema array and return a schema array with the correct instanciate data types.
-     * 
+     *
      * @return \stdClass
      */
     protected function getSchemaFromInternalJson()
@@ -19,7 +19,7 @@ trait HasInternalJsonSchema
 
     /**
      * Schema with data instantiation.
-     * 
+     *
      * @return \stdClass
      */
     public function schemaWithDataInstantiation()
@@ -33,7 +33,7 @@ trait HasInternalJsonSchema
 
     /**
      * Group with data instantiation.
-     * 
+     *
      * @return \stdClass
      */
     public function groupWithDataInstantiation($group)
@@ -53,13 +53,14 @@ trait HasInternalJsonSchema
 
     /**
      * Datas with data instatiation.
-     * 
+     *
      * @return \stdClass
      */
     public function datasWithDataInstantiation($datas)
     {
         foreach ($datas as $key => $data) {
-            $datas->{$key} = new class($data, $this, $key) {
+            $datas->{$key} = new class($data, $this, $key)
+            {
                 protected $type = null;
 
                 protected $shell;
@@ -80,6 +81,7 @@ trait HasInternalJsonSchema
                 public function getType()
                 {
                     $class = $this->type;
+
                     return new $class($this->name, $this->shell);
                 }
             };

@@ -2,7 +2,6 @@
 
 namespace NoaPe\Beluga\Concerns;
 
-use NoaPe\Beluga\Beluga;
 use NoaPe\Beluga\Http\Models\Data;
 use NoaPe\Beluga\Http\Models\Group;
 
@@ -126,7 +125,7 @@ trait HasSchema
 
     /**
      * Getter schema.
-     * 
+     *
      * @return \NoaPe\Beluga\Http\Models\Table
      */
     public function getSchema()
@@ -137,6 +136,7 @@ trait HasSchema
 
         if (method_exists($this, 'getSchemaFrom'.$this->schema_origin)) {
             $this->schema = $this->{'getSchemaFrom'.$this->schema_origin}();
+
             return $this->schema;
         } else {
             throw new \Exception('Schema origin "'.$this->schema_origin.'" not found.');

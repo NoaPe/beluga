@@ -3,8 +3,6 @@
 namespace NoaPe\Beluga\Http\Models;
 
 use NoaPe\Beluga\Shell;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Str;
 
 abstract class BasicShell extends Shell
 {
@@ -15,11 +13,11 @@ abstract class BasicShell extends Shell
 
     /**
      * Schema origin
-     * 
+     *
      * @var string
      */
     protected $schema_origin = 'InternalJson';
-    
+
     /**
      * Static function to get a name of schema file.
      */

@@ -7,8 +7,8 @@ use NoaPe\Beluga\Beluga;
 
 /**
  * Data model.
- * 
- * @property boolean $parent_is_group
+ *
+ * @property bool $parent_is_group
  * @property string $name
  * @property string $type
  */
@@ -29,13 +29,14 @@ class Data extends BasicShell
 
     /**
      * Function for get data type
-     * 
-     * @param \NoaPe\Beluga\Shell $shell
+     *
+     * @param  \NoaPe\Beluga\Shell  $shell
      * @return \NoaPe\Beluga\DataType
      */
     public function getType($shell)
     {
         $class = Beluga::getDataType($this->type);
+
         return new $class($this->name, $shell);
     }
 
