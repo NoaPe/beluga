@@ -11,7 +11,7 @@ class Polygon extends MultiPoint
 
     /**
      * Surface of the polygon.
-     * 
+     *
      * @return float
      */
     public function surface()

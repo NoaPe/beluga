@@ -85,7 +85,7 @@ class Point
 
     /**
      * Convert lat coordinate to km from equator.
-     * 
+     *
      * @return float
      */
     public function latKm()
@@ -95,7 +95,7 @@ class Point
 
     /**
      * Convert lng coordinate to km from prime meridian.
-     * 
+     *
      * @return float
      */
     public function lngKm()

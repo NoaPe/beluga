@@ -58,5 +58,4 @@ class Position extends DataType
 
         return new Point($value[0], $value[1]);
     }
-
 }

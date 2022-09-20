@@ -8,8 +8,8 @@ class Import extends Component
 {
     /**
      * If geo imports is needed.
-     * 
-     * @var boolean
+     *
+     * @var bool
      */
     public $geo;
 
@@ -17,6 +17,7 @@ class Import extends Component
     {
         $this->geo = $geo;
     }
+
     public function render()
     {
         return view('beluga::components.import', [
