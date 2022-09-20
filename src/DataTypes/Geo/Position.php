@@ -14,6 +14,11 @@ class Position extends DataType
     public $blueprint_type = 'string';
 
     /**
+     * Input type
+     */
+    public $input_type = 'geo.position';
+
+    /**
      * Constructor.
      */
     public function __construct($name, $shell)
@@ -54,13 +59,4 @@ class Position extends DataType
         return new Point($value[0], $value[1]);
     }
 
-    /**
-     * Render input.
-     */
-    public function renderInput()
-    {
-        return view('beluga::components.inputs.'.$this->input_type, [
-            'data' => $this,
-        ]);
-    }
 }

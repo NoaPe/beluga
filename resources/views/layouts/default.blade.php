@@ -12,6 +12,8 @@
 
         <!-- Include jQuery from CDN -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+        <x-beluga-import :geo="true" />
     </head>
     <body>
         <!-- Navbar -->

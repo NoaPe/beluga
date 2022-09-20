@@ -82,4 +82,24 @@ class Point
     {
         return $this->lat.':'.$this->lng;
     }
+
+    /**
+     * Convert lat coordinate to km from equator.
+     * 
+     * @return float
+     */
+    public function latKm()
+    {
+        return $this->distanceTo(new Point(0, $this->lng));
+    }
+
+    /**
+     * Convert lng coordinate to km from prime meridian.
+     * 
+     * @return float
+     */
+    public function lngKm()
+    {
+        return $this->distanceTo(new Point($this->lat, 0));
+    }
 }

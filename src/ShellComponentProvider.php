@@ -7,6 +7,7 @@ use NoaPe\Beluga\Http\Components\Form;
 use NoaPe\Beluga\Http\Components\Group;
 use NoaPe\Beluga\Http\Components\Input;
 use NoaPe\Beluga\Http\Components\Table;
+use NoaPe\Beluga\Http\Components\Import;
 
 class ShellComponentProvider
 {
@@ -21,6 +22,8 @@ class ShellComponentProvider
         Blade::component(Table::class, 'beluga-table');
         Blade::component(Group::class, 'beluga-group');
         Blade::component(Input::class, 'beluga-input');
+
+        Blade::component(Import::class, 'beluga-import');
 
         Blade::componentNamespace('NoaPe\Beluga\Http\Components', 'beluga');
     }

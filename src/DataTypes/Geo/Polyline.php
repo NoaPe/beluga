@@ -5,14 +5,9 @@ namespace NoaPe\Beluga\DataTypes\Geo;
 class Polyline extends MultiPoint
 {
     /**
-     * Render input.
+     * Input type
      */
-    public function renderInput()
-    {
-        return view('beluga::components.inputs.'.$this->input_type, [
-            'data' => $this,
-        ]);
-    }
+    public $input_type = 'geo.polyline';
 
     /**
      * Length of the polyline.
