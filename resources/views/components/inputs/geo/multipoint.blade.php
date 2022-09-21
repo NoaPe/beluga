@@ -47,9 +47,11 @@
             }
         }
 
-        render_{{ $data->name }}(value.split(';').map(function (coord) {
-            return coord.split(':');
-        }));
+        if (value !== '') {
+            render_{{ $data->name }}(value.split(';').map(function (coord) {
+                return coord.split(':');
+            }));
+        }
 
         input.value = value;
     }
@@ -74,7 +76,9 @@
             value.pop();
             value = value.join(';');
             // Remove last circle
-            map_{{$data->name}}.removeLayer(circles_{{ $data->name }}.pop());
+            if (circles_{{ $data->name }}.length > 0) {
+                map_{{$data->name}}.removeLayer(circles_{{ $data->name }}.pop());
+            }
 
             // Update input
             input.value = value;
