@@ -22,10 +22,8 @@ class BelugaServiceProvider extends PackageServiceProvider
             $this->publishes([
                 __DIR__.'/../config/config.php' => config_path('beluga.php'),
             ], 'config');
-
         }
 
-        
         $this->publishes([
             __DIR__.'/../resources/assets' => public_path('assets/beluga'),
         ], 'assets');
