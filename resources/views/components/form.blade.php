@@ -28,8 +28,14 @@
                 </div>
             @endforeach
         @endif
-
-        <button type="submit" class="btn btn-primary">Envoyer</button>
+        <div class="row">
+            <div id="beluga-button-{{ $shell->getName() }}" class="beluga-button justify-content-around d-flex py-3"></div>
+        </div>
+        <div class="row">
+            <div class="justify-content-end d-flex">
+                <button type="submit" class="btn btn-primary" id="beluga-button-submit-{{ $shell->getName() }}">Envoyer</button>
+            </div>
+        </div>
     </div>
 </form>
 

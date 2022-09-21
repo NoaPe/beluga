@@ -12,8 +12,8 @@
     let currentGroup_{{ $name }} = 0;
 
     {{-- Add next and previous group button --}}
-    $('#beluga-form-{{ $name }}').prepend('<button id="previous-group-{{ $name }}" class="btn btn-primary">Précédant</button>');
-    $('#beluga-form-{{ $name }}').append('<button id="next-group-{{ $name }}" class="btn btn-primary">Suivant</button>');
+    $('#beluga-button-{{ $name }}').append('<button id="previous-group-{{ $name }}" class="beluga-button-prev btn btn-warning">< Précédant</button>');
+    $('#beluga-button-{{ $name }}').append('<button id="next-group-{{ $name }}" class="beluga-button-next btn btn-warning">Suivant ></button>');
 
     {{-- Next group --}}
     function nextGroup_{{ $name }}() {
@@ -33,6 +33,7 @@
 
     {{-- Show group --}}
     function showGroup_{{ $name }}() {
+        
         let group = groups_{{ $name }}[currentGroup_{{ $name }}];
 
         {{-- Hide all groups --}}
@@ -43,15 +44,17 @@
 
         {{-- Update buttons --}}
         if (currentGroup_{{ $name }} == 0) {
-            $('#previous-group').hide();
+            $('#previous-group-{{ $name }}').hide();
         } else {
-            $('#previous-group').show();
+            $('#previous-group-{{ $name }}').show();
         }
 
         if (currentGroup_{{ $name }} == groups_{{ $name }}.length - 1) {
-            $('#next-group').hide();
+            $('#beluga-button-submit-{{ $name }}').show();
+            $('#next-group-{{ $name }}').hide();
         } else {
-            $('#next-group').show();
+            $('#beluga-button-submit-{{ $name }}').hide();
+            $('#next-group-{{ $name }}').show();
         }
     }
 

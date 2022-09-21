@@ -61,7 +61,7 @@
         // Append button on the map
         let button = document.createElement('button');
         button.innerHTML = 'Annuler dernier point';
-        button.className = 'btn btn-primary leaflet-top leaflet-right';
+        button.className = 'btn btn-primary leaflet-top leaflet-right m-2';
         button.style = "pointer-events: auto;";
         button.onclick = function (e) {
             e.stopPropagation();

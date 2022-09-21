@@ -29,9 +29,11 @@
                 </div>
             @else
                 @foreach($group->datas as $dataName => $data)
-                <div class="row">
-                    {{-- include input component --}}
-                    <x-beluga-input :shell="$shell" :name="$dataName" :prefix="$name.'-'.$prefix" :internal="$internal" />
+                <div class="beluga-data-{{ $dataName }}">
+                    <div class="row">
+                        {{-- include input component --}}
+                        <x-beluga-input :shell="$shell" :name="$dataName" :prefix="$name.'-'.$prefix" :internal="$internal" />
+                    </div>
                 </div>
                 @endforeach
             @endif
