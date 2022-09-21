@@ -9,19 +9,20 @@
         </div>
     @endif
 
-    {{-- Loop for each data in $shell->schema->datas --}}
+
+    {{-- Loop for each data in $schema->datas --}}
     @if(isset($schema->datas)) 
         @foreach($schema->datas as $name => $data)
             {{-- include input component --}}
-            <x-beluga-input :shell="$shell" :name="$name" :internal="$internal" prefix="" />
+            <x-beluga-input :shell="$shell" :name="$name" :internal="$internal" />
         @endforeach
     @endif
 
-    {{-- Loop for each group in $shell->schema->groups --}}
+    {{-- Loop for each group in $schema->groups --}}
     @if(isset($schema->groups)) 
-        @foreach($schema->groups as $group)
+        @foreach($schema->groups as $name => $group)
             {{-- include group component --}}
-            <x-beluga-group :group="$group" :internal="$internal" />
+            <x-beluga-group :shell="$shell" :name="$name" :internal="$internal" />
         @endforeach
     @endif
 </form>

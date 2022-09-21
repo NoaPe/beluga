@@ -77,9 +77,11 @@ trait HasSchema
     {
         $datas = [];
 
-        foreach ($group->datas as $key => $data) {
-            if ($callback($data)) {
-                $datas[] = $key;
+        if (isset($group->datas)) {        
+            foreach ($group->datas as $key => $data) {
+                if ($callback($data)) {
+                    $datas[] = $key;
+                }
             }
         }
 
@@ -178,4 +180,46 @@ trait HasSchema
 
         return null;
     }
+
+    /**
+     * Get a group from a name.
+     * 
+     * @param  string  $name
+     * @return mixed
+     */
+    public function getGroup($name)
+    {
+        return $this->getGroupFromGroup($name, $this->schema);
+    }
+
+    /**
+     * Get a group from a name.
+     * 
+     * @param  string  $name
+     * @param  mixed  $group
+     * @return mixed
+     */
+    protected function getGroupFromGroup($name, $group)
+    {
+        if (isset($group->groups)) {
+            foreach ($group->groups as $group2) {
+                if ($group2->name == $name) {
+                    return $group2;
+                }
+            }
+        }
+
+        if (isset($group->groups)) {
+            foreach ($group->groups as $group2) {
+                $group3 = $this->getGroupFromGroup($name, $group2);
+
+                if ($group3 !== null) {
+                    return $group3;
+                }
+            }
+        }
+
+        return null;
+    }
+
 }

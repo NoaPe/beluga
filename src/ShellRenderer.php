@@ -59,18 +59,23 @@ class ShellRenderer
     /**
      * Function for render a group.
      *
-     * @param  array  $group
+     * @param  \NoaPe\Beluga\Shell $shell
+     * @param  string  $name
      * @param  string  $prefix
+     * @param  bool  $internal
      * @return \Illuminate\View\View
      */
-    public static function group($group, $prefix = '', $internal = false)
+    public static function group($shell, $name, $prefix = '', $internal = false)
     {
+        $schema = $shell->getSchema();
+
         /**
          * Return the group view with the group and the prefix.
          */
-        return view('beluga::components.group', [
-            'group' => $group,
-            'prefix' => $prefix,
+        return view('beluga::components.group')->with([
+            'group' => $shell->getGroup($name),
+            'name' => $name,
+            'prefix' => $name.'-'.$prefix,
             'internal' => $internal,
         ]);
     }
@@ -96,7 +101,9 @@ class ShellRenderer
             $groupsName = explode('-', $prefix);
 
             foreach ($groupsName as $groupName) {
-                $parent = $parent->groups->$groupName;
+                if($groupName !== '') {
+                    $parent = $parent->groups->$groupName;
+                }
             }
 
             $data = $parent->datas->$name;

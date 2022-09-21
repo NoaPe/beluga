@@ -2,20 +2,21 @@
 
 namespace NoaPe\Beluga\Http\Components;
 
-use Illuminate\View\Component;
 use NoaPe\Beluga\ShellRenderer;
 
-class Group extends Component
+class Group extends ComponentWithShell
 {
-    public $group;
+    public $name;
 
     public $prefix;
 
     public $internal;
 
-    public function __construct($group, $prefix, $internal = false)
+    public function __construct($shell, $name, $prefix = '', $internal = false)
     {
-        $this->group = $group;
+        parent::__construct($shell, $internal);
+
+        $this->name = $name;
         $this->prefix = $prefix;
         $this->internal = $internal;
     }
@@ -25,6 +26,6 @@ class Group extends Component
         /**
          * Use the ShellRenderer to render the group.
          */
-        return ShellRenderer::group($this->group, $this->prefix, $this->internal);
+        return ShellRenderer::group($this->shell, $this->name, $this->prefix, $this->internal);
     }
 }

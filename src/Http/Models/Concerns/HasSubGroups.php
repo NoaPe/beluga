@@ -64,13 +64,17 @@ trait HasSubGroups
     public function registerDatas($shell)
     {
         // Call register function of each data in $this->datas
-        foreach ($this->datas as $data) {
-            $data->register($shell);
+        if (isset($this->datas) && is_array($this->datas)) {
+            foreach ($this->datas as $key => $data) {
+                $data->register($shell);
+            }
         }
 
-        // Call registerDatas for each group
-        foreach ($this->groups as $group) {
-            $group->registerDatas($shell);
+        if (isset($this->groups)) {
+            // Call register function of each group in $this->groups
+            foreach ($this->groups as $group) {
+                $group->registerDatas($shell);
+            }
         }
     }
 }
