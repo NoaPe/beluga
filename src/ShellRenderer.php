@@ -59,7 +59,7 @@ class ShellRenderer
     /**
      * Function for render a group.
      *
-     * @param  \NoaPe\Beluga\Shell $shell
+     * @param  \NoaPe\Beluga\Shell  $shell
      * @param  string  $name
      * @param  string  $prefix
      * @param  bool  $internal
@@ -101,7 +101,7 @@ class ShellRenderer
             $groupsName = explode('-', $prefix);
 
             foreach ($groupsName as $groupName) {
-                if($groupName !== '') {
+                if ($groupName !== '') {
                     $parent = $parent->groups->$groupName;
                 }
             }

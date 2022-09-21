@@ -6,7 +6,7 @@ class Render
 {
     /**
      * Static function for calculate the number of column for a label.
-     * 
+     *
      * @param  \stdClass  $data
      */
     public static function labelColumn($data)
@@ -17,7 +17,7 @@ class Render
 
         if ($row == 2) {
             $column = 6;
-        } else if ($row == 1) {
+        } elseif ($row == 1) {
             $column = 6;
         }
 
@@ -26,7 +26,7 @@ class Render
 
     /**
      * Static function for calculate the number of column for a input.
-     * 
+     *
      * @param  \stdClass  $data
      */
     public static function inputColumn($data)
@@ -37,7 +37,7 @@ class Render
 
         if ($row == 2) {
             $column = 12;
-        } else if ($row == 1) {
+        } elseif ($row == 1) {
             $column = 6;
         }
 

@@ -77,7 +77,7 @@ trait HasSchema
     {
         $datas = [];
 
-        if (isset($group->datas)) {        
+        if (isset($group->datas)) {
             foreach ($group->datas as $key => $data) {
                 if ($callback($data)) {
                     $datas[] = $key;
@@ -183,7 +183,7 @@ trait HasSchema
 
     /**
      * Get a group from a name.
-     * 
+     *
      * @param  string  $name
      * @return mixed
      */
@@ -194,7 +194,7 @@ trait HasSchema
 
     /**
      * Get a group from a name.
-     * 
+     *
      * @param  string  $name
      * @param  mixed  $group
      * @return mixed
@@ -221,5 +221,4 @@ trait HasSchema
 
         return null;
     }
-
 }
