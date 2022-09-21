@@ -22,6 +22,14 @@
             "label": "Timestamps",
             "description": "If the table has timestamps.",
             "fillable": true
+        },
+
+        "render": {
+            "type": "String",
+            "required": false,
+            "label": "Render method",
+            "description": "The render method for the table.",
+            "fillable": true
         }
     }
 }

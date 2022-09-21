@@ -6,4 +6,6 @@
     <script src="{{ asset('assets/beluga/js/map.js') }}"></script>
 @endif
 
+<script src="{{ asset('assets/beluga/js/form.js') }}"></script>
+
 <link href="{{ asset('assets/beluga/css/app.css') }}" rel="stylesheet" />

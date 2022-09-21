@@ -23,10 +23,12 @@ class BelugaServiceProvider extends PackageServiceProvider
                 __DIR__.'/../config/config.php' => config_path('beluga.php'),
             ], 'config');
 
-            $this->publishes([
-                __DIR__.'/../resources/assets' => public_path('assets/beluga'),
-            ], 'assets');
         }
+
+        
+        $this->publishes([
+            __DIR__.'/../resources/assets' => public_path('assets/beluga'),
+        ], 'assets');
 
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'beluga');
 

@@ -75,7 +75,7 @@ class Shell extends Model
      *
      * @return string
      */
-    protected function getName()
+    public function getName()
     {
         return class_basename(get_called_class());
     }
