@@ -24,8 +24,13 @@ class Group extends ComponentWithShell
     public function render()
     {
         /**
-         * Use the ShellRenderer to render the group.
+         * Return the group view with the group and the prefix.
          */
-        return ShellRenderer::group($this->shell, $this->name, $this->prefix, $this->internal);
+        return view('beluga::components.group')->with([
+            'group' => $this->shell->getGroup($this->name),
+            'name' => $this->name,
+            'prefix' => $this->name.'-'.$this->prefix,
+            'internal' => $this->internal,
+        ]);
     }
 }

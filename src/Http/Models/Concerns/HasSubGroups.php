@@ -17,46 +17,6 @@ trait HasSubGroups
     public $datas;
 
     /**
-     * Function who return the stdClass object of the schema.
-     */
-    public static function rawSchema()
-    {
-        /**
-         * Get the schema from the parent.
-         */
-        $schema = parent::rawSchema();
-
-        /**
-         * Set groups property with a recursive call and use $group->name as $key.
-         */
-        if (isset($schema->groups) && is_array($schema->groups)) {
-            $groups = new \stdClass();
-
-            foreach ($schema->groups as $key => $group) {
-                $groups->{$key} = $group::rawSchema();
-            }
-
-            $schema->groups = $groups;
-        }
-
-        /**
-         * Set datas property with a mapping and data getSchema function with the data name as key.
-         */
-        if (isset($schema->datas) && is_array($schema->datas)) {
-            $datas = new \stdClass();
-
-            foreach ($schema->datas as $key => $data) {
-                $class = Beluga::getDataType($data->type);
-                $datas->{$key} = $class;
-            }
-
-            $schema->datas = $datas;
-        }
-
-        return $schema;
-    }
-
-    /**
      * Call register function of each datas of the table.
      *
      * @return void
@@ -76,5 +36,31 @@ trait HasSubGroups
                 $group->registerDatas($shell);
             }
         }
+    }
+
+    /**
+     * Get validation rules.
+     * 
+     * @return array
+     */
+    public function getRules($shell)
+    {
+        $rules = [];
+
+        // Get the validation rules of each data
+        if (isset($this->datas)) {
+            foreach ($this->datas as $key => $data) {
+                $rules[$key] = $data->getRules($shell);
+            }
+        }
+
+        // Get the validation rules of each group
+        if (isset($this->groups)) {
+            foreach ($this->groups as $group) {
+                $rules = array_merge($rules, $group->getRules($shell));
+            }
+        }
+
+        return $rules;
     }
 }

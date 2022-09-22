@@ -116,7 +116,7 @@ abstract class DataType
         }
 
         if ($this->is('unique')) {
-            $rules .= '|unique:'.get_called_class()::getTableName();
+            $rules .= '|unique:'.($this->shell::class)::getTableName();
         }
 
         if ($this->is('required')) {

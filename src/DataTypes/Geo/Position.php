@@ -41,18 +41,12 @@ class Position extends DataType
         return $column;
     }
 
-    /**
-     * Set function.
-     */
-    public function set($value)
+    public function stringify($value)
     {
         return $value->lat.':'.$value->lng;
     }
 
-    /**
-     * Get function.
-     */
-    public function get($value)
+    public function objectify($value)
     {
         $value = explode(':', $value);
 

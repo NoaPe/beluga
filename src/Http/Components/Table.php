@@ -8,19 +8,33 @@ class Table extends ComponentWithShell
 {
     public $render_settings;
 
-    public function __construct($shell, $render_settings, $internal = false)
+    public function __construct($shell, $render_settings = [], $internal = false)
     {
         parent::__construct($shell, $internal);
 
-        $this->shell = $shell;
         $this->render_settings = $render_settings;
     }
 
     public function render()
     {
         /**
-         * Use the ShellRenderer to render the table.
+         * Get the schema from the shell.
          */
-        return ShellRenderer::table($this->shell, $this->render_settings, $this->internal);
+        $schema = $this->shell->getSchema();
+
+        /**
+         * Get all lines from the shell.
+         */
+        $lines = $this->shell::all();
+
+        /**
+         * Return the table view with the schema and the lines.
+         */
+        return view('beluga::components.table', [
+            'schema' => $schema,
+            'lines' => $lines,
+            'render_settings' => $this->render_settings,
+            'internal' => $this->internal,
+        ]);
     }
 }

@@ -20,9 +20,28 @@ class Input extends ComponentWithShell
 
     public function render()
     {
-        /**
-         * Use the ShellRenderer to render the input.
-         */
-        return ShellRenderer::input($this->shell, $this->prefix, $this->name, $this->internal);
+        $schema = $this->shell->getSchema();
+
+        if ($this->prefix) {
+            $parent = $schema;
+
+            /**
+             * We explode the prefix with "-" and we take successive sub groups of the schema.
+             */
+            $groupsName = explode('-', $this->prefix);
+
+            foreach ($groupsName as $groupName) {
+                if ($groupName !== '') {
+                    $parent = $parent->groups->$groupName;
+                }
+            }
+
+            $data = $parent->datas->{$this->name};
+        } else {
+            $data = $schema->datas->{$this->name};
+        }
+
+        // Return the view from the data type
+        return $data->getType($this->shell)->renderInput();
     }
 }

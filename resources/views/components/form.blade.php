@@ -1,7 +1,15 @@
 {{-- Form for a $shell --}}
-<form method="POST" action="">
+<form method="POST" action="{{ route($shell->getRoute().'.store') }}">
     @csrf
-
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div id="beluga-form-{{ $shell->getName() }}">
         {{-- If $shell->schema have description show it --}}
         @if(isset($schema->description))

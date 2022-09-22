@@ -34,6 +34,13 @@ class Shell extends Model
     protected $schema_origin = 'Json';
 
     /**
+     * Route prefix
+     * 
+     * @var string
+     */
+    protected $route = '';
+
+    /**
      * Create a new Shell instance.
      *
      * @param  array  $attributes
@@ -67,7 +74,21 @@ class Shell extends Model
          */
         $this->hidden = $this->getHiddens();
 
+        if ($this->route == "") {
+            $this->route = $this->table;
+        }
+
         parent::__construct($attributes);
+    }
+
+    /**
+     * Get route
+     * 
+     * @return string
+     */
+    public function getRoute()
+    {
+        return $this->route;
     }
 
     /**
@@ -85,7 +106,7 @@ class Shell extends Model
      *
      * @return string
      */
-    protected static function getTableName()
+    public static function getTableName()
     {
         return Str::snake(Str::pluralStudly(class_basename(get_called_class())));
     }

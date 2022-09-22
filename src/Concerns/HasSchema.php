@@ -19,13 +19,14 @@ trait HasSchema
      *
      * @return array
      */
-    public static function getValidationRules()
+    public  function getValidationRules()
     {
         $rules = [];
 
-        //
+        // Get the schema
+        $schema = $this->getSchema();
 
-        return $rules;
+        return $schema->getRules($this);
     }
 
     /**
@@ -54,7 +55,7 @@ trait HasSchema
                 $data = $this->getDataType($name, $group2);
 
                 if ($data !== null) {
-                    return $data->getType($this);
+                    return $data;
                 }
             }
         }

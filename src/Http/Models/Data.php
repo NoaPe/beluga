@@ -52,4 +52,14 @@ class Data extends BasicShell
     {
         return 'beluga_datas';
     }
+
+    /**
+     * Get validation rules.
+     * 
+     * @return array
+     */
+    public function getRules($shell)
+    {
+        return $this->getType($shell)->getValidationRules();
+    }
 }

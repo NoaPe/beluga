@@ -14,9 +14,9 @@ abstract class MultiPoint extends DataType
     public $blueprint_type = 'string';
 
     /**
-     * Set function.
+     * Stringify function.
      */
-    public function set($value)
+    public function stringify($value)
     {
         $result = '';
 
@@ -32,9 +32,9 @@ abstract class MultiPoint extends DataType
     }
 
     /**
-     * Get function.
+     * Objectify function.
      */
-    public function get($value)
+    public function objectify($value)
     {
         $value = explode(';', $value);
 
