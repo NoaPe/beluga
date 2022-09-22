@@ -2,8 +2,6 @@
 
 namespace NoaPe\Beluga\Http\Components;
 
-use NoaPe\Beluga\ShellRenderer;
-
 class Table extends ComponentWithShell
 {
     public $render_settings;

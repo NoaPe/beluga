@@ -19,7 +19,7 @@ trait HasSchema
      *
      * @return array
      */
-    public  function getValidationRules()
+    public function getValidationRules()
     {
         $rules = [];
 

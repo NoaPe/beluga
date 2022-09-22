@@ -55,7 +55,7 @@ class Data extends BasicShell
 
     /**
      * Get validation rules.
-     * 
+     *
      * @return array
      */
     public function getRules($shell)

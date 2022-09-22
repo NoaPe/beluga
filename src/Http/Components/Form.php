@@ -2,14 +2,12 @@
 
 namespace NoaPe\Beluga\Http\Components;
 
-use NoaPe\Beluga\ShellRenderer;
-
 class Form extends ComponentWithShell
 {
     /**
      * Constructor
-     * 
-     * @param  \NoaPe\Beluga\Shell $shell
+     *
+     * @param  \NoaPe\Beluga\Shell  $shell
      */
     public function __construct($shell, $internal = false)
     {

@@ -2,8 +2,6 @@
 
 namespace NoaPe\Beluga\Http\Models\Concerns;
 
-use NoaPe\Beluga\Beluga;
-
 trait HasSubGroups
 {
     /**
@@ -40,7 +38,7 @@ trait HasSubGroups
 
     /**
      * Get validation rules.
-     * 
+     *
      * @return array
      */
     public function getRules($shell)

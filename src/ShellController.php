@@ -2,15 +2,12 @@
 
 namespace NoaPe\Beluga;
 
-use NoaPe\Beluga\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use NoaPe\Beluga\Http\Components\Table;
+use Illuminate\Support\Str;
 use NoaPe\Beluga\Http\Components\Form;
 use NoaPe\Beluga\Http\Components\Show;
-
-
+use NoaPe\Beluga\Http\Components\Table;
+use NoaPe\Beluga\Http\Controllers\Controller;
 
 abstract class ShellController extends Controller
 {
@@ -23,7 +20,7 @@ abstract class ShellController extends Controller
 
     /**
      * The shell class name.
-     * 
+     *
      * @var string
      */
     protected $shellClass;
@@ -83,7 +80,7 @@ abstract class ShellController extends Controller
         // Json success response
         return response()->json([
             'success' => true,
-            'message' => 'The ' . $this->shell->getName() . ' has been created.',
+            'message' => 'The '.$this->shell->getName().' has been created.',
         ]);
     }
 
@@ -138,7 +135,7 @@ abstract class ShellController extends Controller
         // Json success response
         return response()->json([
             'success' => true,
-            'message' => 'The ' . $this->shell->getName() . ' has been updated.',
+            'message' => 'The '.$this->shell->getName().' has been updated.',
         ]);
     }
 
@@ -160,7 +157,7 @@ abstract class ShellController extends Controller
         // Json success response
         return response()->json([
             'success' => true,
-            'message' => 'The ' . $this->shell->getName() . ' has been deleted.',
+            'message' => 'The '.$this->shell->getName().' has been deleted.',
         ]);
     }
 }

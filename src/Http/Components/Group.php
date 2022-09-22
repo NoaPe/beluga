@@ -2,8 +2,6 @@
 
 namespace NoaPe\Beluga\Http\Components;
 
-use NoaPe\Beluga\ShellRenderer;
-
 class Group extends ComponentWithShell
 {
     public $name;

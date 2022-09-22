@@ -35,7 +35,7 @@ class Shell extends Model
 
     /**
      * Route prefix
-     * 
+     *
      * @var string
      */
     protected $route = '';
@@ -74,7 +74,7 @@ class Shell extends Model
          */
         $this->hidden = $this->getHiddens();
 
-        if ($this->route == "") {
+        if ($this->route == '') {
             $this->route = $this->table;
         }
 
@@ -83,7 +83,7 @@ class Shell extends Model
 
     /**
      * Get route
-     * 
+     *
      * @return string
      */
     public function getRoute()
