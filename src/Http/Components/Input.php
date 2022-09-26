@@ -16,8 +16,8 @@ class Input extends ComponentWithShell
         $this->name = $name;
     }
 
-    public function render()
-    {
+    protected function getData()
+    {   
         $schema = $this->shell->getSchema();
 
         if ($this->prefix) {
@@ -39,6 +39,13 @@ class Input extends ComponentWithShell
             $data = $schema->datas->{$this->name};
         }
 
+        return $data;
+    }
+
+    public function render()
+    {
+        $data = $this->getData();
+        
         // Return the view from the data type
         return $data->getType($this->shell)->renderInput();
     }

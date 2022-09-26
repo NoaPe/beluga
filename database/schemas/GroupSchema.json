@@ -52,6 +52,14 @@
             "fillable": true,
             "position": 4,
             "nullable": true
+        },
+
+        "render": {
+            "type": "String",
+            "required": false,
+            "label": "Render method",
+            "description": "The render method for the group.",
+            "fillable": true
         }
     }
 }

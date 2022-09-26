@@ -40,13 +40,41 @@
         @endif
 
         
-        {{-- Loop for each group in $group->groups --}}
-        @if(isset($group->groups))
-            @foreach($group->groups as $name => $group)
-                {{-- include group component --}}
-                <x-beluga-group :shell="$shell" :name="$name" :prefix="$prefix" :internal="$internal" />
-            @endforeach
+        @if (isset($group->render) && $group->render == 'table')
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <?php $first_group = $group->groups->{array_keys((array) $group->groups)[0]}; ?>
+                        @foreach($first_group->datas as $data)
+                            <th>{{ $data->label }}</th>
+                        @endforeach
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($group->groups as $name => $group2)
+                        <tr>
+                            <td>{{ $group2->label }}</td>
+                            @foreach($group2->datas as $data)
+                                <td>
+                                    <x-beluga-field :shell="$shell" :name="$data->name" :prefix="$prefix.'-'.$name.'-'" :internal="$internal" />
+                                </td>
+                            @endforeach
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @else
+            {{-- Loop for each group in $group->groups --}}
+            @if(isset($group->groups))
+                @foreach($group->groups as $name => $group)
+                    {{-- include group component --}}
+                    <x-beluga-group :shell="$shell" :name="$name" :prefix="$prefix" :internal="$internal" />
+                @endforeach
+            @endif
         @endif
+
+
     </div>
 @if (isset($standalone) && $standalone)
 </form>

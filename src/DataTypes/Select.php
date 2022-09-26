@@ -40,10 +40,11 @@ class Select extends DataType
      */
     public function renderInput()
     {
-        return view('beluga::components.inputs.'.$this->input_type)->with([
+        return view('beluga::components.input')->with([
             'data' => $this->schema,
             'name' => $this->name,
             'options' => $this->options,
+            'input_type' => $this->input_type,
         ]);
     }
 

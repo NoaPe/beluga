@@ -158,9 +158,21 @@ abstract class DataType
      */
     public function renderInput()
     {
-        return view('beluga::components.inputs.'.$this->input_type, [
+        return view('beluga::components.input', [
             'data' => $this->schema,
             'name' => $this->name,
+            'input_type' => $this->input_type,
+        ]);
+    }
+
+    /**
+     * Render field.
+     */
+    public function renderField()
+    {
+        return view('beluga::components.inputs.'.$this->input_type, [
+            'data' => $this->schema,
+            'name' => $this->name
         ]);
     }
 

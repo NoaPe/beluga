@@ -46,10 +46,11 @@ class BelongsTo extends Relation
      */
     public function renderInput()
     {
-        return view('beluga::components.inputs.'.$this->input_type, [
+        return view('beluga::components.input', [
             'data' => $this->schema,
             'name' => $this->name,
             'options' => $this->options,
+            'input_type' => $this->input_type,
         ]);
     }
 

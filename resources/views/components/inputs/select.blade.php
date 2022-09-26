@@ -1,4 +1,3 @@
-@include('beluga::components.inputs.parts.top', ['data' => $data])
 <select name="{{ $name }}">
     @foreach($options as $value => $text)
         @if(is_array($text))
@@ -10,4 +9,3 @@
         @endif
     @endforeach
 </select>
-@include('beluga::components.inputs.parts.bottom', ['data' => $data])
