@@ -8,7 +8,7 @@ class BelongsTo extends Relation
      * Relation function to call.
      */
     public $relation_function = 'belongsTo';
-    
+
     /**
      * Html input type.
      */
@@ -21,9 +21,9 @@ class BelongsTo extends Relation
 
     /**
      * Constructor
-     * 
-     * @param \NoaPe\Beluga\Shell $shell
-     * @param string $name
+     *
+     * @param  \NoaPe\Beluga\Shell  $shell
+     * @param  string  $name
      * @return void
      */
     public function __construct($shell, $name)
@@ -39,9 +39,7 @@ class BelongsTo extends Relation
         }
 
         $this->options = $options;
-        
     }
-
 
     /**
      * Render input.

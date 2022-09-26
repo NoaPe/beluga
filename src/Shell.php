@@ -149,7 +149,7 @@ class Shell extends Model
 
     /**
      * To string function.
-     * 
+     *
      * @return string
      */
     public function toString()
