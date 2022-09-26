@@ -79,29 +79,31 @@ abstract class DataType
      * Function for add the column to the blueprint schema.
      *
      * @param  Blueprint  $blueprint
-     * @return mixed
+     * @return mixed|void
      */
     public function addToBlueprint($blueprint)
     {
-        $column = $blueprint->{$this->blueprint_type}($this->name);
+        if ($this->blueprint_type) {
+            $column = $blueprint->{$this->blueprint_type}($this->name);
 
-        if ($this->is('nullable')) {
-            $column->nullable();
+            if ($this->is('nullable')) {
+                $column->nullable();
+            }
+
+            if ($this->is('unique')) {
+                $column->unique();
+            }
+
+            if ($this->has('default')) {
+                $column->default($this->schema->default);
+            }
+
+            if ($this->has('length')) {
+                $column->length($this->schema->length);
+            }
+
+            return $column;
         }
-
-        if ($this->is('unique')) {
-            $column->unique();
-        }
-
-        if ($this->has('default')) {
-            $column->default($this->schema->default);
-        }
-
-        if ($this->has('length')) {
-            $column->length($this->schema->length);
-        }
-
-        return $column;
     }
 
     /**
