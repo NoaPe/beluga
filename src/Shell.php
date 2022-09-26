@@ -145,4 +145,14 @@ class Shell extends Model
 
         return $value;
     }
+
+    /**
+     * To string function.
+     * 
+     * @return string
+     */
+    public function toString()
+    {
+        return $this->getAttribute('name');
+    }
 }

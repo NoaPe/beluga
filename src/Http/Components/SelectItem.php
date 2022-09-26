@@ -21,9 +21,6 @@ class SelectItem extends Component
 
     public function render()
     {
-        return view('beluga::components.inputs.select-item', [
-            'value' => $this->value,
-            'text' => $this->text,
-        ]);
+        return view('beluga::components.inputs.select-item');
     }
 }

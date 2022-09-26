@@ -1,6 +1,6 @@
 @include('beluga::components.inputs.parts.top', ['data' => $data])
 <select name="{{ $name }}">
-    @foreach($data->settings->options as $value => $text)
+    @foreach($options as $value => $text)
         @if(is_array($text))
             <optgroup label="{{ $value }}">
                 <x-beluga::select-group :group="$text" />
