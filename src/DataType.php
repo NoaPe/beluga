@@ -172,7 +172,7 @@ abstract class DataType
     {
         return view('beluga::components.inputs.'.$this->input_type, [
             'data' => $this->schema,
-            'name' => $this->name
+            'name' => $this->name,
         ]);
     }
 

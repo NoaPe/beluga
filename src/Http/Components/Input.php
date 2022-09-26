@@ -17,7 +17,7 @@ class Input extends ComponentWithShell
     }
 
     protected function getData()
-    {   
+    {
         $schema = $this->shell->getSchema();
 
         if ($this->prefix) {
@@ -45,7 +45,7 @@ class Input extends ComponentWithShell
     public function render()
     {
         $data = $this->getData();
-        
+
         // Return the view from the data type
         return $data->getType($this->shell)->renderInput();
     }
