@@ -31,7 +31,9 @@ trait HasBlueprint
      */
     protected static function addGroupToBlueprint($group, $blueprint)
     {
-        self::addDatasToBlueprint($group->datas, $blueprint);
+        if (isset($group->datas)) {
+            self::addDatasToBlueprint($group->datas, $blueprint);
+        }
 
         if (isset($group->groups)) {
             foreach ($group->groups as $group2) {
