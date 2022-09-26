@@ -9,7 +9,6 @@ class BelongsTo extends Relation
      */
     public $relation_function = 'belongsTo';
     
-    
     /**
      * Html input type.
      */
@@ -54,5 +53,17 @@ class BelongsTo extends Relation
             'name' => $this->name,
             'options' => $this->options,
         ]);
+    }
+
+     /**
+     * Generate seed value.
+     * 
+     * @return string
+     */
+    public function generateSeedValue()
+    {
+        $options = array_keys((array) $this->options);
+
+        return $options[rand(0, count($options) - 1)];;
     }
 }

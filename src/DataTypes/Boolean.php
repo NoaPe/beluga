@@ -15,4 +15,14 @@ class Boolean extends DataType
      * Html input type.
      */
     public $input_type = 'checkbox';
+
+    /**
+     * Generate seed value.
+     * 
+     * @return bool
+     */
+    public function generateSeedValue()
+    {
+        return (bool) mt_rand(0, 1);
+    }
 }

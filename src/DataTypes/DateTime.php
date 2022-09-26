@@ -15,4 +15,14 @@ class DateTime extends DataType
      * Html input type.
      */
     public $input_type = 'time';
+    
+    /**
+    * Generate seed value.
+    * 
+    * @return string
+    */
+   public function generateSeedValue()
+   {
+         return date('Y-m-d H:i:s', mt_rand(0, time()));
+   }
 }

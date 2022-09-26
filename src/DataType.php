@@ -3,6 +3,7 @@
 namespace NoaPe\Beluga;
 
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Str;
 
 abstract class DataType
 {
@@ -86,7 +87,7 @@ abstract class DataType
         if ($this->blueprint_type) {
             $column = $blueprint->{$this->blueprint_type}($this->name);
 
-            if ($this->is('nullable')) {
+            if ($this->is('nullable') || !$this->is('required')) {
                 $column->nullable();
             }
 
@@ -169,5 +170,41 @@ abstract class DataType
     public function register()
     {
         //
+    }
+
+    /**
+     * Generate seed value.
+     * 
+     * @return mixed
+     */
+    public function generateSeedValue()
+    {
+        return Str::random(rand(1, 10));
+    }
+
+    /**
+     * Generate seed values.
+     * 
+     * @return array
+     */
+    public function generateSeedValues($number)
+    {
+        $values = [];
+
+        for ($i = 0; $i < $number; $i++) {
+            if ((!$this->is('required') && $this->is('nullable')) && mt_rand(0, 2) == 0) {
+                $values[] = null;
+            } else {
+                // Generate the value.
+                do {
+                    $value = $this->generateSeedValue();
+                } while ($this->is('unique') && in_array($value, $values));
+
+                // Add the value to the array.
+                $values[] = $value;
+            }
+        }
+
+        return $values;
     }
 }

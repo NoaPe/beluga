@@ -15,7 +15,7 @@ class MultipleSelect extends DataType
      * Html input type.
      */
     public $input_type = 'select';
-    
+
     /**
      * Options
      */
@@ -46,5 +46,22 @@ class MultipleSelect extends DataType
             'name' => $this->name,
             'options' => $this->options,
         ]);
+    }
+
+    /**
+     * Generate seed value.
+     * 
+     * @return string
+     */
+    public function generateSeedValue()
+    {
+        $options = array_keys((array) $this->options);
+        $value = [];
+
+        for ($i = 0; $i < mt_rand(1, count($options)); $i++) {
+            $value[] = $options[mt_rand(0, count($options) - 1)];
+        }
+
+        return implode(',', $value);
     }
 }

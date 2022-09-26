@@ -52,4 +52,14 @@ class Integer extends DataType
 
         return $column;
     }
+
+    /**
+     * Generate seed value.
+     * 
+     * @return integer
+     */
+    public function generateSeedValue()
+    {
+        return mt_rand(0, 1000000);
+    }
 }

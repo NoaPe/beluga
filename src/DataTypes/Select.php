@@ -47,4 +47,16 @@ class Select extends DataType
             'options' => $this->options,
         ]);
     }
+
+    /**
+     * Generate seed value.
+     * 
+     * @return string
+     */
+    public function generateSeedValue()
+    {
+        $options = array_keys((array) $this->options);
+
+        return $options[rand(0, count($options) - 1)];;
+    }
 }

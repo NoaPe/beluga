@@ -12,7 +12,8 @@ class Shell extends Model
         Concerns\HasSchema,
         Concerns\HasJsonSchema,
         Concerns\HasInternalJsonSchema,
-        Concerns\HasDatabaseSchema;
+        Concerns\HasDatabaseSchema,
+        Concerns\HasSeeding;
 
     /**
      * The name of the table.

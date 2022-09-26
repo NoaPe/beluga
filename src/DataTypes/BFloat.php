@@ -40,4 +40,14 @@ class BFloat extends DataType
 
         return $column;
     }
+
+    /**
+     * Generate seed value.
+     * 
+     * @return float
+     */
+    public function generateSeedValue()
+    {
+        return mt_rand(0, 1000000) / 100;
+    }
 }
