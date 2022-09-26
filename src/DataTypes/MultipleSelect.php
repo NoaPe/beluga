@@ -15,7 +15,7 @@ class MultipleSelect extends DataType
      * Html input type.
      */
     public $input_type = 'select';
-    
+
     /**
      * Options
      */
@@ -23,9 +23,9 @@ class MultipleSelect extends DataType
 
     /**
      * Constructor
-     * 
-     * @param \NoaPe\Beluga\Shell $shell
-     * @param string $name
+     *
+     * @param  \NoaPe\Beluga\Shell  $shell
+     * @param  string  $name
      * @return void
      */
     public function __construct($shell, $name)
@@ -34,7 +34,6 @@ class MultipleSelect extends DataType
 
         $this->options = $this->schema->settings->options;
     }
-
 
     /**
      * Render input.
