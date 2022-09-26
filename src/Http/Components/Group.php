@@ -10,13 +10,16 @@ class Group extends ComponentWithShell
 
     public $internal;
 
+    public $group;
+
     public function __construct($shell, $name, $prefix = '', $internal = false)
     {
         parent::__construct($shell, $internal);
 
         $this->name = $name;
-        $this->prefix = $prefix;
+        $this->prefix = $prefix.$this->name.'-';
         $this->internal = $internal;
+        $this->group = $this->shell->getGroup($this->name);
     }
 
     public function render()
@@ -24,11 +27,6 @@ class Group extends ComponentWithShell
         /**
          * Return the group view with the group and the prefix.
          */
-        return view('beluga::components.group')->with([
-            'group' => $this->shell->getGroup($this->name),
-            'name' => $this->name,
-            'prefix' => $this->name.'-'.$this->prefix,
-            'internal' => $this->internal,
-        ]);
+        return view('beluga::components.group');
     }
 }

@@ -24,7 +24,7 @@
                 <div class="row">
                 @foreach($group->datas as $dataName => $data)
                     {{-- include input component --}}
-                    <x-beluga-input :shell="$shell" :name="$dataName" :prefix="$name.'-'.$prefix" :internal="$internal" />
+                    <x-beluga-input :shell="$shell" :name="$dataName" :prefix="$prefix" :internal="$internal" />
                 @endforeach
                 </div>
             @else
@@ -32,7 +32,7 @@
                 <div class="beluga-data-{{ $dataName }}">
                     <div class="row">
                         {{-- include input component --}}
-                        <x-beluga-input :shell="$shell" :name="$dataName" :prefix="$name.'-'.$prefix" :internal="$internal" />
+                        <x-beluga-input :shell="$shell" :name="$dataName" :prefix="$prefix" :internal="$internal" />
                     </div>
                 </div>
                 @endforeach
@@ -44,7 +44,7 @@
         @if(isset($group->groups))
             @foreach($group->groups as $name => $group)
                 {{-- include group component --}}
-                <x-beluga-group :shell="$shell" :name="$name" :prefix="$prefix.$group->name" :internal="$internal" />
+                <x-beluga-group :shell="$shell" :name="$name" :prefix="$prefix" :internal="$internal" />
             @endforeach
         @endif
     </div>
