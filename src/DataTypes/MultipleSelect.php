@@ -49,7 +49,7 @@ class MultipleSelect extends DataType
 
     /**
      * Generate seed value.
-     * 
+     *
      * @return string
      */
     public function generateSeedValue()

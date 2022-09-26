@@ -18,7 +18,7 @@ class Boolean extends DataType
 
     /**
      * Generate seed value.
-     * 
+     *
      * @return bool
      */
     public function generateSeedValue()

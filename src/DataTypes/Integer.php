@@ -55,8 +55,8 @@ class Integer extends DataType
 
     /**
      * Generate seed value.
-     * 
-     * @return integer
+     *
+     * @return int
      */
     public function generateSeedValue()
     {

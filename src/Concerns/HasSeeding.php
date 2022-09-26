@@ -6,7 +6,7 @@ trait HasSeeding
 {
     /**
      * Seed the database with the number of line.
-     * 
+     *
      * @param  int  $number
      * @return void
      */
@@ -33,14 +33,13 @@ trait HasSeeding
 
     /**
      * Seed a group, recursive on sub-groups.
-     * 
+     *
      * @param  array  $datas
      * @param  mixed  $group
      * @param  \NoaPe\Beluga\Shell  $shell
      * @param  int  $number
      * @return array
      */
-
     protected static function seedGroup($datas, $group, $shell, $number)
     {
         if (isset($group->datas)) {

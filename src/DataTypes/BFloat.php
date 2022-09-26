@@ -43,7 +43,7 @@ class BFloat extends DataType
 
     /**
      * Generate seed value.
-     * 
+     *
      * @return float
      */
     public function generateSeedValue()

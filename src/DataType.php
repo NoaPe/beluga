@@ -87,7 +87,7 @@ abstract class DataType
         if ($this->blueprint_type) {
             $column = $blueprint->{$this->blueprint_type}($this->name);
 
-            if ($this->is('nullable') || !$this->is('required')) {
+            if ($this->is('nullable') || ! $this->is('required')) {
                 $column->nullable();
             }
 
@@ -174,7 +174,7 @@ abstract class DataType
 
     /**
      * Generate seed value.
-     * 
+     *
      * @return mixed
      */
     public function generateSeedValue()
@@ -184,7 +184,7 @@ abstract class DataType
 
     /**
      * Generate seed values.
-     * 
+     *
      * @return array
      */
     public function generateSeedValues($number)
@@ -192,7 +192,7 @@ abstract class DataType
         $values = [];
 
         for ($i = 0; $i < $number; $i++) {
-            if ((!$this->is('required') && $this->is('nullable')) && mt_rand(0, 2) == 0) {
+            if ((! $this->is('required') && $this->is('nullable')) && mt_rand(0, 2) == 0) {
                 $values[] = null;
             } else {
                 // Generate the value.

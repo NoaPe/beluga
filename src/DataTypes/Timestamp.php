@@ -18,7 +18,7 @@ class Timestamp extends DataType
 
     /**
      * Generate seed value.
-     * 
+     *
      * @return string
      */
     public function generateSeedValue()

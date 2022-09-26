@@ -18,7 +18,7 @@ class Date extends DataType
 
     /**
      * Generate seed value.
-     * 
+     *
      * @return string
      */
     public function generateSeedValue()
