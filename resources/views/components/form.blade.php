@@ -1,5 +1,5 @@
 {{-- Form for a $shell --}}
-<form method="POST" action="{{ route($shell->getRoute().'.store') }}">
+<form method="POST" action="{{ Route::has($shell->getRoute().'.store') ? route($shell->getRoute().'.store') : '' }}">
     @csrf
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -10,7 +10,7 @@
             </ul>
         </div>
     @endif
-    <div id="beluga-form-{{ $shell->getName() }}">
+    <div id="beluga-form-{{ $shell->getName() }}" class="beluga-form">
         {{-- If $shell->schema have description show it --}}
         @if(isset($schema->description))
             <div class="form-description">

@@ -1,4 +1,5 @@
-<select name="{{ $name }}">
+<select name="{{ $name }}" {{(isset($data->settings->visible) && $data->settings->visible == false) || 
+        isset($data->hidden) && $data->hidden ? 'hidden' : '' }}>
     @foreach($options as $value => $text)
         @if(is_array($text))
             <optgroup label="{{ $value }}">

@@ -30,15 +30,19 @@ class BelongsTo extends Relation
     {
         parent::__construct($shell, $name);
 
-        $options = [];
+        if ($this->is('hidden')) {
+            $this->input_type = 'text';
+        } else {
+            $options = [];
 
-        $class = new $this->schema->settings->class();
+            $class = new $this->schema->settings->class();
 
-        foreach ($class::all() as $item) {
-            $options[(string) $item->id] = $item->toString();
+            foreach ($class::all() as $item) {
+                $options[(string) $item->id] = $item->toString();
+            }
+
+            $this->options = $options;
         }
-
-        $this->options = $options;
     }
 
     /**

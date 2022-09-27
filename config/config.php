@@ -25,6 +25,8 @@ return [
 
     'table_prefix' => 'beluga_',
 
+    'class_prefix' => 'beluga-',
+
     /**
      * Shell namespace.
      */
