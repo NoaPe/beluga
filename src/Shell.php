@@ -113,6 +113,16 @@ class Shell extends Model
     }
 
     /**
+     * Get element name
+     * 
+     * @return string
+     */
+    public static function getElementName()
+    {
+        return Str::snake(class_basename(static::class));
+    }
+
+    /**
      * Function who use set function of appropriate data type and set attrbute
      *
      * @param  string  $key

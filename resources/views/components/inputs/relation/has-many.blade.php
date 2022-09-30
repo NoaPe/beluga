@@ -3,6 +3,6 @@
 @endif
 
 @if ($data->settings->addable)
-    <div class="beluga-addable" data-route="{{ route((new $data->settings->class())->getRoute().'.create'); }}">
+    <div class="beluga-addable" data-route="{{ route((new $data->settings->class())->getRoute().'.create'); }}" data-parent="{{ ($shell::class)::getElementName(); }}">
     </div>
 @endif

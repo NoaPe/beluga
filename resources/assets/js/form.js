@@ -15,6 +15,12 @@ $(document).ready(() => {
                 // Preprend the error container
                 $(element).prepend('<div class="beluga-addable-error"></div>');
 
+                // Get parent name
+                let parentName = $(element).data('parent');
+
+                // Set parent id input value
+                $(element).find('input[name="' + parentName + '_id"]').val(0);
+
                 let form = $(element).find('form'),
                     submit = $(element).find('button[type="submit"]');
 
@@ -34,8 +40,6 @@ $(document).ready(() => {
                         sendingDatas[element.name] = element.value;
                     });
 
-                    console.log(action, method, sendingDatas)
-
                     // Ajax call to submit the form
                     $.ajax({
                         url: action,
@@ -44,6 +48,7 @@ $(document).ready(() => {
                         success: (data) => {
                             // Append the data to the .beluga-addable
                             $(element).append(data);
+                            console.log('success', data);
                         },
                         error: (data) => {
                         // Get the error container
