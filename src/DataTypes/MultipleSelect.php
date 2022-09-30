@@ -44,7 +44,7 @@ class MultipleSelect extends DataType
             'data' => $this->schema,
             'name' => $this->name,
             'options' => $this->options,
-            'input_type' => $this->input_type
+            'input_type' => $this->input_type,
         ]);
     }
 

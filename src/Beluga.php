@@ -1,6 +1,7 @@
 <?php
 
 namespace NoaPe\Beluga;
+
 use Illuminate\Support\Facades\Route;
 
 class Beluga
@@ -46,7 +47,7 @@ class Beluga
 
     /**
      * Static function for qualify a controller from shell name.
-     * 
+     *
      * @param  string  $name
      * @return string
      */
@@ -61,9 +62,9 @@ class Beluga
         return $name;
     }
 
-    /** 
+    /**
      * Create resource from class
-     * 
+     *
      * @param  string  $class
      */
     public static function createResource($shell)
