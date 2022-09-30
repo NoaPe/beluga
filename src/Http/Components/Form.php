@@ -26,6 +26,7 @@ class Form extends ComponentWithShell
          */
         return view('beluga::components.form', [
             'schema' => $schema,
+            'shell' => $this->shell,
             'internal' => $this->internal,
         ]);
     }
