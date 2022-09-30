@@ -63,9 +63,9 @@ class Beluga
     }
 
     /**
-     * Create resource from class
+     * Create resource from shell name.
      *
-     * @param  string  $class
+     * @param  string  $shell
      */
     public static function createResource($shell)
     {
