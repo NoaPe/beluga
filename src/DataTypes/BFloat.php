@@ -42,6 +42,20 @@ class BFloat extends DataType
     }
 
     /**
+     * Function for get the validation rules.
+     * 
+     * @return string
+     */
+    public function getValidationRules()
+    {
+        $rules = parent::getValidationRules();
+
+        $rules .= '|numeric';
+
+        return $rules;
+    }
+
+    /**
      * Generate seed value.
      *
      * @return float

@@ -54,6 +54,20 @@ class Integer extends DataType
     }
 
     /**
+     * Function for get the validation rules.
+     * 
+     * @return string
+     */
+    public function getValidationRules()
+    {
+        $rules = parent::getValidationRules();
+
+        $rules .= '|integer';
+
+        return $rules;
+    }
+
+    /**
      * Generate seed value.
      *
      * @return int

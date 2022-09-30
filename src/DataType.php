@@ -114,7 +114,7 @@ abstract class DataType
     {
         $rules = '';
 
-        if ($this->is('nullable')) {
+        if ($this->is('nullable') || ! $this->is('required')) {
             $rules = 'nullable';
         }
 

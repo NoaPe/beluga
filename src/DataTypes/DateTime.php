@@ -25,4 +25,18 @@ class DateTime extends DataType
     {
         return date('Y-m-d H:i:s', mt_rand(0, time()));
     }
+
+    /**
+     * Function for get the validation rules.
+     * 
+     * @return string
+     */
+    public function getValidationRules()
+    {
+        $rules = parent::getValidationRules();
+
+        $rules .= '|date';
+
+        return $rules;
+    }
 }

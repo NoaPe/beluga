@@ -42,4 +42,19 @@ class Text extends DataType
             }
         }
     }
+
+    /**
+     * Function for get the validation rules.
+     * 
+     * @return string
+     */
+    public function getValidationRules()
+    {
+        $rules = parent::getValidationRules();
+
+        $rules .= '|string';
+
+        return $rules;
+    }
+
 }
