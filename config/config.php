@@ -33,6 +33,11 @@ return [
     'shell_namespace' => 'App\\Shells',
 
     /**
+     * Controller namespace.
+     */
+    'controller_namespace' => 'App\\Http\\Controllers',
+
+    /**
      * Shell namespace for internal shell.
      */
     'internal_shell_namespace' => 'NoaPe\\Beluga\\Http\\Models',
@@ -70,4 +75,9 @@ return [
      * Image path.
      */
     'image_path' => 'images',
+
+    /**
+     * Api prefix.
+     */
+    'api_prefix' => 'api',
 ];

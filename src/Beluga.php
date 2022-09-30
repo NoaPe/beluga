@@ -1,6 +1,7 @@
 <?php
 
 namespace NoaPe\Beluga;
+use Illuminate\Support\Facades\Route;
 
 class Beluga
 {
@@ -41,5 +42,36 @@ class Beluga
         }
 
         return $name;
+    }
+
+    /**
+     * Static function for qualify a controller from shell name.
+     * 
+     * @param  string  $name
+     * @return string
+     */
+    public static function qualifyController($name)
+    {
+        $class = config('beluga.controller_namespace').'\\'.$name.'Controller';
+
+        if (class_exists($class)) {
+            return $class;
+        }
+
+        return $name;
+    }
+
+    /** 
+     * Create resource from class
+     * 
+     * @param  string  $class
+     */
+    public static function createResource($shell)
+    {
+        $controller = self::qualifyController($shell);
+        $shell = self::qualifyShell($shell);
+        $route = (new $shell())->getRoute();
+
+        Route::resource(config('beluga.api_prefix').'/'.$route, $controller);
     }
 }

@@ -37,10 +37,10 @@
         let group = groups_{{ $name }}[currentGroup_{{ $name }}];
 
         {{-- Hide all groups --}}
-        $('.beluga-form-group').hide();
+        $('.beluga-{{ $shell->getName() }}-group').hide();
 
         {{-- Show current group --}}
-        $('#beluga-form-group-' + group).show();
+        $('#beluga-{{ $shell->getName() }}-group-' + group).show();
 
         {{-- Update buttons --}}
         if (currentGroup_{{ $name }} == 0) {

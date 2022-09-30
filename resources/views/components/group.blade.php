@@ -3,7 +3,7 @@
 <form method="POST" action="">
     @csrf
 @endif
-    <div class="container-fluid beluga-form-group mb-3" id="beluga-form-group-{{ $name }}">
+    <div class="container-fluid beluga-form-group beluga-{{ $shell->getName() }}-group mb-3" id="beluga-{{ $shell->getName() }}-group-{{ $name }}">
         <div class="row">
             {{-- If $group have label show it --}}
             @if(isset($group->label))

@@ -18,5 +18,5 @@
 
     <p>Depollution</p>
 
-    <x-beluga-form shell="SpecificWaste" />
+    <x-beluga-form shell="Depollution" />
 @endsection

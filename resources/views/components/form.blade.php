@@ -30,10 +30,8 @@
         {{-- Loop for each group in $schema->groups --}}
         @if(isset($schema->groups))
             @foreach($schema->groups as $group_name => $group)
-                <div class="container-fluid beluga-form-group" id="beluga-form-group-{{ $group_name }}">
-                    {{-- include group component --}}
-                    <x-beluga-group :shell="$shell" :name="$group_name" :internal="$internal" />
-                </div>
+                {{-- include group component --}}
+                <x-beluga-group :shell="$shell" :name="$group_name" :internal="$internal" />
             @endforeach
         @endif
         <div class="row">

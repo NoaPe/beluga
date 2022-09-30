@@ -13,4 +13,9 @@ class HasMany extends Relation
      * Remove blueprint column.
      */
     public $blueprint_type = false;
+
+    /**
+     * Html input type.
+     */
+    public $input_type = 'relation.has-many';
 }
