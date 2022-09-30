@@ -114,7 +114,7 @@ class Shell extends Model
 
     /**
      * Get element name
-     * 
+     *
      * @return string
      */
     public static function getElementName()

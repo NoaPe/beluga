@@ -26,10 +26,9 @@ class Date extends DataType
         return date('Y-m-d', mt_rand(0, time()));
     }
 
-    
     /**
      * Function for get the validation rules.
-     * 
+     *
      * @return string
      */
     public function getValidationRules()
@@ -40,5 +39,4 @@ class Date extends DataType
 
         return $rules;
     }
-
 }

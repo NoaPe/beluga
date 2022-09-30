@@ -11,10 +11,9 @@ class BString extends DataType
      */
     public $blueprint_type = 'string';
 
-    
     /**
      * Function for get the validation rules.
-     * 
+     *
      * @return string
      */
     public function getValidationRules()
@@ -25,5 +24,4 @@ class BString extends DataType
 
         return $rules;
     }
-
 }
