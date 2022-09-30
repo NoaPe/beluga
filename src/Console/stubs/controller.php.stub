@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use NoaPe\Beluga\ShellController;
 
-class {{ shell }}Controller extends ShellController
+class {{ shell }} extends ShellController
 {
     //
 }
