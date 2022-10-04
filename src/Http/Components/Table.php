@@ -26,7 +26,7 @@ class Table extends ComponentWithShell
         return [
             'schema' => $schema,
             'lines' => $lines,
-            'internal' => $this->internal,
+            'shell' => $this->shell,
         ];
     }
 }

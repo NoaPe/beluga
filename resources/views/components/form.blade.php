@@ -6,7 +6,8 @@
     @section('content')
 @endif
     {{-- Form for a $shell --}}
-    <form method="POST" action="{{ Route::has($shell->getRoute().'.store') ? route($shell->getRoute().'.store') : '' }}">
+    <form method="POST" action="{{ Route::has($shell->getRoute().'.store') ? route($shell->getRoute().'.store') : '' }}/{{ $shell->getAttribute('id') }}">
+        @method($method ?? 'POST')
         @csrf
         @if ($errors->any())
             <div class="alert alert-danger">
