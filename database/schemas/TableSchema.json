@@ -21,6 +21,7 @@
             "required": false,
             "label": "Timestamps",
             "description": "If the table has timestamps.",
+            "default": true,
             "fillable": true
         },
 

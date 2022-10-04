@@ -4,19 +4,26 @@ namespace NoaPe\Beluga\Http\Components;
 
 class Show extends ComponentWithShell
 {
+    protected $view = 'beluga::components.show';
+
     /**
      * Constructor
      */
-    public function __construct($shell, $internal = false)
+    public function __construct($shell)
     {
-        parent::__construct($shell, $internal);
+        parent::__construct($shell);
     }
 
-    public function render()
+    /**
+     * Get datas for rendering.
+     * 
+     * @return array
+     */
+    public function getDatas()
     {
-        return view('beluga::components.show')->with([
+        return [
             'shell' => $this->shell,
             'internal' => $this->internal,
-        ]);
+        ];
     }
 }

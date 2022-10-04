@@ -26,6 +26,13 @@ abstract class ShellController extends Controller
     protected $shellClass;
 
     /**
+     * The layout to use.
+     * 
+     * @var string
+     */
+    protected $layout = '';
+
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -45,7 +52,7 @@ abstract class ShellController extends Controller
      */
     public function index()
     {
-        return response((new Table($this->shell))->render());
+        return $this->render(Table::class, [ 'layout' => $this->layout ]);
     }
 
     /**
@@ -55,7 +62,7 @@ abstract class ShellController extends Controller
      */
     public function create()
     {
-        return response((new Form($this->shell))->render());
+        return $this->render(Form::class, [ 'layout' => $this->layout ]);
     }
 
     /**
@@ -107,7 +114,11 @@ abstract class ShellController extends Controller
         $model = $this->shellClass;
         $model = $model::findOrFail($id);
 
-        return response((new Form($this->shellClass::findOrFail($id)))->render());
+        return $this->render(
+            Form::class,
+            [ 'layout' => $this->layout ],
+            $this->shellClass::findOrFail($id)
+        );
     }
 
     /**
@@ -159,5 +170,24 @@ abstract class ShellController extends Controller
             'success' => true,
             'message' => 'The '.$this->shell->getName().' has been deleted.',
         ]);
+    }
+
+    /**
+     * Render component with datas.
+     * 
+     * @param  string  $component
+     * @param  array  $datas
+     * @param  Shell  $shell
+     * @return \Illuminate\Http\Response
+     */
+    public function render($component, $datas = [], $shell = null)
+    {
+        $shell = $shell ?? $this->shell;
+
+        $component = new $component($shell);
+
+        $component->addDatas($datas);
+
+        return response($component->render());
     }
 }

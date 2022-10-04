@@ -4,11 +4,13 @@ namespace NoaPe\Beluga\Http\Components;
 
 use Illuminate\View\Component;
 
-class SelectItem extends Component
+class SelectItem extends BasicComponent
 {
     public $value;
 
     public $text;
+
+    protected $view = 'beluga::components.select-item';
 
     /**
      * Constructor
@@ -17,10 +19,5 @@ class SelectItem extends Component
     {
         $this->value = $value;
         $this->text = $text;
-    }
-
-    public function render()
-    {
-        return view('beluga::components.inputs.select-item');
     }
 }

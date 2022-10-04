@@ -4,7 +4,7 @@ namespace NoaPe\Beluga\Http\Components;
 
 use Illuminate\View\Component;
 
-class Import extends Component
+class Import extends BasicComponent
 {
     /**
      * If geo imports is needed.
@@ -13,15 +13,22 @@ class Import extends Component
      */
     public $geo;
 
+    protected $view = 'beluga::components.import';
+
     public function __construct($geo = false)
     {
         $this->geo = $geo;
     }
-
-    public function render()
+    
+    /**
+     * Get datas for rendering.
+     * 
+     * @return array
+     */
+    public function getDatas()
     {
-        return view('beluga::components.import', [
+        return [
             'geo' => $this->geo,
-        ]);
+        ];
     }
 }

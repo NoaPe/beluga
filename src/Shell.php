@@ -42,6 +42,13 @@ class Shell extends Model
     protected $route = '';
 
     /**
+     * Is internal
+     * 
+     * @var bool
+     */
+    protected $internal = false;
+
+    /**
      * Create a new Shell instance.
      *
      * @param  array  $attributes
@@ -165,5 +172,15 @@ class Shell extends Model
     public function toString()
     {
         return $this->getAttribute('name');
+    }
+
+    /**
+     * Is internal function.
+     * 
+     * @return bool
+     */
+    public function isInternal()
+    {
+        return $this->internal;
     }
 }

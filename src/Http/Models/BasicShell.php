@@ -18,6 +18,8 @@ abstract class BasicShell extends Shell
      */
     protected $schema_origin = 'InternalJson';
 
+    protected $internal = true;
+
     /**
      * Static function to get a name of schema file.
      */

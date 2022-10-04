@@ -8,9 +8,9 @@ class Input extends ComponentWithShell
 
     public $name;
 
-    public function __construct($shell, $prefix, $name, $internal = false)
+    public function __construct($shell, $prefix, $name)
     {
-        parent::__construct($shell, $internal);
+        parent::__construct($shell);
 
         $this->prefix = $prefix;
         $this->name = $name;

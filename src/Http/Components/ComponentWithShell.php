@@ -2,16 +2,15 @@
 
 namespace NoaPe\Beluga\Http\Components;
 
-use Illuminate\View\Component;
 use NoaPe\Beluga\Shell;
 
-abstract class ComponentWithShell extends Component
+abstract class ComponentWithShell extends BasicComponent
 {
     public $shell;
 
     public $internal;
 
-    public function __construct($shell, $internal = false)
+    public function __construct($shell)
     {
         if (is_string($shell)) {
             if ($internal) {
@@ -27,6 +26,6 @@ abstract class ComponentWithShell extends Component
             throw new \Exception('Invalid shell provided to component.');
         }
 
-        $this->internal = $internal;
+        $this->internal = $shell->isInternal();
     }
 }

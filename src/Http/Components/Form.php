@@ -4,30 +4,24 @@ namespace NoaPe\Beluga\Http\Components;
 
 class Form extends ComponentWithShell
 {
-    /**
-     * Constructor
-     *
-     * @param  \NoaPe\Beluga\Shell  $shell
-     */
-    public function __construct($shell, $internal = false)
-    {
-        parent::__construct($shell, $internal);
-    }
+    use Concerns\HasAddableDatas;
 
-    public function render()
+    protected $view = 'beluga::components.form';
+
+    /**
+     * Get base datas for rendering.
+     *
+     * @return array
+     */
+    public function baseDatas()
     {
-        /**
-         * Get the schema from the shell.
-         */
+        // Define datas for rendering
         $schema = $this->shell->getSchema();
 
-        /**
-         * Return the form view with the schema.
-         */
-        return view('beluga::components.form', [
+        return [
             'schema' => $schema,
             'shell' => $this->shell,
             'internal' => $this->internal,
-        ]);
+        ];
     }
 }

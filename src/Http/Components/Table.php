@@ -4,35 +4,29 @@ namespace NoaPe\Beluga\Http\Components;
 
 class Table extends ComponentWithShell
 {
+    use Concerns\HasAddableDatas;
+
     public $render_settings;
 
-    public function __construct($shell, $render_settings = [], $internal = false)
-    {
-        parent::__construct($shell, $internal);
+    protected $view = 'beluga::components.table';
 
-        $this->render_settings = $render_settings;
-    }
-
-    public function render()
+    /**
+     * Define base datas for rendering.
+     * 
+     * @return array
+     */
+    public function baseDatas()
     {
-        /**
-         * Get the schema from the shell.
-         */
+        // Get the schema from the shell.
         $schema = $this->shell->getSchema();
 
-        /**
-         * Get all lines from the shell.
-         */
+        // Get all lines from the shell.
         $lines = $this->shell::all();
 
-        /**
-         * Return the table view with the schema and the lines.
-         */
-        return view('beluga::components.table', [
+        return [
             'schema' => $schema,
             'lines' => $lines,
-            'render_settings' => $this->render_settings,
             'internal' => $this->internal,
-        ]);
+        ];
     }
 }

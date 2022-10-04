@@ -4,9 +4,11 @@ namespace NoaPe\Beluga\Http\Components;
 
 use Illuminate\View\Component;
 
-class SelectGroup extends Component
+class SelectGroup extends BasicComponent
 {
     public $group;
+
+    protected $view = 'beluga::components.select-group';
 
     /**
      * Constructor
@@ -16,10 +18,15 @@ class SelectGroup extends Component
         $this->group = $group;
     }
 
-    public function render()
+    /**
+     * Get datas for rendering.
+     * 
+     * @return array
+     */
+    public function getDatas()
     {
-        return view('beluga::components.inputs.select-group', [
+        return [
             'group' => $this->group,
-        ]);
+        ];
     }
 }

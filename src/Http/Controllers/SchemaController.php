@@ -84,4 +84,14 @@ class SchemaController extends Controller
 
         return response()->json($shell::getSchema(), 200, [], JSON_PRETTY_PRINT);
     }
+
+    /**
+     * Create a new shell page.
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('beluga::create');
+    }
 }

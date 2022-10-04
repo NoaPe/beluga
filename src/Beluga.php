@@ -53,6 +53,10 @@ class Beluga
      */
     public static function qualifyController($name)
     {
+        if ((new $name())->isInternal()) {
+            return config('beluga.internal_controller_namespace').'\\'.class_basename($name).'Controller';
+        }
+        
         $class = config('beluga.controller_namespace').'\\'.$name.'Controller';
 
         if (class_exists($class)) {
@@ -66,13 +70,15 @@ class Beluga
      * Create resource from shell name.
      *
      * @param  string  $shell
+     * @param  bool  $api
+     * @return void
      */
-    public static function createResource($shell)
+    public static function createResource($shell, $api = false)
     {
         $controller = self::qualifyController($shell);
         $shell = self::qualifyShell($shell);
         $route = (new $shell())->getRoute();
 
-        Route::resource(config('beluga.api_prefix').'/'.$route, $controller);
+        Route::resource(($api ? config('beluga.api_prefix').'/' : '').$route, $controller);
     }
 }

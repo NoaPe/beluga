@@ -36,6 +36,7 @@ return [
      * Controller namespace.
      */
     'controller_namespace' => 'App\\Http\\Controllers',
+    'internal_controller_namespace' => 'NoaPe\\Beluga\\Http\\Controllers',
 
     /**
      * Shell namespace for internal shell.
