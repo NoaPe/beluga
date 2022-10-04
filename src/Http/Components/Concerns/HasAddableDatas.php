@@ -14,7 +14,7 @@ trait HasAddableDatas
     /**
      * Add data.
      *
-     * @param  array  $data
+     * @param  array  $datas
      * @return void
      */
     public function addDatas($datas)

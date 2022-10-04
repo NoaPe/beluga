@@ -92,6 +92,6 @@ class SchemaController extends Controller
      */
     public function create()
     {
-        return view('beluga::create');
+        return response(view('beluga::create'));
     }
 }
