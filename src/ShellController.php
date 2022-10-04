@@ -27,7 +27,7 @@ abstract class ShellController extends Controller
 
     /**
      * The layout to use.
-     * 
+     *
      * @var string
      */
     protected $layout = '';
@@ -52,7 +52,7 @@ abstract class ShellController extends Controller
      */
     public function index()
     {
-        return $this->render(Table::class, [ 'layout' => $this->layout ]);
+        return $this->render(Table::class, ['layout' => $this->layout]);
     }
 
     /**
@@ -62,7 +62,7 @@ abstract class ShellController extends Controller
      */
     public function create()
     {
-        return $this->render(Form::class, [ 'layout' => $this->layout ]);
+        return $this->render(Form::class, ['layout' => $this->layout]);
     }
 
     /**
@@ -116,7 +116,7 @@ abstract class ShellController extends Controller
 
         return $this->render(
             Form::class,
-            [ 'layout' => $this->layout ],
+            ['layout' => $this->layout],
             $this->shellClass::findOrFail($id)
         );
     }
@@ -174,7 +174,7 @@ abstract class ShellController extends Controller
 
     /**
      * Render component with datas.
-     * 
+     *
      * @param  string  $component
      * @param  array  $datas
      * @param  Shell  $shell

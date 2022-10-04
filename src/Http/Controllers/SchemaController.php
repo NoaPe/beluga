@@ -87,7 +87,7 @@ class SchemaController extends Controller
 
     /**
      * Create a new shell page.
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function create()

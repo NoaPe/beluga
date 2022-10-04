@@ -56,7 +56,7 @@ class Beluga
         if ((new $name())->isInternal()) {
             return config('beluga.internal_controller_namespace').'\\'.class_basename($name).'Controller';
         }
-        
+
         $class = config('beluga.controller_namespace').'\\'.$name.'Controller';
 
         if (class_exists($class)) {

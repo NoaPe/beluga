@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use NoaPe\Beluga\Beluga;
 use NoaPe\Beluga\Http\Controllers\SchemaController;
 use NoaPe\Beluga\Http\Controllers\TableController;
-use NoaPe\Beluga\Beluga;
 use NoaPe\Beluga\Http\Models\Table;
 
 Route::get('/', [SchemaController::class, 'index'])->name('beluga.index');

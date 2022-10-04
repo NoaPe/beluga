@@ -43,7 +43,7 @@ class Shell extends Model
 
     /**
      * Is internal
-     * 
+     *
      * @var bool
      */
     protected $internal = false;
@@ -176,7 +176,7 @@ class Shell extends Model
 
     /**
      * Is internal function.
-     * 
+     *
      * @return bool
      */
     public function isInternal()

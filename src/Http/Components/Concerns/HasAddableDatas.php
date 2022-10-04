@@ -6,7 +6,7 @@ trait HasAddableDatas
 {
     /**
      * Datas
-     * 
+     *
      * @var array
      */
     protected $datas = [];

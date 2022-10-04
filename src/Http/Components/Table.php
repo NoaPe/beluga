@@ -12,7 +12,7 @@ class Table extends ComponentWithShell
 
     /**
      * Define base datas for rendering.
-     * 
+     *
      * @return array
      */
     public function baseDatas()

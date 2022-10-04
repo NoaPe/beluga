@@ -2,8 +2,6 @@
 
 namespace NoaPe\Beluga\Http\Components;
 
-use Illuminate\View\Component;
-
 class Import extends BasicComponent
 {
     /**
@@ -19,10 +17,10 @@ class Import extends BasicComponent
     {
         $this->geo = $geo;
     }
-    
+
     /**
      * Get datas for rendering.
-     * 
+     *
      * @return array
      */
     public function getDatas()

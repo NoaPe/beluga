@@ -16,7 +16,7 @@ class Show extends ComponentWithShell
 
     /**
      * Get datas for rendering.
-     * 
+     *
      * @return array
      */
     public function getDatas()

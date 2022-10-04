@@ -2,8 +2,6 @@
 
 namespace NoaPe\Beluga\Http\Components;
 
-use Illuminate\View\Component;
-
 class SelectItem extends BasicComponent
 {
     public $value;

@@ -2,8 +2,6 @@
 
 namespace NoaPe\Beluga\Http\Components;
 
-use Illuminate\View\Component;
-
 class SelectGroup extends BasicComponent
 {
     public $group;
@@ -20,7 +18,7 @@ class SelectGroup extends BasicComponent
 
     /**
      * Get datas for rendering.
-     * 
+     *
      * @return array
      */
     public function getDatas()
