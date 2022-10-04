@@ -2,8 +2,8 @@
 
 namespace NoaPe\Beluga\Http\Components;
 
-use NoaPe\Beluga\Shell;
 use NoaPe\Beluga\Beluga;
+use NoaPe\Beluga\Shell;
 
 abstract class ComponentWithShell extends BasicComponent
 {
