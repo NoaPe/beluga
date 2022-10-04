@@ -22,7 +22,8 @@
             "label": "Timestamps",
             "description": "If the table has timestamps.",
             "default": true,
-            "fillable": true
+            "fillable": true,
+            "hidden": true
         },
 
         "render": {
