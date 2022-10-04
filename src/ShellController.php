@@ -118,7 +118,7 @@ abstract class ShellController extends Controller
             Form::class,
             [
                 'layout' => $this->layout,
-                'method' => 'PUT'
+                'method' => 'PUT',
             ],
             $this->shellClass::findOrFail($id)
         );
