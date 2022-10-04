@@ -33,10 +33,9 @@ class Json extends DataType
         return json_decode($value);
     }
 
-    
     /**
      * Function for get the validation rules.
-     * 
+     *
      * @return string
      */
     public function getValidationRules()

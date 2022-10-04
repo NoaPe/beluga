@@ -28,7 +28,7 @@ class Timestamp extends DataType
 
     /**
      * Function for get the validation rules.
-     * 
+     *
      * @return string
      */
     public function getValidationRules()

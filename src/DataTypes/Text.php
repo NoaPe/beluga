@@ -45,7 +45,7 @@ class Text extends DataType
 
     /**
      * Function for get the validation rules.
-     * 
+     *
      * @return string
      */
     public function getValidationRules()
@@ -56,5 +56,4 @@ class Text extends DataType
 
         return $rules;
     }
-
 }
