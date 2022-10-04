@@ -16,7 +16,7 @@ class Table extends BasicShell
 
     /**
      * Define hasMany relation with Group model only the Group have parent_is_group to false.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function groups()
@@ -26,7 +26,7 @@ class Table extends BasicShell
 
     /**
      * Has many relation with Data model only the Data have parent_is_group to false.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function datas()
@@ -36,7 +36,7 @@ class Table extends BasicShell
 
     /**
      * Get validation rules, return an array with the rules without dynamic calling.
-     * 
+     *
      * @return array
      */
     public function getValidationRules()
