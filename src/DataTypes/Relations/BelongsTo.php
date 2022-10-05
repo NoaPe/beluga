@@ -83,6 +83,6 @@ class BelongsTo extends Relation
             return $options[rand(0, count($options) - 1)];
         }
 
-        return null;
+        return '';
     }
 }

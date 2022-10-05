@@ -1,10 +1,8 @@
-@if ($layout)
-    @extends($layout)
+@extends(isset($layout) && $layout !== '' ? $layout : 'beluga::layouts.raw')
 
-    @section('title', $shell->getName())
+@section('title', $shell->getName())
 
-    @section('content')
-@endif
+@section('content')
     {{-- Form for a $shell --}}
     <form method="POST" action="{{ Route::has($shell->getRoute().'.store') ? route($shell->getRoute().'.store') : '' }}/{{ $shell->getAttribute('id') }}">
         @method($method ?? 'POST')
@@ -59,6 +57,4 @@
             'groups' => $schema->groups
         ])
     @endif
-@if ($layout)
-    @endsection
-@endif
+@endsection

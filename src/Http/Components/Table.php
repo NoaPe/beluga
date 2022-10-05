@@ -10,6 +10,22 @@ class Table extends ComponentWithShell
 
     protected $view = 'beluga::components.table';
 
+    protected $group;
+
+    /**
+     * Create a new component instance.
+     *
+     * @param  mixed  $shell
+     * @param  mixed  $group
+     * @return void
+     */
+    public function __construct($shell, $group = null)
+    {
+        parent::__construct($shell);
+
+        $this->group = $group;
+    }
+
     /**
      * Define base datas for rendering.
      *
@@ -17,9 +33,12 @@ class Table extends ComponentWithShell
      */
     public function baseDatas()
     {
-        // Get the schema from the shell.
-        $schema = $this->shell->getSchema();
-
+        // Is the group is set send it else get the schema from the shell.
+        if ($this->group) {
+            $schema = $this->group;
+        } else {
+            $schema = $this->shell->getSchema();
+        }
         // Get all lines from the shell.
         $lines = $this->shell::all();
 
