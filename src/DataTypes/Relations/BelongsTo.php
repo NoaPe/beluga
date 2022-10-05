@@ -52,7 +52,7 @@ class BelongsTo extends Relation
 
     /**
      * Get options.
-     * 
+     *
      * @return array
      */
     public function getOptions()

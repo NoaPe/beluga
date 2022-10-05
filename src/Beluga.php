@@ -54,7 +54,7 @@ class Beluga
     public static function qualifyController($name)
     {
         $shellClass = self::qualifyShell($name);
-        
+
         if ((new $shellClass())->isInternal()) {
             return config('beluga.internal_controller_namespace').'\\'.class_basename($name).'Controller';
         }
