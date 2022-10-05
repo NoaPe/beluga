@@ -33,15 +33,7 @@ class BelongsTo extends Relation
         if ($this->is('hidden')) {
             $this->input_type = 'text';
         } else {
-            $options = [];
-
-            $class = new $this->schema->settings->class();
-
-            foreach ($class::all() as $item) {
-                $options[(string) $item->id] = $item->toString();
-            }
-
-            $this->options = $options;
+            $this->options = $this->getOptions();
         }
     }
 
@@ -59,14 +51,38 @@ class BelongsTo extends Relation
     }
 
     /**
+     * Get options.
+     * 
+     * @return array
+     */
+    public function getOptions()
+    {
+        $options = [];
+
+        $class = new $this->schema->settings->class;
+
+        foreach ($class::all() as $item) {
+            $options[(string) $item->id] = $item->toString();
+        }
+
+        return $options;
+    }
+
+    /**
      * Generate seed value.
      *
      * @return string
      */
     public function generateSeedValue()
     {
+        $this->options = $this->options == [] ? $this->getOptions() : $this->options;
+
         $options = array_keys((array) $this->options);
 
-        return $options[rand(0, count($options) - 1)];
+        if (count($options) > 0) {
+            return $options[rand(0, count($options) - 1)];
+        }
+
+        return null;
     }
 }

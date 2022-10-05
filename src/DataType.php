@@ -191,7 +191,7 @@ abstract class DataType
      */
     public function generateSeedValue()
     {
-        return Str::random(rand(1, 10));
+        return Str::random(rand(3, 12));
     }
 
     /**
