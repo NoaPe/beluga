@@ -48,7 +48,7 @@ class Table extends ComponentWithShell
             'schema' => $schema,
             'lines' => $lines,
             'shell' => $this->shell,
-            'data_attributes' => $attributes
+            'data_attributes' => $attributes,
         ];
     }
 
