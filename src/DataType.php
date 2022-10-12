@@ -110,7 +110,7 @@ abstract class DataType
 
     /**
      * Function for get the validation rules.
-     * 
+     *
      * @return array
      */
     public function getValidationRules()

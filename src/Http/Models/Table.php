@@ -47,7 +47,7 @@ class Table extends BasicShell
                 'required',
                 'string',
                 'max:255',
-                Rule::unique(($this::class)::getTableName())->ignore($this->id)
+                Rule::unique(($this::class)::getTableName())->ignore($this->id),
             ],
             'description' => 'nullable|string',
             'render' => 'nullable|string',
