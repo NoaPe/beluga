@@ -35,4 +35,14 @@ abstract class BasicShell extends Shell
     {
         return config('beluga.table_prefix').parent::getTableName();
     }
+
+    /**
+     * Get element name
+     *
+     * @return string
+     */
+    public static function getElementName()
+    {
+        return config('beluga.table_prefix').parent::getElementName();
+    }
 }
