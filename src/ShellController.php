@@ -96,7 +96,10 @@ abstract class ShellController extends Controller
      */
     public function show($id)
     {
-        return response((new Show($this->shellClass::findOrFail($id)))->render());
+        return $this->render(Show::class,
+            ['layout' => $this->layout],
+            $this->shellClass::findOrFail($id)
+        );
     }
 
     /**

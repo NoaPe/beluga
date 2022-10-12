@@ -8,7 +8,8 @@ use Illuminate\Validation\Rule;
 class Table extends BasicShell
 {
     use HasFactory,
-        Concerns\HasSubGroups;
+        Concerns\HasSubGroups,
+        Concerns\IsShowable;
 
     /**
      * Name

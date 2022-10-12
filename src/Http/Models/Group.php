@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Group extends BasicShell
 {
     use HasFactory,
-        Concerns\HasSubGroups;
+        Concerns\HasSubGroups,
+        Concerns\IsShowable;
 
     /**
      * Boolean, true is the parent is group.
