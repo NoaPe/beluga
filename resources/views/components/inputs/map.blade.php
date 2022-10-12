@@ -5,7 +5,7 @@
     <input id="input-map-{{ $data->name }}"
         type="hidden" 
         name="{{ $data->name }}"
-        value="{{ $shell->getAttribute($name) ?? $data->default ?? '' }}" >
+        value="{{ old($name) ?? $shell->getAttribute($name) ?? $data->default ?? '' }}" >
 </div>
 
 <style>

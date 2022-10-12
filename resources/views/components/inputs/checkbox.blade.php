@@ -1,7 +1,7 @@
 <input type="checkbox"
     name="{{ $name }}"
     id="{{ $name }}"
-    value="{{ $shell->getAttribute($name) ?? $data->default ?? '' }}"
+    value="{{ old($name) ?? $shell->getAttribute($name) ?? $data->default ?? '' }}"
     style="{{ isset($data->style) ? 'style' : '' }}"
     class=" {{ isset($data->settings->class) ? $data->settings->class : '' }}"
     {{ $shell->getAttribute($name) || (isset($data->default) && $data->default) ? 'checked' : '' }}
