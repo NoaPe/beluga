@@ -46,13 +46,13 @@ class Text extends DataType
     /**
      * Function for get the validation rules.
      *
-     * @return string
+     * @return array
      */
     public function getValidationRules()
     {
         $rules = parent::getValidationRules();
 
-        $rules .= '|string';
+        $rules[] = 'string';
 
         return $rules;
     }

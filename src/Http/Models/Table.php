@@ -3,6 +3,7 @@
 namespace NoaPe\Beluga\Http\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Validation\Rule;
 
 class Table extends BasicShell
 {
@@ -42,7 +43,12 @@ class Table extends BasicShell
     public function getValidationRules()
     {
         return [
-            'name' => 'required|string|max:255|unique:beluga_tables,name',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique(($this::class)::getTableName())->ignore($this->id)
+            ],
             'description' => 'nullable|string',
             'render' => 'nullable|string',
         ];

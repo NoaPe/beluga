@@ -19,13 +19,13 @@ class Boolean extends DataType
     /**
      * Function for get the validation rules.
      *
-     * @return string
+     * @return array
      */
     public function getValidationRules()
     {
         $rules = parent::getValidationRules();
 
-        $rules .= '|boolean';
+        $rules[] = 'boolean';
 
         return $rules;
     }

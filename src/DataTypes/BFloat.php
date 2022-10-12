@@ -44,13 +44,13 @@ class BFloat extends DataType
     /**
      * Function for get the validation rules.
      *
-     * @return string
+     * @return array
      */
     public function getValidationRules()
     {
         $rules = parent::getValidationRules();
 
-        $rules .= '|numeric';
+        $rules[] = 'numeric';
 
         return $rules;
     }

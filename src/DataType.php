@@ -4,6 +4,7 @@ namespace NoaPe\Beluga;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 abstract class DataType
 {
@@ -109,29 +110,31 @@ abstract class DataType
 
     /**
      * Function for get the validation rules.
+     * 
+     * @return array
      */
     public function getValidationRules()
     {
-        $rules = '';
+        $rules = [];
 
         if ($this->is('nullable') || ! $this->is('required')) {
-            $rules = 'nullable';
+            $rules[] = 'nullable';
         }
 
         if ($this->is('unique')) {
-            $rules .= '|unique:'.($this->shell::class)::getTableName();
+            $rules[] = Rule::unique(($this->shell::class)::getTableName())->ignore($this->shell->id);
         }
 
         if ($this->is('required')) {
-            $rules .= '|required';
+            $rules[] = 'required';
         }
 
         if ($this->has('validation')) {
-            $rules .= '|'.$this->schema->validation;
+            $rules[] = $this->schema->validation;
         }
 
         if ($this->has('max')) {
-            $rules .= '|max:'.$this->schema->max;
+            $rules[] = $this->schema->max;
         }
 
         return $rules;

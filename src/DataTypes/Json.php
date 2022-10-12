@@ -36,13 +36,13 @@ class Json extends DataType
     /**
      * Function for get the validation rules.
      *
-     * @return string
+     * @return array
      */
     public function getValidationRules()
     {
         $rules = parent::getValidationRules();
 
-        $rules .= '|json';
+        $rules[] = 'json';
 
         return $rules;
     }

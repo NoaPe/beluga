@@ -69,7 +69,7 @@ abstract class ShellController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -84,11 +84,8 @@ abstract class ShellController extends Controller
         // Save the model
         $model->save();
 
-        // Json success response
-        return response()->json([
-            'success' => true,
-            'message' => 'The '.$this->shell->getName().' has been created.',
-        ]);
+        // Redirect to the index
+        return redirect()->route($this->shell->getRoute().'.index');
     }
 
     /**
@@ -125,39 +122,37 @@ abstract class ShellController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource in storage and come back to the latest page.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, $id)
     {
-        // Data validation
-        $this->validate($request, $this->shell->getValidationRules());
-
         // Request database
         $model = $this->shellClass;
         $model = $model::findOrFail($id);
 
+        // Data validation
+        //dd($model->getValidationRules());
+        $this->validate($request, $model->getValidationRules());
+
         // Update the model
-        $model->fill($request->all());
+        $model->update($request->all());
 
         // Save the model
         $model->save();
 
-        // Json success response
-        return response()->json([
-            'success' => true,
-            'message' => 'The '.$this->shell->getName().' has been updated.',
-        ]);
+        // Redirect to the index
+        return redirect()->route($this->shell->getRoute().'.index');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from storage. And return to the index.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
@@ -168,11 +163,8 @@ abstract class ShellController extends Controller
         // Delete the model
         $model->delete();
 
-        // Json success response
-        return response()->json([
-            'success' => true,
-            'message' => 'The '.$this->shell->getName().' has been deleted.',
-        ]);
+        // Redirect to the index
+        return redirect()->route($this->shell->getRoute().'.index');
     }
 
     /**

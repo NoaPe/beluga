@@ -56,13 +56,13 @@ class Integer extends DataType
     /**
      * Function for get the validation rules.
      *
-     * @return string
+     * @return array
      */
     public function getValidationRules()
     {
         $rules = parent::getValidationRules();
 
-        $rules .= '|integer';
+        $rules[] = 'integer';
 
         return $rules;
     }
