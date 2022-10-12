@@ -42,10 +42,36 @@ class Table extends ComponentWithShell
         // Get all lines from the shell.
         $lines = $this->shell::all();
 
+        $attributes = $this->getAttributesFromGroup($schema);
+
         return [
             'schema' => $schema,
             'lines' => $lines,
             'shell' => $this->shell,
+            'data_attributes' => $attributes
         ];
+    }
+
+    /**
+    * Get attributes from group.
+    *
+    * @param  mixed  $schema
+    * @return array
+    */
+    protected function getAttributesFromGroup($group)
+    {
+        $attributes = [];
+
+        if ($group->datas) {
+            $attributes = (array) $group->datas;
+        }
+
+        if ($group->groups) {
+            foreach ($group->groups as $subgroup) {
+                $attributes = array_merge($attributes, $this->getAttributesFromGroup($subgroup));
+            }
+        }
+
+        return $attributes;
     }
 }
