@@ -11,6 +11,12 @@
                         <th>{{ $data->label }}</th>
                     @endforeach
 
+                    @if(isset($custom_columns))
+                        @foreach($custom_columns as $name => $custom_column)
+                            <th>{{ $name }}</th>
+                        @endforeach
+                    @endif
+
                     @if(isset($actions))
                         <th>Actions</th>
                     @endif
@@ -22,6 +28,12 @@
                     @foreach($data_attributes as $data_name => $data)
                         <td>{{ $line->getAttribute($data_name) }}</td>
                     @endforeach
+
+                    @if(isset($custom_columns))
+                        @foreach($custom_columns as $name => $custom_column)
+                            <td>{{ $custom_column($line) }}</td>
+                        @endforeach
+                    @endif
 
                     @if(isset($actions))
                         <td>
