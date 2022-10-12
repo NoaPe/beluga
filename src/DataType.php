@@ -204,7 +204,7 @@ abstract class DataType
         $values = [];
 
         for ($i = 0; $i < $number; $i++) {
-            if ((! $this->is('required') && $this->is('nullable')) && mt_rand(0, 2) == 0) {
+            if ((! $this->is('required')) && mt_rand(0, 2) == 0) {
                 $values[] = null;
             } else {
                 // Generate the value.
