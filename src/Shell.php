@@ -342,9 +342,9 @@ class Shell extends Model
      * @param  string  $name
      * @return mixed
      */
-    protected function getGroup($name, $schema)
+    public function getGroup($name)
     {
-        return $this->getGroupFromGroup($name, $schema);
+        return $this->getGroupFromGroup($name, $this->getSchema());
     }
 
     /**

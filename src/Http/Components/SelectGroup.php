@@ -6,7 +6,7 @@ class SelectGroup extends BasicComponent
 {
     public $group;
 
-    protected $view = 'beluga::components.select-group';
+    protected $view = 'beluga::components.inputs.select-group';
 
     /**
      * Constructor

@@ -22,6 +22,6 @@ abstract class ComponentWithShell extends BasicComponent
             throw new \Exception('Invalid shell provided to component.');
         }
 
-        $this->internal = $shell->isInternal();
+        $this->internal = $this->shell->isInternal();
     }
 }

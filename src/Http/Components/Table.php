@@ -62,11 +62,11 @@ class Table extends ComponentWithShell
     {
         $attributes = [];
 
-        if ($group->datas) {
+        if (isset($group->datas)) {
             $attributes = (array) $group->datas;
         }
 
-        if ($group->groups) {
+        if (isset($group->groups)) {
             foreach ($group->groups as $subgroup) {
                 $attributes = array_merge($attributes, $this->getAttributesFromGroup($subgroup));
             }

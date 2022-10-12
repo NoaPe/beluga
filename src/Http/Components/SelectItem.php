@@ -8,7 +8,7 @@ class SelectItem extends BasicComponent
 
     public $text;
 
-    protected $view = 'beluga::components.select-item';
+    protected $view = 'beluga::components.inputs.select-item';
 
     /**
      * Constructor
