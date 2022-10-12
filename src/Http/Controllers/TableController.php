@@ -2,11 +2,11 @@
 
 namespace NoaPe\Beluga\Http\Controllers;
 
-use NoaPe\Beluga\ShellController;
-use NoaPe\Beluga\Http\Components\Table;
-use NoaPe\Beluga\Actions\EditAction;
-use NoaPe\Beluga\Actions\DownloadAction;
 use NoaPe\Beluga\Actions\DeleteAction;
+use NoaPe\Beluga\Actions\DownloadAction;
+use NoaPe\Beluga\Actions\EditAction;
+use NoaPe\Beluga\Http\Components\Table;
+use NoaPe\Beluga\ShellController;
 
 class TableController extends ShellController
 {
@@ -24,8 +24,8 @@ class TableController extends ShellController
             'actions' => [
                 EditAction::class,
                 DownloadAction::class,
-                DeleteAction::class
-            ]
+                DeleteAction::class,
+            ],
         ]);
     }
 }
