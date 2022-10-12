@@ -48,16 +48,16 @@ class Table extends ComponentWithShell
             'schema' => $schema,
             'lines' => $lines,
             'shell' => $this->shell,
-            'data_attributes' => $attributes
+            'data_attributes' => $attributes,
         ];
     }
 
     /**
-    * Get attributes from group.
-    *
-    * @param  mixed  $schema
-    * @return array
-    */
+     * Get attributes from group.
+     *
+     * @param  mixed  $schema
+     * @return array
+     */
     protected function getAttributesFromGroup($group)
     {
         $attributes = [];
