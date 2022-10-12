@@ -24,12 +24,12 @@ class TableController extends ShellController
             'actions' => [
                 EditAction::class,
                 DownloadAction::class,
-                DeleteAction::class
+                DeleteAction::class,
             ],
             'custom_columns' => [
-                'Custom column' => function($line) {
+                'Custom column' => function ($line) {
                     return $line->id;
-                }
+                },
             ],
         ]);
     }
