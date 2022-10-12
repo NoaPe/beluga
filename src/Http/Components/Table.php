@@ -53,11 +53,11 @@ class Table extends ComponentWithShell
     }
 
     /**
-    * Get attributes from group.
-    *
-    * @param  mixed  $group
-    * @return array
-    */
+     * Get attributes from group.
+     *
+     * @param  mixed  $group
+     * @return array
+     */
     protected function getAttributesFromGroup($group)
     {
         $attributes = [];

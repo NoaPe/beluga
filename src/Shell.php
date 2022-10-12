@@ -214,7 +214,7 @@ class Shell extends Model
 
     /**
      * Get schema
-     * 
+     *
      * @return mixed
      */
     public function getSchema()
@@ -299,7 +299,7 @@ class Shell extends Model
             return isset($data->guarded) && $data->guarded;
         });
     }
-    
+
     /**
      * Get a data raw schema from a key.
      *

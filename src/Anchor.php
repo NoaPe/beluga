@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace NoaPe\Beluga;
 
@@ -8,7 +8,6 @@ class Anchor
         Concerns\HasInternalJsonSchema,
         Concerns\HasDatabaseSchema;
 
-    
     private static $schemas;
 
     public static function getSchema($shell, $origin)

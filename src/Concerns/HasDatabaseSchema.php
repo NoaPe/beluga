@@ -11,7 +11,7 @@ trait HasDatabaseSchema
      *
      * @return  Table
      */
-    static function getSchemaFromDatabase($shell)
+    public static function getSchemaFromDatabase($shell)
     {
         $table = Table::where('name', $shell->table)->first();
 
