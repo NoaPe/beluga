@@ -12,9 +12,9 @@ trait HasInternalJsonSchema
      *
      * @return \stdClass
      */
-    protected function getSchemaFromInternalJson()
+    protected static function getSchemaFromInternalJson($shell)
     {
-        return $this->schemaWithDataInstantiation();
+        return self::schemaWithDataInstantiation($shell);
     }
 
     /**
@@ -22,11 +22,11 @@ trait HasInternalJsonSchema
      *
      * @return \stdClass
      */
-    public function schemaWithDataInstantiation()
+    protected static function schemaWithDataInstantiation($shell)
     {
-        $schema = $this->getRawSchema();
+        $schema = self::getRawSchema($shell);
 
-        $schema = $this->groupWithDataInstantiation($schema);
+        $schema = self::groupWithDataInstantiation($schema, $shell);
 
         return $schema;
     }
@@ -36,15 +36,15 @@ trait HasInternalJsonSchema
      *
      * @return \stdClass
      */
-    public function groupWithDataInstantiation($group)
+    protected static function groupWithDataInstantiation($group, $shell)
     {
         if (isset($group->datas)) {
-            $group->datas = $this->datasWithDataInstantiation($group->datas);
+            $group->datas = self::datasWithDataInstantiation($group->datas, $shell);
         }
 
         if (isset($group->groups)) {
             foreach ($group->groups as $key => $subgroup) {
-                $group->groups->{$key} = $this->groupWithDataInstantiation($subgroup);
+                $group->groups->{$key} = self::groupWithDataInstantiation($subgroup, $shell);
             }
         }
 
@@ -56,10 +56,10 @@ trait HasInternalJsonSchema
      *
      * @return \stdClass
      */
-    public function datasWithDataInstantiation($datas)
+    protected static function datasWithDataInstantiation($datas, $shell)
     {
         foreach ($datas as $key => $data) {
-            $datas->{$key} = new class($data, $this, $key)
+            $datas->{$key} = new class($data, $shell, $key)
             {
                 protected $type = null;
 

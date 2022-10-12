@@ -11,12 +11,12 @@ trait HasDatabaseSchema
      *
      * @return  Table
      */
-    public function getSchemaFromDatabase()
+    static function getSchemaFromDatabase($shell)
     {
-        $table = Table::where('name', $this->table)->first();
+        $table = Table::where('name', $shell->table)->first();
 
-        if (! $this->table) {
-            throw new \Exception('Table "'.$this->table.'" not found in the database please migrate it.');
+        if (! $shell->table) {
+            throw new \Exception('Table "'.$shell->table.'" not found in the database please migrate it.');
         }
 
         return $table;

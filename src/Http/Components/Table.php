@@ -55,7 +55,7 @@ class Table extends ComponentWithShell
     /**
     * Get attributes from group.
     *
-    * @param  mixed  $schema
+    * @param  mixed  $group
     * @return array
     */
     protected function getAttributesFromGroup($group)

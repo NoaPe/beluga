@@ -9,27 +9,26 @@ use NoaPe\Beluga\Http\Models\Table;
 trait HasJsonSchema
 {
     /**
-     * Json schema information array.
-     */
-    protected $raw_schema;
-
-    /**
      * Static function for get a name of schema file.
      */
-    public static function getJsonSchemaFileName()
+    public static function getJsonSchemaFileName($shell)
     {
-        return config('beluga.schema_path').'/'.class_basename(static::class).'Schema.json';
+        if (method_exists($shell, 'getJsonSchemaFileName')) {
+            return $shell->getJsonSchemaFileName();
+        }
+
+        return config('beluga.schema_path').'/'.class_basename($shell).'Schema.json';
     }
 
     /**
      * Static function to get raw schema information.
      */
-    protected static function rawSchema()
+    protected static function getRawSchema($shell)
     {
         /**
          * Get schema information from Json file.
          */
-        $file = static::getJsonSchemaFileName();
+        $file = static::getJsonSchemaFileName($shell);
         $data = new \stdClass();
 
         if (file_exists($file)) {
@@ -41,23 +40,7 @@ trait HasJsonSchema
         return json_decode($data);
     }
 
-    /**
-     * Return raw schema.
-     *
-     * @return \stdClass
-     */
-    protected function getRawSchema()
-    {
-        if ($this->raw_schema) {
-            return $this->raw_schema;
-        }
-
-        $this->raw_schema = static::rawSchema();
-
-        return $this->raw_schema;
-    }
-
-    protected function getDatasSchemaFromArray($datas)
+    protected static function getDatasSchemaFromArray($datas)
     {
         $schema = new \stdClass();
 
@@ -70,12 +53,12 @@ trait HasJsonSchema
         return $schema;
     }
 
-    protected function getGroupsSchemaFromArray($groups)
+    protected static function getGroupsSchemaFromArray($groups)
     {
         $schema = new \stdClass();
 
         foreach ($groups as $key => $value) {
-            $schema->{$key} = $this->getGroupSchemaFromArray($value, $key);
+            $schema->{$key} = self::getGroupSchemaFromArray($value, $key);
         }
 
         return $schema;
@@ -87,7 +70,7 @@ trait HasJsonSchema
      * @param  mixed  $group
      * @return \NoaPe\Beluga\Http\Models\Group
      */
-    protected function getGroupSchemaFromArray($group, $name)
+    protected static function getGroupSchemaFromArray($group, $name)
     {
         $group->name = $name;
 
@@ -107,11 +90,11 @@ trait HasJsonSchema
         $schema = new Group((array) $group);
 
         if (isset($groups)) {
-            $schema->groups = $this->getGroupsSchemaFromArray($groups);
+            $schema->groups = self::getGroupsSchemaFromArray($groups);
         }
 
         if (isset($datas)) {
-            $schema->datas = $this->getDatasSchemaFromArray($datas);
+            $schema->datas = self::getDatasSchemaFromArray($datas);
         }
 
         return $schema;
@@ -122,14 +105,14 @@ trait HasJsonSchema
      *
      * @return Table
      */
-    protected function getSchemaFromJson()
+    protected static function getSchemaFromJson($shell)
     {
         /**
          * Get raw schema information.
          */
-        $schema = $this->getRawSchema();
+        $schema = self::getRawSchema($shell);
 
-        $schema->name = $this->getName();
+        $schema->name = $shell->getName();
 
         /**
          * Remove the datas and groups from the schema.
@@ -147,13 +130,13 @@ trait HasJsonSchema
         $table = new Table((array) $schema);
 
         if (isset($datas)) {
-            $table->datas = $this->getDatasSchemaFromArray($datas);
+            $table->datas = self::getDatasSchemaFromArray($datas);
         } else {
             $table->datas = new \stdClass();
         }
 
         if (isset($groups)) {
-            $table->groups = $this->getGroupsSchemaFromArray($groups);
+            $table->groups = self::getGroupsSchemaFromArray($groups);
         } else {
             $table->groups = new \stdClass();
         }
@@ -166,8 +149,8 @@ trait HasJsonSchema
      *
      * @return bool
      */
-    public static function hasJsonSchema()
+    public static function hasJsonSchema($shell)
     {
-        return file_exists(static::getJsonSchemaFileName());
+        return file_exists(self::getJsonSchemaFileName($shell));
     }
 }

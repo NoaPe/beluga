@@ -53,7 +53,7 @@ trait HasBlueprint
 
         Schema::create($table_name, function (Blueprint $blueprint) {
             $class = static::class;
-            $schema = (new $class())->schema;
+            $schema = (new $class())->getSchema();
 
             $blueprint->id();
 

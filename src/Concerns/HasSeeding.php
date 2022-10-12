@@ -14,7 +14,7 @@ trait HasSeeding
     {
         $class = static::class;
         $shell = new $class();
-        $schema = $shell->schema;
+        $schema = $shell->getSchema();
 
         echo "Start seeding {$class}...\n";
 
