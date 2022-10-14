@@ -10,16 +10,16 @@ class Anchor
 
     /**
      * Schema array
-     * 
+     *
      * @var array
      */
     private static $schemas;
 
     /**
      * Return schema from specified origin
-     * 
-     * @param  \NoaPe\Beluga\Shell $shell
-     * @param  string $origin
+     *
+     * @param  \NoaPe\Beluga\Shell  $shell
+     * @param  string  $origin
      * @return mixed
      */
     public static function getSchema($shell, $origin)
