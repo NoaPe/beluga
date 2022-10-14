@@ -1,0 +1,17 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use {{ qualify_shell }};
+
+return new class extends Migration
+{
+    public function up()
+    {
+        {{ shell }}::up();
+    }
+
+    public function down()
+    {
+        {{ shell }}::down();
+    }
+};

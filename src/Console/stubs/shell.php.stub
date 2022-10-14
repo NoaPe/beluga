@@ -1,0 +1,10 @@
+<?php
+
+namespace App\Shells;
+
+use NoaPe\Beluga\Shell;
+
+class {{ shell }} extends Shell
+{
+    //
+}

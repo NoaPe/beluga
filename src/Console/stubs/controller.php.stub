@@ -1,0 +1,10 @@
+<?php 
+
+namespace App\Http\Controllers;
+
+use NoaPe\Beluga\ShellController;
+
+class {{ shell }} extends ShellController
+{
+    //
+}

@@ -18,11 +18,16 @@
     beStrictAboutOutputDuringTests="true"
     verbose="true"
 >
+    
     <testsuites>
-        <testsuite name="VendorName Test Suite">
-            <directory>tests</directory>
+        <testsuite name="Unit">
+            <directory suffix="Test.php">./tests/Unit</directory>
+        </testsuite>
+        <testsuite name="Feature">
+            <directory suffix="Test.php">./tests/Feature</directory>
         </testsuite>
     </testsuites>
+
     <coverage>
         <include>
             <directory suffix=".php">./src</directory>

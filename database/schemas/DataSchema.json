@@ -1,0 +1,158 @@
+{
+    "datas": {
+        "parent_id": {
+            "type": "Integer",
+            "required": true,
+            "nullable": false,
+            "position": 0,
+            "fillable": true,
+            "settings": {
+                "invisible": true,
+                "unsigned": true
+            }
+        },
+        "parent_is_group": {
+            "type": "Boolean",
+            "required": true,
+            "nullable": false,
+            "position": 1,
+            "fillable": true,
+            "settings": {
+                "invisible": true
+            }
+        },
+        "name": {
+            "type": "String",
+            "label": "Nom",
+            "position": 2,
+            "nullable": false,
+            "fillable": true,
+            "settings": {
+                "invisible": true
+            }
+        },
+
+        "label": {
+            "type": "String",
+            "label": "Label",
+            "position": 3,
+            "fillable": true,
+            "nullable": false
+        },
+
+        "description": {
+            "type": "Text",
+            "label": "Description",
+            "position": 4,
+            "fillable": true,
+            "nullable": true
+        },
+
+        "type": {
+            "type": "String",
+            "label": "Type",
+            "position": 5,
+            "fillable": true,
+            "nullable": false
+        },
+
+        "default": {
+            "type": "String",
+            "label": "Valeur par défaut",
+            "position": 6,
+            "fillable": true,
+            "nullable": true
+        },
+
+        "required": {
+            "type": "Boolean",
+            "label": "Requis",
+            "position": 7,
+            "fillable": true,
+            "nullable": false
+        },
+
+        "dimension": {
+            "type": "String",
+            "label": "Dimension",
+            "position": 8,
+            "fillable": true,
+            "nullable": true
+        },
+
+        "position": {
+            "type": "Integer",
+            "label": "Position",
+            "position": 9,
+            "fillable": true,
+            "nullable": true
+        },
+
+        "validation": {
+            "type": "String",
+            "label": "Validation",
+            "position": 10,
+            "fillable": true,
+            "nullable": true
+        },
+
+        "max": {
+            "type": "Integer",
+            "label": "Maximum",
+            "position": 11,
+            "fillable": true,
+            "nullable": true
+        },
+
+        "fillable": {
+            "type": "Boolean",
+            "label": "Remplissable",
+            "position": 12,
+            "nullable": false,
+            "fillable": true,
+            "default": false
+        },
+
+        "hidden": {
+            "type": "Boolean",
+            "label": "Visible",
+            "position": 13,
+            "nullable": false,
+            "fillable": true,
+            "default": false
+        },
+
+        "guarded": {
+            "type": "Boolean",
+            "label": "Protégé",
+            "position": 14,
+            "nullable": false,
+            "fillable": true,
+            "default": false
+        },
+
+        "settings": {
+            "type": "Json",
+            "label": "Paramètres",
+            "position": 15,
+            "fillable": true,
+            "nullable": true
+        },
+
+        "unique": {
+            "type": "Boolean",
+            "label": "Unique",
+            "position": 16,
+            "fillable": true,
+            "default": false
+        },
+
+        "nullable": {
+            "type": "Boolean",
+            "label": "Peut être null",
+            "position": 17,
+            "fillable": true,
+            "default": false
+        }
+    }
+}

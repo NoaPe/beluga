@@ -1,0 +1,45 @@
+<?php
+
+namespace NoaPe\Beluga\DataTypes\DummySubNamespace;
+
+use Illuminate\Database\Schema\Blueprint;
+use NoaPe\Beluga\DataType;
+
+class DummyName extends DataType
+{
+    /**
+     * Blueprint type.
+     */
+    public $blueprint_type = 'string';
+
+    /**
+     * Function for add the column to the blueprint schema.
+     *
+     * @param  Blueprint  $blueprint
+     * @return mixed
+     */
+    public function addToBlueprint($blueprint)
+    {
+        $column = parent::addToBlueprint($blueprint);
+
+        // Do something...
+
+        return $column;
+    }
+
+    /**
+     * Set function.
+     */
+    public function set($value)
+    {
+        return $value;
+    }
+
+    /**
+     * Get function.
+     */
+    public function get($value)
+    {
+        return $value;
+    }
+}
