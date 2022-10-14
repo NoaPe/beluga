@@ -8,8 +8,20 @@ class Anchor
         Concerns\HasInternalJsonSchema,
         Concerns\HasDatabaseSchema;
 
+    /**
+     * Schema array
+     * 
+     * @var array
+     */
     private static $schemas;
 
+    /**
+     * Return schema from specified origin
+     * 
+     * @param  \NoaPe\Beluga\Shell $shell
+     * @param  string $origin
+     * @return mixed
+     */
     public static function getSchema($shell, $origin)
     {
         $name = get_class($shell);
@@ -30,7 +42,7 @@ class Anchor
      *
      * @param  \NoaPe\Beluga\Shell  $shell
      * @param  string  $origin
-     * @return \NoaPe\Beluga\Http\Models\Table
+     * @return mixed
      */
     protected static function getSchemaFromOrigin($shell, $origin)
     {
