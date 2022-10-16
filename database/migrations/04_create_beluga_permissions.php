@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use NoaPe\Beluga\Http\Models\Group;
+use NoaPe\Beluga\Shells\Permission;
 
 return new class extends Migration
 {
@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Group::up();
+        Permission::up();
     }
 
     /**
@@ -22,6 +22,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Group::down();
+        Permission::down();
     }
 };

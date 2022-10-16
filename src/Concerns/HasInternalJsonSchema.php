@@ -54,19 +54,44 @@ trait HasInternalJsonSchema
     /**
      * Datas with data instatiation.
      *
-     * @return \stdClass
+     * @param  array  $datas
+     * @param  \NoaPe\Beluga\Shell  $shell
+     * @return array
      */
     protected static function datasWithDataInstantiation($datas, $shell)
     {
         foreach ($datas as $key => $data) {
             $datas->{$key} = new class($data, $shell, $key)
             {
-                protected $type = null;
+                /**
+                 * Type of data.
+                 *
+                 * @var \NoaPe\Beluga\DataType
+                 */
+                protected $type;
 
+                /**
+                 * Shell
+                 *
+                 * @var \NoaPe\Beluga\Shell
+                 */
                 protected $shell;
 
+                /**
+                 * Name
+                 *
+                 * @var string
+                 */
                 protected $name;
 
+                /**
+                 * Constructor.
+                 *
+                 * @param  \stdClass  $data
+                 * @param  \NoaPe\Beluga\Shell  $shell
+                 * @param  string  $name
+                 * @return void
+                 */
                 public function __construct($data, $shell, $name)
                 {
                     foreach ($data as $key => $value) {
@@ -78,6 +103,11 @@ trait HasInternalJsonSchema
                     $this->name = $name;
                 }
 
+                /**
+                 * Get type.
+                 *
+                 * @return \NoaPe\Beluga\DataType
+                 */
                 public function getType()
                 {
                     $class = $this->type;

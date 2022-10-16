@@ -81,4 +81,9 @@ return [
      * Api prefix.
      */
     'api_prefix' => 'api',
+
+/**
+ * User model.
+ */
+    //'user_model' => App\User::class,
 ];

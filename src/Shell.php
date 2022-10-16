@@ -9,7 +9,8 @@ use NoaPe\Beluga\Http\Models\Table;
 class Shell extends Model
 {
     use Concerns\HasBlueprint,
-        Concerns\HasSeeding;
+        Concerns\HasSeeding,
+        Auth\HasOwningRelation;
 
     /**
      * The name of the table.

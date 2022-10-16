@@ -1,0 +1,23 @@
+{
+    "datas": {
+        "name": {
+            "type": "String",
+            "label": "Name",
+            "position": 1,
+            "nullable": false,
+            "fillable": true
+        },
+        
+        "user_id": {
+            "type": "Integer",
+            "required": true,
+            "nullable": false,
+            "position": 2,
+            "fillable": true,
+            "settings": {
+                "invisible": true,
+                "unsigned": true
+            }
+        }
+    }
+}
