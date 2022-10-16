@@ -5,6 +5,7 @@ namespace NoaPe\Beluga;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use NoaPe\Beluga\Shell;
 
 abstract class DataType
 {
@@ -39,10 +40,10 @@ abstract class DataType
      * Constructor
      *
      * @param  string  $name
-     * @param  \NoaPe\Beluga\Shell  $shell
+     * @param  Shell  $shell
      * @return void
      */
-    public function __construct($name, $shell)
+    public function __construct($name, Shell $shell)
     {
         // Set the name. Throw an exception if the name is not set.
         $this->name = $name;
@@ -83,7 +84,7 @@ abstract class DataType
      * @param  Blueprint  $blueprint
      * @return mixed|void
      */
-    public function addToBlueprint($blueprint)
+    public function addToBlueprint(Blueprint $blueprint)
     {
         if ($this->blueprint_type) {
             $column = $blueprint->{$this->blueprint_type}($this->name);
