@@ -65,28 +65,28 @@ trait HasInternalJsonSchema
             {
                 /**
                  * Type of data.
-                 * 
+                 *
                  * @var \NoaPe\Beluga\DataType
                  */
                 protected $type;
 
                 /**
                  * Shell
-                 * 
+                 *
                  * @var \NoaPe\Beluga\Shell
                  */
                 protected $shell;
 
                 /**
                  * Name
-                 * 
+                 *
                  * @var string
                  */
                 protected $name;
 
                 /**
                  * Constructor.
-                 * 
+                 *
                  * @param  \stdClass  $data
                  * @param  \NoaPe\Beluga\Shell  $shell
                  * @param  string  $name
@@ -105,7 +105,7 @@ trait HasInternalJsonSchema
 
                 /**
                  * Get type.
-                 * 
+                 *
                  * @return \NoaPe\Beluga\DataType
                  */
                 public function getType()
