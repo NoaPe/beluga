@@ -18,10 +18,11 @@ class Permission
 
     /**
      * Recursive function for flattening array.
-     * 
+     *
      * @return array
      */
-    protected static function flatten($array) {
+    protected static function flatten($array)
+    {
         $result = [];
 
         foreach ($array as $key => $value) {
@@ -37,7 +38,7 @@ class Permission
 
     /**
      * Get permissions
-     * 
+     *
      * @return array
      */
     public static function getPermissions()
@@ -47,7 +48,7 @@ class Permission
 
     /**
      * Get sub permissions
-     * 
+     *
      * @param  string  $permission
      * @return array|null
      */
@@ -58,7 +59,7 @@ class Permission
 
     /**
      * Get permission group
-     * 
+     *
      * @param  string  $name
      * @param  bool  $flatened
      * @param  array  $permissionArray
@@ -87,9 +88,9 @@ class Permission
         return null;
     }
 
-    /** 
-     * Get all permission of a given user 
-     * 
+    /**
+     * Get all permission of a given user
+     *
      * @param  \Illuminate\Foundation\Auth\User  $user
      **/
     public static function of(User $user)
@@ -97,7 +98,7 @@ class Permission
         $permissions = [];
 
         foreach ($user->getAttribute('permissions') as $permission) {
-            $toAdd =  static::getSubPermissions($permission);
+            $toAdd = static::getSubPermissions($permission);
 
             if ($toAdd !== null) {
                 $permissions = array_merge($permissions, $toAdd);
@@ -111,7 +112,7 @@ class Permission
 
     /**
      * User has permission among given permissions
-     * 
+     *
      * @param  \Illuminate\Foundation\Auth\User  $user
      * @param  array  $permissions
      * @return bool
@@ -131,7 +132,7 @@ class Permission
 
     /**
      * Permission is in the given group
-     * 
+     *
      * @param  string  $permission
      * @param  string  $group
      * @return bool
@@ -149,10 +150,11 @@ class Permission
 
     /**
      * User has the given permission
-     * 
+     *
      * @param  \Illuminate\Foundation\Auth\User  $user
      * @param  string  $permission
      * @return bool
+     *
      * @throws \BadMethodCallException
      */
     public static function hasPermission(User $user, string $permission)

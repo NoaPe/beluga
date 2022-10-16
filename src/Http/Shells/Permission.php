@@ -8,7 +8,7 @@ class Permission extends Shell
 {
     /**
      * Belongs to user
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()

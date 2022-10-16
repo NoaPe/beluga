@@ -5,7 +5,6 @@ namespace NoaPe\Beluga;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
-use NoaPe\Beluga\Shell;
 
 abstract class DataType
 {

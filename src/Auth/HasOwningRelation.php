@@ -9,30 +9,30 @@ trait HasOwningRelation
 {
     /**
      * Potential owners of the shell.
-     * 
+     *
      * @var array
      */
     protected $owners = [];
 
     /**
      * Potential editors of the shell.
-     * 
+     *
      * @var array
      */
     protected $editors = [];
 
     /**
      * Potential viewers of the shell.
-     * 
+     *
      * @var array
      */
     protected $viewers = [];
 
     /**
      * If user is in relation with the shell.
-     * 
+     *
      * @param  \Illuminate\Foundation\Auth\User  $user
-     * @param  string $relationType
+     * @param  string  $relationType
      * @return bool
      */
     protected function isInRelation(User $user, string $relationType)
@@ -52,10 +52,9 @@ trait HasOwningRelation
         return false;
     }
 
-
     /**
      * Determine if the user is an owner of the shell.
-     * 
+     *
      * @param  \Illuminate\Foundation\Auth\User  $user
      * @return bool
      */
@@ -66,7 +65,7 @@ trait HasOwningRelation
 
     /**
      * Determine if the user is an editor of the shell.
-     * 
+     *
      * @param  \Illuminate\Foundation\Auth\User  $user
      * @return bool
      */
@@ -77,7 +76,7 @@ trait HasOwningRelation
 
     /**
      * Determine if the user is a viewer of the shell.
-     * 
+     *
      * @param  \Illuminate\Foundation\Auth\User  $user
      * @return bool
      */

@@ -2,10 +2,10 @@
 
 namespace NoaPe\Beluga\Auth\Policies;
 
-use NoaPe\Beluga\Shell;
-use NoaPe\Beluga\Helpers\Permission;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Foundation\Auth\User;
+use NoaPe\Beluga\Helpers\Permission;
+use NoaPe\Beluga\Shell;
 
 class RestPolicy
 {
@@ -13,7 +13,7 @@ class RestPolicy
 
     /**
      * Table name
-     * 
+     *
      * @var string
      */
     public $table_name = null;

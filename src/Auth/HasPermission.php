@@ -8,14 +8,14 @@ trait HasPermissions
 {
     /**
      * Cached permissions
-     * 
+     *
      * @var array
      */
     protected $cachedPermissions = [];
 
     /**
      * Get permissions of the user.
-     * 
+     *
      * @return array
      */
     public function getPermissions()

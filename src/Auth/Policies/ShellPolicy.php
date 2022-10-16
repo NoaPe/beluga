@@ -2,9 +2,9 @@
 
 namespace NoaPe\Beluga\Auth\Policies;
 
-use NoaPe\Beluga\Shell;
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Foundation\Auth\User;
+use NoaPe\Beluga\Shell;
 
 class ShellPolicy extends RestPolicy
 {
@@ -12,14 +12,15 @@ class ShellPolicy extends RestPolicy
 
     /**
      * __call method for verify if hasPermission method exists for user.
-     * 
-     * @param string $method
-     * @param array $parameters
+     *
+     * @param  string  $method
+     * @param  array  $parameters
      * @return mixed
+     *
      * @throws \BadMethodCallException
      */
-	public function __call($method, $parameters)
-	{
+    public function __call($method, $parameters)
+    {
         if (method_exists($parameters[0], 'isOwnedBy')
             && method_exists($parameters[0], 'isEditedBy')
             && method_exists($parameters[0], 'isViewedBy')) {
@@ -27,7 +28,7 @@ class ShellPolicy extends RestPolicy
         } else {
             throw new \BadMethodCallException("User does not use NoaPe\Beluga\Auth\HasOwningRelation trait.");
         }
-	}
+    }
 
     /**
      * Determine whether the user can view the model.
