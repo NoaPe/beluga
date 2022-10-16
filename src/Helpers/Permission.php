@@ -98,12 +98,12 @@ class Permission
         $permissions = [];
 
         foreach ($user->getAttribute('permissions') as $permission) {
-            $toAdd = static::getSubPermissions($permission);
+            $toAdd = static::getSubPermissions($permission->name);
 
             if ($toAdd !== null) {
                 $permissions = array_merge($permissions, $toAdd);
             } else {
-                $permissions[] = $permission;
+                $permissions[] = $permission->naùe;
             }
         }
 

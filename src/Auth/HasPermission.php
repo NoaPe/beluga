@@ -37,4 +37,14 @@ trait HasPermission
     {
         return in_array($permission, $this->getPermissions());
     }
+
+    /**
+     * Permissions of the user, hasMany relation.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function permissions()
+    {
+        return $this->hasMany('NoaPe\Beluga\Shells\Permission');
+    }
 }

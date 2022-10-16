@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use NoaPe\Beluga\Shells\Permission;
+use NoaPe\Beluga\Http\Shells\Permission;
 
 return new class extends Migration
 {
