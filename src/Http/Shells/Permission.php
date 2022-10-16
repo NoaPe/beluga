@@ -1,6 +1,6 @@
 <?php
 
-namespace NoaPe\Beluga\Shells;
+namespace NoaPe\Beluga\Http\Shells;
 
 use NoaPe\Beluga\Shell;
 

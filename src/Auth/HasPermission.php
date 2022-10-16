@@ -4,7 +4,7 @@ namespace NoaPe\Beluga\Auth;
 
 use NoaPe\Beluga\Helpers\Permission;
 
-trait HasPermissions
+trait HasPermission
 {
     /**
      * Cached permissions
