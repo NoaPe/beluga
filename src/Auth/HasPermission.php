@@ -40,7 +40,7 @@ trait HasPermission
 
     /**
      * Permissions of the user, hasMany relation.
-     * 
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function permissions()
