@@ -40,7 +40,7 @@ abstract class DataType
      * Constructor
      *
      * @param  string  $name
-     * @param  Shell  $shell
+     * @param  \NoaPe\Beluga\Shell  $shell
      * @return void
      */
     public function __construct($name, Shell $shell)

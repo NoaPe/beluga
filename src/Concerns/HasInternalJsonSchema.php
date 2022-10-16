@@ -56,7 +56,7 @@ trait HasInternalJsonSchema
      *
      * @param  array  $datas
      * @param  \NoaPe\Beluga\Shell  $shell
-     * @return \stdClass
+     * @return array
      */
     protected static function datasWithDataInstantiation($datas, $shell)
     {
