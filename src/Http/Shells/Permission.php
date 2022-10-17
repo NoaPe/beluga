@@ -2,9 +2,9 @@
 
 namespace NoaPe\Beluga\Http\Shells;
 
-use NoaPe\Beluga\Shell;
+use NoaPe\Beluga\Http\Models\BasicShell;
 
-class Permission extends Shell
+class Permission extends BasicShell
 {
     /**
      * Belongs to user
