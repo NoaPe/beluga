@@ -9,9 +9,23 @@ use NoaPe\Beluga\Console\MakeMigrationCommand;
 use NoaPe\Beluga\Console\MakeShellCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Illuminate\Support\Facades\Gate;
+use NoaPe\Beluga\Auth\Middleware\UserHasBelugaAdministrationPermission;
 
 class BelugaServiceProvider extends PackageServiceProvider
 {
+    /**
+     * Policies
+     * 
+     * @var array
+     */
+    protected $policies = [
+        Http\Shells\Permission::class => Http\Policies\PermissionPolicy::class,
+        Http\Models\Table::class => Http\Policies\TablePolicy::class,
+        Http\Models\Group::class => Http\Policies\GroupPolicy::class,
+        Http\Models\Data::class => Http\Policies\DataPolicy::class,
+    ];
+
     public function boot()
     {
         if ($this->app->runningInConsole()) {
@@ -39,6 +53,8 @@ class BelugaServiceProvider extends PackageServiceProvider
 
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
+        $this->registerPolicies();
+
         ShellComponentProvider::register();
     }
 
@@ -57,7 +73,10 @@ class BelugaServiceProvider extends PackageServiceProvider
     {
         return [
             'prefix' => config('beluga.prefix'),
-            'middleware' => config('beluga.middleware'),
+            'middleware' => array_merge(
+                config('beluga.middleware'),
+                [UserHasBelugaAdministrationPermission::class]
+            ),
         ];
     }
 
@@ -73,5 +92,12 @@ class BelugaServiceProvider extends PackageServiceProvider
             ->hasConfigFile()
             ->hasViews()
             ->hasMigration('create_beluga_table');
+    }
+
+    protected function registerPolicies()
+    {
+        foreach ($this->policies as $model => $policy) {
+            Gate::policy($model, $policy);
+        }
     }
 }

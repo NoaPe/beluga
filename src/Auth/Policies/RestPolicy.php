@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User;
 use NoaPe\Beluga\Helpers\Permission;
 use NoaPe\Beluga\Shell;
 
-class RestPolicy
+abstract class RestPolicy
 {
     use HandlesAuthorization;
 

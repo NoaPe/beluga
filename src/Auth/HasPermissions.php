@@ -4,7 +4,7 @@ namespace NoaPe\Beluga\Auth;
 
 use NoaPe\Beluga\Helpers\Permission;
 
-trait HasPermission
+trait HasPermissions
 {
     /**
      * Cached permissions
@@ -45,7 +45,7 @@ trait HasPermission
      */
     public function permissions()
     {
-        return $this->hasMany('NoaPe\Beluga\Shells\Permission');
+        return $this->hasMany('NoaPe\Beluga\Http\Shells\Permission');
     }
 
     /**

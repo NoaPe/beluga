@@ -5,6 +5,7 @@ namespace NoaPe\Beluga\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use NoaPe\Beluga\Http\Models\Table;
+use NoaPe\Beluga\Auth\HasShellWithPermissions;
 
 class SchemaController extends Controller
 {
@@ -36,7 +37,7 @@ class SchemaController extends Controller
      * @param  string  $name
      * @return string
      */
-    public function getShellClass($name)
+    protected function getShellClass($name)
     {
         $shell_namespace = config('beluga.shell_namespace');
         $prefix = config('beluga.table_prefix');

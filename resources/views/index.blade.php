@@ -13,10 +13,10 @@
         map_polyline.setView(coords, 13);
         map_surface.setView(coords, 13);
     });
-    </script>--}}
+    </script>
 
 
     <p>Depollution</p>
 
-    <x-beluga-form shell="Depollution" />
+    <x-beluga-form shell="Depollution" />--}}
 @endsection

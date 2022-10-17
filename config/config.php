@@ -82,8 +82,8 @@ return [
      */
     'api_prefix' => 'api',
 
-/**
- * User model.
- */
-    //'user_model' => App\User::class,
+    /**
+     * User model.
+     */
+    'user_model' => 'App\\Models\\User',
 ];

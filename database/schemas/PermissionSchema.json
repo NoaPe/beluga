@@ -7,12 +7,20 @@
             "nullable": false,
             "fillable": true
         },
+
+        "description": {
+            "type": "String",
+            "label": "Description",
+            "position": 2,
+            "nullable": true,
+            "fillable": true
+        },
         
         "user_id": {
             "type": "Integer",
             "required": true,
             "nullable": false,
-            "position": 2,
+            "position": 3,
             "fillable": true,
             "settings": {
                 "invisible": true,
