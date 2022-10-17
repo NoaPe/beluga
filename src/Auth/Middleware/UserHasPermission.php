@@ -1,7 +1,7 @@
 <?php
- 
+
 namespace NoaPe\Beluga\Auth\Middleware;
- 
+
 use Closure;
 use NoaPe\Beluga\Helpers\Permission;
 
@@ -9,7 +9,7 @@ class UserHasPermission
 {
     /**
      * Permission name
-     * 
+     *
      * @var string
      */
     protected $permission = null;

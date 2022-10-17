@@ -2,21 +2,21 @@
 
 namespace NoaPe\Beluga;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
+use NoaPe\Beluga\Auth\Middleware\UserHasBelugaAdministrationPermission;
 use NoaPe\Beluga\Console\InstallBelugaPackage;
 use NoaPe\Beluga\Console\MakeControllerCommand;
 use NoaPe\Beluga\Console\MakeMigrationCommand;
 use NoaPe\Beluga\Console\MakeShellCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Illuminate\Support\Facades\Gate;
-use NoaPe\Beluga\Auth\Middleware\UserHasBelugaAdministrationPermission;
 
 class BelugaServiceProvider extends PackageServiceProvider
 {
     /**
      * Policies
-     * 
+     *
      * @var array
      */
     protected $policies = [

@@ -5,7 +5,6 @@ namespace NoaPe\Beluga\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use NoaPe\Beluga\Http\Models\Table;
-use NoaPe\Beluga\Auth\HasShellWithPermissions;
 
 class SchemaController extends Controller
 {

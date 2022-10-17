@@ -8,7 +8,6 @@ use NoaPe\Beluga\Http\Components\Form;
 use NoaPe\Beluga\Http\Components\Show;
 use NoaPe\Beluga\Http\Components\Table;
 use NoaPe\Beluga\Http\Controllers\Controller;
-use NoaPe\Beluga\Auth\HasShellWithPermissions;
 
 abstract class ShellController extends Controller
 {

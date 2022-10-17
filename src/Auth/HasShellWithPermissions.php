@@ -8,7 +8,7 @@ trait HasShellWithPermissions
 {
     /**
      * Association of methods to permissions
-     * 
+     *
      * @var array
      */
     protected $permissions = [
@@ -23,7 +23,7 @@ trait HasShellWithPermissions
 
     /**
      * __call magic method
-     * 
+     *
      * @param  string  $method
      * @param  array  $parameters
      * @return mixed
