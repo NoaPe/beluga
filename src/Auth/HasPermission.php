@@ -47,4 +47,15 @@ trait HasPermission
     {
         return $this->hasMany('NoaPe\Beluga\Shells\Permission');
     }
+
+    /**
+     * Add permission to the user.
+     * 
+     * @param  string  $permission
+     * @return void
+     */
+    public function addPermission(string $permission)
+    {
+        $this->permissions()->create(['name' => $permission]);
+    }
 }
