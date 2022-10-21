@@ -7,24 +7,13 @@ use NoaPe\Beluga\Helpers\Permission;
 trait HasPermissions
 {
     /**
-     * Cached permissions
-     *
-     * @var array
-     */
-    protected $cachedPermissions = [];
-
-    /**
      * Get permissions of the user.
      *
      * @return array
      */
     public function getPermissions()
     {
-        if (empty($this->cachedPermissions)) {
-            $this->cachedPermissions = Permission::of($this);
-        }
-
-        return $this->cachedPermissions;
+        return Permission::of($this);
     }
 
     /**
@@ -56,6 +45,7 @@ trait HasPermissions
      */
     public function addPermission(string $permission)
     {
-        $this->permissions()->create(['name' => $permission]);
+        $this->permissions()->create(['name' => $permission])->save();
+        $this->refresh();
     }
 }

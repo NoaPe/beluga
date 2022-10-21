@@ -17,6 +17,28 @@ class Permission
     protected $permissions = [];
 
     /**
+     * Get instance
+     * 
+     * @return Permission
+     */
+    public static function getInstance()
+    {
+        if (is_null(static::$instance)) {
+            static::$instance = new static;
+        }
+
+        return static::$instance;
+    }
+
+    /**
+     * Constructor
+     */
+    protected function __construct()
+    {
+        $this->permissions = static::getPermissionsArray();
+    }
+
+    /**
      * Recursive function for flattening array.
      *
      * @return array
@@ -37,13 +59,23 @@ class Permission
     }
 
     /**
+     * Get permissions array
+     *
+     * @return array
+     */
+    public static function getPermissionsArray()
+    {
+        return config('permissions');
+    }
+
+    /**
      * Get permissions
      *
      * @return array
      */
     public static function getPermissions()
     {
-        return config('beluga.permissions');
+        return static::getInstance()->permissions;
     }
 
     /**
@@ -65,10 +97,12 @@ class Permission
      * @param  array  $permissionArray
      * @return array|null
      */
-    public static function getPermissionGroup(string $name, bool $flatened = false, array $permissionArray = [])
+    public static function getPermissionGroup(string $name, bool $flatened = false, array $permissionArray = null)
     {
-        if ($permissionArray === []) {
-            $permissionArray = static::getPermissions();
+        $permissionArray = $permissionArray ?: static::getPermissions();
+        
+        if (!$permissionArray) {
+            return null;
         }
 
         if (isset($permissionArray[$name])) {
@@ -103,7 +137,7 @@ class Permission
             if ($toAdd !== null) {
                 $permissions = array_merge($permissions, $toAdd);
             } else {
-                $permissions[] = $permission->naùe;
+                $permissions[] = $permission->name;
             }
         }
 
@@ -120,7 +154,6 @@ class Permission
     public static function has(User $user, array $permissions)
     {
         $userPermissions = static::of($user);
-
         foreach ($permissions as $permission) {
             if (in_array($permission, $userPermissions)) {
                 return true;
