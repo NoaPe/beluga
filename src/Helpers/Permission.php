@@ -18,7 +18,7 @@ class Permission
 
     /**
      * Get instance
-     * 
+     *
      * @return Permission
      */
     public static function getInstance()
@@ -100,8 +100,8 @@ class Permission
     public static function getPermissionGroup(string $name, bool $flatened = false, array $permissionArray = null)
     {
         $permissionArray = $permissionArray ?: static::getPermissions();
-        
-        if (!$permissionArray) {
+
+        if (! $permissionArray) {
             return null;
         }
 
