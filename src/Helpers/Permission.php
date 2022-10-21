@@ -24,7 +24,8 @@ class Permission
     public static function getInstance()
     {
         if (is_null(static::$instance)) {
-            static::$instance = new static;
+            $class = static::class;
+            static::$instance = new $class();
         }
 
         return static::$instance;
