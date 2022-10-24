@@ -48,4 +48,16 @@ trait HasPermissions
         $this->permissions()->create(['name' => $permission])->save();
         $this->refresh();
     }
+
+    /**
+     * Delete permission to the user.
+     * 
+     * @param  string  $permission
+     * @return void
+     */
+    public function deletePermission(string $permission)
+    {
+        $this->permissions()->where('name', $permission)->delete();
+        $this->refresh();
+    }
 }
