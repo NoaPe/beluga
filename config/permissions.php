@@ -9,7 +9,7 @@ return [
         /**
          * Beluga schema administration
          */
-        'schema_administration' => [
+        'beluga_administration' => [
             'beluga_table_administration' => [
                 'beluga_table_create',
                 'beluga_table_update',

@@ -50,9 +50,9 @@ class Permission
 
         foreach ($array as $key => $value) {
             if (is_array($value)) {
-                $result = array_merge($result, static::flatten($value));
+                $result = array_merge($result, static::flatten($value), [$key]);
             } else {
-                $result = [$value];
+                $result[] = $value;
             }
         }
 
@@ -109,10 +109,10 @@ class Permission
         if (isset($permissionArray[$name])) {
             return $flatened ? static::flatten($permissionArray[$name]) : $permissionArray[$name];
         } else {
-            foreach ($permissionArray as $key => $value) {
+            foreach ($permissionArray as $value) {
                 if (is_array($value)) {
                     $group = static::getPermissionGroup($name, $flatened, $value);
-
+                    
                     if ($group !== null) {
                         return $group;
                     }
@@ -135,11 +135,11 @@ class Permission
         foreach ($user->getAttribute('permissions') as $permission) {
             $toAdd = static::getSubPermissions($permission->name);
 
-            if ($toAdd !== null) {
+            if ($toAdd !== null && is_array($toAdd)) {
                 $permissions = array_merge($permissions, $toAdd);
-            } else {
-                $permissions[] = $permission->name;
             }
+
+            $permissions[] = $permission->name;
         }
 
         return $permissions;
