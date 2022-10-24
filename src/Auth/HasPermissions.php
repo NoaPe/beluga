@@ -51,7 +51,7 @@ trait HasPermissions
 
     /**
      * Delete permission to the user.
-     * 
+     *
      * @param  string  $permission
      * @return void
      */
