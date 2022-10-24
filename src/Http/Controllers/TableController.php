@@ -29,8 +29,8 @@ class TableController extends ShellController
                 DeleteAction::class,
             ],
             'custom_columns' => [
-                'Custom column' => function ($line) {
-                    return $line->id;
+                'Group count' => function ($line) {
+                    return $line->groups()->count();
                 },
             ],
         ]);

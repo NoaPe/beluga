@@ -17,16 +17,6 @@ class Table extends BasicShell
     public $name;
 
     /**
-     * Define hasMany relation with Group model only the Group have parent_is_group to false.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function groups()
-    {
-        return $this->hasMany(Group::class, 'parent_id')->where('parent_is_group', false);
-    }
-
-    /**
      * Has many relation with Data model only the Data have parent_is_group to false.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

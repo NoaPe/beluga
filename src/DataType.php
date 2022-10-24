@@ -18,7 +18,7 @@ abstract class DataType
      *
      * @var \NoaPe\Beluga\Shell
      */
-    public $shell;
+    protected $shell;
 
     /**
      * Schema information.
@@ -47,6 +47,7 @@ abstract class DataType
         // Set the name. Throw an exception if the name is not set.
         $this->name = $name;
         $this->shell = $shell;
+        $this->register();
 
         $this->schema = $shell->getDataSchema($name);
     }

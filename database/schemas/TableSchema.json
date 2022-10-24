@@ -32,6 +32,19 @@
             "label": "Render method",
             "description": "The render method for the table.",
             "fillable": true
+        },
+
+        "groups": {
+            "type": "HasMany",
+            "required": false,
+            "label": "Groups",
+            "settings": {
+                "class": "NoaPe\\Beluga\\Http\\Models\\Group",
+                "foreign_key": "parent_id",
+                "where": ["parent_is_group", false],
+                "addable": true,
+                "selectable": false
+            }
         }
     }
 }

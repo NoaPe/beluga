@@ -21,15 +21,21 @@ class Relation extends DataType
      */
     public function register()
     {
-        // Get the shell class name.
+        $settings = $this->shell->getDataSchema($this->name)->settings;
 
         $relation = $this->shell->{$this->relation_function}(
-            $this->schema->settings->class,
+            $settings->class,
+            $settings->foreign_key,
         );
 
+        if (isset($settings->where)) {
+            $relation->where(...$settings->where);
+        }
+
+
         // Add the method to the shell.
-        $this->shell->{$this->name} = function () use ($relation) {
+        ($this->shell)::resolveRelationUsing($this->name, function ($orderModel) use ($relation) {
             return $relation;
-        };
+        });
     }
 }
