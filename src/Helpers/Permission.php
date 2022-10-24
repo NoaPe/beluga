@@ -112,7 +112,7 @@ class Permission
             foreach ($permissionArray as $value) {
                 if (is_array($value)) {
                     $group = static::getPermissionGroup($name, $flatened, $value);
-                    
+
                     if ($group !== null) {
                         return $group;
                     }
