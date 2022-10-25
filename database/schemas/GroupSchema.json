@@ -60,6 +60,32 @@
             "label": "Render method",
             "description": "The render method for the group.",
             "fillable": true
+        },
+
+        "groups": {
+            "type": "HasMany",
+            "required": false,
+            "label": "Groups",
+            "settings": {
+                "class": "NoaPe\\Beluga\\Http\\Models\\Group",
+                "foreign_key": "parent_id",
+                "where": ["parent_is_group", true],
+                "addable": true,
+                "selectable": false
+            }
+        },
+
+        "datas": {
+            "type": "HasMany",
+            "required": false,
+            "label": "Datas",
+            "settings": {
+                "class": "NoaPe\\Beluga\\Http\\Models\\Data",
+                "foreign_key": "parent_id",
+                "where": ["parent_is_group", true],
+                "addable": true,
+                "selectable": false
+            }
         }
     }
 }

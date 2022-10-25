@@ -26,10 +26,12 @@ trait HasSubGroups
 
         $this->setRelationCustomColumns([
             'Group count' => function ($line) {
-                return $line->groups()->count();
+                //return $line->groups()->count();
+                return 'TODO';
             },
             'Data count' => function ($line) {
-                return $line->datas()->count();
+                //return $line->datas()->count();
+                return 'TODO';
             },
         ]);
     }

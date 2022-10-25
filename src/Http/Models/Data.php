@@ -62,4 +62,26 @@ class Data extends BasicShell
     {
         return $this->getType($shell)->getValidationRules();
     }
+
+    /**
+     * Get validation rules, return an array with the rules without dynamic calling.
+     *
+     * @return array
+     */
+    public function getValidationRules()
+    {
+        return [
+            'parent_id' => 'required|integer',
+            'parent_is_group' => 'required|boolean',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+            ],
+            'label' => 'nullable|string',
+            'description' => 'nullable|string',
+            'render' => 'nullable|string',
+            'position' => 'nullable|integer',
+        ];
+    }
 }

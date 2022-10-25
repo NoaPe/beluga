@@ -45,6 +45,19 @@
                 "addable": true,
                 "selectable": false
             }
+        },
+
+        "datas": {
+            "type": "HasMany",
+            "required": false,
+            "label": "Datas",
+            "settings": {
+                "class": "NoaPe\\Beluga\\Http\\Models\\Data",
+                "foreign_key": "parent_id",
+                "where": ["parent_is_group", false],
+                "addable": true,
+                "selectable": false
+            }
         }
     }
 }

@@ -17,16 +17,6 @@ class Table extends BasicShell
     public $name;
 
     /**
-     * Has many relation with Data model only the Data have parent_is_group to false.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function datas()
-    {
-        return $this->hasMany(Data::class, 'parent_id')->where('parent_is_group', false);
-    }
-
-    /**
      * Get validation rules, return an array with the rules without dynamic calling.
      *
      * @return array
