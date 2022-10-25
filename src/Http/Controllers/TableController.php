@@ -15,7 +15,7 @@ class TableController extends ShellController
 
     /**
      * Constructor
-     * 
+     *
      * @return void
      */
     public function __construct()
@@ -38,7 +38,6 @@ class TableController extends ShellController
             },
         ]);
     }
-
 
     /**
      * Display a listing of the resource.

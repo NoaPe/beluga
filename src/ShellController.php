@@ -34,14 +34,14 @@ abstract class ShellController extends Controller
 
     /**
      * Relation actions
-     * 
+     *
      * @var array
      */
     protected $relation_actions = [];
 
     /**
      * Relation custom columns
-     * 
+     *
      * @var array
      */
     protected $relation_custom_columns = [];
@@ -61,8 +61,8 @@ abstract class ShellController extends Controller
 
     /**
      * Set relation actions
-     * 
-     * @param array $actions
+     *
+     * @param  array  $actions
      * @return void
      */
     public function setRelationActions(array $actions)
@@ -72,8 +72,8 @@ abstract class ShellController extends Controller
 
     /**
      * Set relation custom columns
-     * 
-     * @param array $columns
+     *
+     * @param  array  $columns
      * @return void
      */
     public function setRelationCustomColumns(array $columns)
@@ -83,7 +83,7 @@ abstract class ShellController extends Controller
 
     /**
      * __call magic function for call showRelation method.
-     * 
+     *
      * @param  string  $method
      * @param  array  $parameters
      * @return  mixed
@@ -101,7 +101,7 @@ abstract class ShellController extends Controller
 
     /**
      * Show table from a relation.
-     * 
+     *
      * @param  string  $relation
      * @param  mixed  $id
      * @return  \Illuminate\Http\Response
@@ -110,20 +110,21 @@ abstract class ShellController extends Controller
     {
         $this->shellClass::findOrFail($id);
         $settings = $this->shell->getDataSchema(Str::snake($relation))->settings;
-        
+
         $foreign_key = isset($settings->foreign_key) ? $settings->foreign_key : $this->shell->getForeignKey();
-        
+
         return $this->render(Table::class, [
-                'layout' => '',
-                'actions' => $this->relation_actions,
-                'custom_columns' => $this->relation_custom_columns,
-            ],
+            'layout' => '',
+            'actions' => $this->relation_actions,
+            'custom_columns' => $this->relation_custom_columns,
+        ],
             $settings->class,
             function ($shell) use ($settings, $id, $foreign_key) {
                 $result = $shell::where($foreign_key, $id);
                 if (isset($settings->where)) {
                     $result = $result->where(...$settings->where);
                 }
+
                 return $result;
             },
         );

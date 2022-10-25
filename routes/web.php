@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use NoaPe\Beluga\Beluga;
 use NoaPe\Beluga\Http\Controllers\SchemaController;
-use NoaPe\Beluga\Http\Models\Table;
 use NoaPe\Beluga\Http\Models\Group;
+use NoaPe\Beluga\Http\Models\Table;
 
 Route::get('/', [SchemaController::class, 'index'])->name('beluga.index');
 Route::get('/edit/{name}', [SchemaController::class, 'edit'])->name('beluga.edit');

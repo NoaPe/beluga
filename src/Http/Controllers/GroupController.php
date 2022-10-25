@@ -15,7 +15,7 @@ class GroupController extends ShellController
 
     /**
      * Constructor
-     * 
+     *
      * @return void
      */
     public function __construct()

@@ -14,7 +14,7 @@ class Table extends ComponentWithShell
 
     /**
      * Callback function for "where" conditions.
-     * 
+     *
      * @var callable
      */
     protected $where;
@@ -55,7 +55,6 @@ class Table extends ComponentWithShell
         } else {
             $lines = ($this->where)($this->shell)->get();
         }
-
 
         $attributes = $this->getAttributesFromGroup($schema);
 
