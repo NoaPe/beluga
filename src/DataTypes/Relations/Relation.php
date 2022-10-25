@@ -23,9 +23,11 @@ class Relation extends DataType
     {
         $settings = $this->shell->getDataSchema($this->name)->settings;
 
+        $foreign_key = isset($settings->foreign_key) ? $settings->foreign_key : $this->shell->getForeignKey();
+
         $relation = $this->shell->{$this->relation_function}(
             $settings->class,
-            $settings->foreign_key,
+            $foreign_key,
         );
 
         if (isset($settings->where)) {
