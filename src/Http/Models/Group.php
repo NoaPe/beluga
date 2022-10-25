@@ -27,7 +27,7 @@ class Group extends BasicShell
             'parent_id'
         );
     }
-    
+
     /**
      * Get validation rules, return an array with the rules without dynamic calling.
      *

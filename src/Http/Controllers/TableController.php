@@ -9,7 +9,7 @@ class TableController extends ShellController
     use Concerns\HasSubGroups;
 
     protected $layout = 'beluga::layouts.default';
-    
+
     /**
      * Constructor
      */
