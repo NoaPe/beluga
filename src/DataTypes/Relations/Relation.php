@@ -32,7 +32,6 @@ class Relation extends DataType
             $relation->where(...$settings->where);
         }
 
-
         // Add the method to the shell.
         ($this->shell)::resolveRelationUsing($this->name, function ($orderModel) use ($relation) {
             return $relation;
