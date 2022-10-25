@@ -3,6 +3,7 @@
 namespace NoaPe\Beluga;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 class Beluga
 {
@@ -75,12 +76,22 @@ class Beluga
      * @param  bool  $api
      * @return void
      */
-    public static function createResource($shell, $api = false)
+    public static function createResource($shell, $api = false, $relations = [])
     {
         $controller = self::qualifyController($shell);
         $shell = self::qualifyShell($shell);
-        $route = (new $shell())->getRoute();
+        $route = ($api ? config('beluga.api_prefix').'/' : '').(new $shell())->getRoute();
 
-        Route::resource(($api ? config('beluga.api_prefix').'/' : '').$route, $controller);
+        Route::resource($route, $controller);
+
+        if (count($relations) > 0) {
+            foreach ($relations as $relation) {
+                $sub_route = $route.'/{id}/'.$relation;
+
+                Route::get($sub_route, [$controller, 'showRelation'.Str::studly($relation)])
+                    ->where('id', '[0-9]+')
+                    ->name($route.'.'.$relation);
+            }
+        }
     }
 }

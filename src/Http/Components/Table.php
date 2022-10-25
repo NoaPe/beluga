@@ -13,17 +13,26 @@ class Table extends ComponentWithShell
     protected $group;
 
     /**
+     * Callback function for "where" conditions.
+     * 
+     * @var callable
+     */
+    protected $where;
+
+    /**
      * Create a new component instance.
      *
      * @param  mixed  $shell
      * @param  mixed  $group
+     * @param  mixed  $where
      * @return void
      */
-    public function __construct($shell, $group = null)
+    public function __construct($shell, $group = null, $where = null)
     {
         parent::__construct($shell);
 
         $this->group = $group;
+        $this->where = $where;
     }
 
     /**
@@ -33,14 +42,20 @@ class Table extends ComponentWithShell
      */
     public function baseDatas()
     {
-        // Is the group is set send it else get the schema from the shell.
+        // Is the group is set send it, else get the schema from the shell.
         if ($this->group) {
             $schema = $this->group;
         } else {
             $schema = $this->shell->getSchema();
         }
+
         // Get all lines from the shell.
-        $lines = $this->shell::all();
+        if ($this->where == null) {
+            $lines = $this->shell::all();
+        } else {
+            $lines = ($this->where)($this->shell)->get();
+        }
+
 
         $attributes = $this->getAttributesFromGroup($schema);
 

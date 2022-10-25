@@ -115,6 +115,16 @@ class Shell extends Model
     }
 
     /**
+     * Get foreignkey name.
+     * 
+     * @return string
+     */
+    public function getForeignKey()
+    {
+        return Str::snake(class_basename(get_called_class())) . '_id';
+    }
+
+    /**
      * Get element name
      *
      * @return string

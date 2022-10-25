@@ -33,6 +33,20 @@ abstract class ShellController extends Controller
     protected $layout = '';
 
     /**
+     * Relation actions
+     * 
+     * @var array
+     */
+    protected $relation_actions = [];
+
+    /**
+     * Relation custom columns
+     * 
+     * @var array
+     */
+    protected $relation_custom_columns = [];
+
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -43,6 +57,76 @@ abstract class ShellController extends Controller
         $shell = Str::replaceLast('Controller', '', class_basename($this));
         $this->shellClass = Beluga::qualifyShell($shell);
         $this->shell = new ($this->shellClass)();
+    }
+
+    /**
+     * Set relation actions
+     * 
+     * @param array $actions
+     * @return void
+     */
+    public function setRelationActions(array $actions)
+    {
+        $this->relation_actions = $actions;
+    }
+
+    /**
+     * Set relation custom columns
+     * 
+     * @param array $columns
+     * @return void
+     */
+    public function setRelationCustomColumns(array $columns)
+    {
+        $this->relation_custom_columns = $columns;
+    }
+
+    /**
+     * __call magic function for call showRelation method.
+     * 
+     * @param  string  $method
+     * @param  array  $parameters
+     * @return  mixed
+     */
+    public function __call($method, $parameters)
+    {
+        if (Str::startsWith($method, 'showRelation')) {
+            $relation = Str::replaceFirst('showRelation', '', $method);
+
+            return $this->showRelation($relation, ...$parameters);
+        }
+
+        return parent::__call($method, $parameters);
+    }
+
+    /**
+     * Show table from a relation.
+     * 
+     * @param  string  $relation
+     * @param  mixed  $id
+     * @return  \Illuminate\Http\Response
+     */
+    public function showRelation($relation, $id)
+    {
+        $this->shellClass::findOrFail($id);
+        $settings = $this->shell->getDataSchema(Str::snake($relation))->settings;
+        
+        $foreign_key = isset($settings->foreign_key) ? $settings->foreign_key : $this->shell->getForeignKey();
+        
+        return $this->render(Table::class, [
+                'layout' => '',
+                'actions' => $this->relation_actions,
+                'custom_columns' => $this->relation_custom_columns,
+            ],
+            $settings->class,
+            function ($shell) use ($settings, $id, $foreign_key) {
+                $result = $shell::where($foreign_key, $id);
+                if (isset($settings->where)) {
+                    $result = $result->where(...$settings->where);
+                }
+                return $result;
+            },
+        );
     }
 
     /**
@@ -178,11 +262,11 @@ abstract class ShellController extends Controller
      * @param  Shell  $shell
      * @return \Illuminate\Http\Response
      */
-    public function render($component, $datas = [], $shell = null)
+    public function render($component, $datas = [], $shell = null, $where = null)
     {
         $shell = $shell ?? $this->shell;
 
-        $component = new $component($shell);
+        $component = new $component($shell, null, $where);
 
         $component->addDatas($datas);
 

@@ -8,7 +8,7 @@
             <thead>
                 <tr>
                     @foreach($data_attributes as $data_name => $data)
-                        <th>{{ $data->label }}</th>
+                        <th>{{ isset($data->label) ? $data->label : '' }}</th>
                     @endforeach
 
                     @if(isset($custom_columns))

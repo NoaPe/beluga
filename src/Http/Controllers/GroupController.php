@@ -9,9 +9,9 @@ use NoaPe\Beluga\Actions\ShowAction;
 use NoaPe\Beluga\Http\Components\Table;
 use NoaPe\Beluga\ShellController;
 
-class TableController extends ShellController
+class GroupController extends ShellController
 {
-    protected $layout = 'beluga::layouts.default';
+    protected $layout = '';
 
     /**
      * Constructor
@@ -38,7 +38,6 @@ class TableController extends ShellController
             },
         ]);
     }
-
 
     /**
      * Display a listing of the resource.

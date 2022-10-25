@@ -43,4 +43,26 @@ class Group extends BasicShell
     {
         return $this->hasMany(Data::class, 'parent_id')->where('parent_is_group', true);
     }
+
+    /**
+     * Get validation rules, return an array with the rules without dynamic calling.
+     *
+     * @return array
+     */
+    public function getValidationRules()
+    {
+        return [
+            'parent_id' => 'required|integer',
+            'parent_is_group' => 'required|boolean',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+            ],
+            'label' => 'nullable|string',
+            'description' => 'nullable|string',
+            'render' => 'nullable|string',
+            'position' => 'nullable|integer',
+        ];
+    }
 }

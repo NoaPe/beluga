@@ -24,6 +24,9 @@
                 </div>
             @endif
 
+            @if(isset($shell->id))
+                <input type="text" name="id" value="{{ $shell->getAttribute('id') }}" hidden>
+            @endif
 
             {{-- Loop for each data in $schema->datas --}}
             @if(isset($schema->datas)) 
