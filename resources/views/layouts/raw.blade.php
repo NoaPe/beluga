@@ -1,1 +1,1 @@
-@yield('content')
+@yield('content_beluga')

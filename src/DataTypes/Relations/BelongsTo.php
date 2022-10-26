@@ -10,6 +10,11 @@ class BelongsTo extends Relation
     public $relation_function = 'belongsTo';
 
     /**
+     * Blueprint type.
+     */
+    public $blueprint_type = 'integer';
+
+    /**
      * Html input type.
      */
     public $input_type = 'select';
@@ -71,7 +76,7 @@ class BelongsTo extends Relation
     /**
      * Generate seed value.
      *
-     * @return string
+     * @return string|null
      */
     public function generateSeedValue()
     {
@@ -83,6 +88,6 @@ class BelongsTo extends Relation
             return $options[rand(0, count($options) - 1)];
         }
 
-        return '';
+        return null;
     }
 }

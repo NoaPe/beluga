@@ -1,8 +1,7 @@
 @extends(isset($layout) && $layout !== '' ? $layout : 'beluga::layouts.raw')
 
-@section('title', $shell->getName())
-
-@section('content')
+@section('title_beluga', $shell->getName())
+@section('content_beluga')
     {{-- Form for a $shell --}}
     <form method="POST" action="{{ Route::has($shell->getRoute().'.store') ? route($shell->getRoute().'.store') : '' }}/{{ $shell->getAttribute('id') }}">
         @method($method ?? 'POST')

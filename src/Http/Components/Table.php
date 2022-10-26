@@ -10,14 +10,19 @@ class Table extends ComponentWithShell
 
     protected $view = 'beluga::components.table';
 
-    protected $group;
-
     /**
      * Callback function for "where" conditions.
      *
      * @var callable
      */
     protected $where;
+
+    /**
+     * Lines to render. If null, all lines will be rendered.
+     * 
+     * @var array
+     */
+    protected $lines;
 
     /**
      * Create a new component instance.

@@ -47,6 +47,19 @@ class Beluga
     }
 
     /**
+     * Instanciate a shell.
+     * 
+     * @param  string  $name
+     * @return \NoaPe\Beluga\Shell
+     */
+    public static function shell($name)
+    {
+        $class = self::qualifyShell($name);
+
+        return new $class();
+    }
+
+    /**
      * Static function for qualify a controller from shell name.
      *
      * @param  string  $name

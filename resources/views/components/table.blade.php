@@ -1,8 +1,8 @@
 @extends(isset($layout) && $layout !== '' ? $layout : 'beluga::layouts.raw')
 
-@section('title', $shell->getName())
-@section('content')
-<div class="row pt-4">
+@section('title_beluga', $shell->getName())
+@section('content_beluga')
+<div class="row">
     <div class="beluga-table-group table-responsive">
         <table class="table card-table table-vcenter text-nowrap datatable">
             <thead>
