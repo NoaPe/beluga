@@ -48,7 +48,7 @@ class Beluga
 
     /**
      * Instanciate a shell.
-     * 
+     *
      * @param  string  $name
      * @return \NoaPe\Beluga\Shell
      */

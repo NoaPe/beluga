@@ -19,7 +19,7 @@ class Table extends ComponentWithShell
 
     /**
      * Lines to render. If null, all lines will be rendered.
-     * 
+     *
      * @var array
      */
     protected $lines;
