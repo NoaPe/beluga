@@ -84,4 +84,37 @@ trait HasOwningRelation
     {
         return $this->isInRelation($user, 'viewer');
     }
+
+    /**
+     * Add owner type to the shell.
+     * 
+     * @param  string  $owner
+     * @return void
+     */
+    public function addOwner(string $owner)
+    {
+        $this->owners[] = $owner;
+    }
+
+    /**
+     * Add editor type to the shell.
+     * 
+     * @param  string  $editor
+     * @return void
+     */
+    public function addEditor(string $editor)
+    {
+        $this->editors[] = $editor;
+    }
+
+    /**
+     * Add viewer type to the shell.
+     * 
+     * @param  string  $viewer
+     * @return void
+     */
+    public function addViewer(string $viewer)
+    {
+        $this->viewers[] = $viewer;
+    }
 }
