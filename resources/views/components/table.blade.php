@@ -4,7 +4,7 @@
 @section('content')
 <div class="row pt-4">
     <div class="beluga-table-group table-responsive">
-        <table class="table table-bordered">
+        <table class="table card-table table-vcenter text-nowrap datatable">
             <thead>
                 <tr>
                     @foreach($data_attributes as $data_name => $data)

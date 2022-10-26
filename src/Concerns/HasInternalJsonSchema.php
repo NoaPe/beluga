@@ -12,9 +12,9 @@ trait HasInternalJsonSchema
      *
      * @return \stdClass
      */
-    protected static function getSchemaFromInternalJson($shell)
+    protected static function getSchemaFromInternalJson($shell, $folder)
     {
-        return self::schemaWithDataInstantiation($shell);
+        return self::schemaWithDataInstantiation($shell, $folder);
     }
 
     /**
@@ -22,9 +22,9 @@ trait HasInternalJsonSchema
      *
      * @return \stdClass
      */
-    protected static function schemaWithDataInstantiation($shell)
+    protected static function schemaWithDataInstantiation($shell, $folder)
     {
-        $schema = self::getRawSchema($shell);
+        $schema = self::getRawSchema($shell, $folder);
 
         $schema = self::groupWithDataInstantiation($schema, $shell);
 

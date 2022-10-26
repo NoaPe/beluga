@@ -267,7 +267,7 @@ abstract class ShellController extends Controller
     {
         $shell = $shell ?? $this->shell;
 
-        $component = new $component($shell, null, $where);
+        $component = new $component($shell, $where);
 
         $component->addDatas($datas);
 

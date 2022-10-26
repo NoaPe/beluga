@@ -23,16 +23,16 @@ class Table extends ComponentWithShell
      * Create a new component instance.
      *
      * @param  mixed  $shell
-     * @param  mixed  $group
      * @param  mixed  $where
+     * @param  mixed  $lines
      * @return void
      */
-    public function __construct($shell, $group = null, $where = null)
+    public function __construct($shell, $where = null, $lines = null)
     {
         parent::__construct($shell);
 
-        $this->group = $group;
         $this->where = $where;
+        $this->lines = $lines;
     }
 
     /**
@@ -42,15 +42,12 @@ class Table extends ComponentWithShell
      */
     public function baseDatas()
     {
-        // Is the group is set send it, else get the schema from the shell.
-        if ($this->group) {
-            $schema = $this->group;
-        } else {
-            $schema = $this->shell->getSchema();
-        }
+        $schema = $this->shell->getSchema();
 
         // Get all lines from the shell.
-        if ($this->where == null) {
+        if ($this->lines) {
+            $lines = $this->lines;
+        }else if ($this->where == null) {
             $lines = $this->shell::all();
         } else {
             $lines = ($this->where)($this->shell)->get();

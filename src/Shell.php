@@ -32,6 +32,13 @@ class Shell extends Model
     protected $schema_origin = 'Json';
 
     /**
+     * Schema folder
+     * 
+     * @var string
+     */
+    protected $schema_folder = '';
+
+    /**
      * Route prefix
      *
      * @var string
@@ -230,7 +237,7 @@ class Shell extends Model
      */
     public function getSchema()
     {
-        return Anchor::getSchema($this, $this->schema_origin);
+        return Anchor::getSchema($this, $this->schema_origin, $this->schema_folder);
     }
 
     /**

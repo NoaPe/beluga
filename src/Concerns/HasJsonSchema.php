@@ -11,24 +11,26 @@ trait HasJsonSchema
     /**
      * Static function for get a name of schema file.
      */
-    public static function getJsonSchemaFileName($shell)
+    public static function getJsonSchemaFileName($shell, $folder)
     {
         if (method_exists($shell, 'getJsonSchemaFileName')) {
             return $shell->getJsonSchemaFileName();
         }
 
-        return config('beluga.schema_path').'/'.class_basename($shell).'Schema.json';
+        return config('beluga.schema_path').'/'
+            .($folder ? $folder.'/' : '')
+            .class_basename($shell).'Schema.json';
     }
 
     /**
      * Static function to get raw schema information.
      */
-    protected static function getRawSchema($shell)
+    protected static function getRawSchema($shell, $folder)
     {
         /**
          * Get schema information from Json file.
          */
-        $file = static::getJsonSchemaFileName($shell);
+        $file = static::getJsonSchemaFileName($shell, $folder);
         $data = new \stdClass();
 
         if (file_exists($file)) {
@@ -105,12 +107,12 @@ trait HasJsonSchema
      *
      * @return Table
      */
-    protected static function getSchemaFromJson($shell)
+    protected static function getSchemaFromJson($shell, $folder)
     {
         /**
          * Get raw schema information.
          */
-        $schema = self::getRawSchema($shell);
+        $schema = self::getRawSchema($shell, $folder);
 
         $schema->name = $shell->getName();
 
@@ -149,8 +151,8 @@ trait HasJsonSchema
      *
      * @return bool
      */
-    public static function hasJsonSchema($shell)
+    public static function hasJsonSchema($shell, $folder)
     {
-        return file_exists(self::getJsonSchemaFileName($shell));
+        return file_exists(self::getJsonSchemaFileName($shell, $folder));
     }
 }

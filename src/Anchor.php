@@ -22,7 +22,7 @@ class Anchor
      * @param  string  $origin
      * @return mixed
      */
-    public static function getSchema($shell, $origin)
+    public static function getSchema($shell, $origin, $folder)
     {
         $name = get_class($shell);
 
@@ -30,7 +30,7 @@ class Anchor
             return self::$schemas[$name];
         }
 
-        $schema = self::getSchemaFromOrigin($shell, $origin);
+        $schema = self::getSchemaFromOrigin($shell, $origin, $folder);
 
         self::$schemas[$name] = $schema;
 
@@ -44,10 +44,10 @@ class Anchor
      * @param  string  $origin
      * @return mixed
      */
-    protected static function getSchemaFromOrigin($shell, $origin)
+    protected static function getSchemaFromOrigin($shell, $origin, $folder)
     {
         if (method_exists(self::class, 'getSchemaFrom'.$origin)) {
-            return self::{'getSchemaFrom'.$origin}($shell);
+            return self::{'getSchemaFrom'.$origin}($shell, $folder);
         } else {
             throw new \Exception('Schema origin "'.$origin.'" not found.');
         }
