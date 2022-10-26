@@ -47,7 +47,7 @@ class Table extends ComponentWithShell
         // Get all lines from the shell.
         if ($this->lines) {
             $lines = $this->lines;
-        }else if ($this->where == null) {
+        } elseif ($this->where == null) {
             $lines = $this->shell::all();
         } else {
             $lines = ($this->where)($this->shell)->get();
