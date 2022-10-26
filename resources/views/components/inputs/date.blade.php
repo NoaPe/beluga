@@ -1,4 +1,4 @@
-<input type="time"
+<input type="date"
     name="{{ $name }}"
     id="{{ $name }}"
     value="{{ old($name) ?? $shell->getAttribute($name) ?? $data->default ?? '' }}"

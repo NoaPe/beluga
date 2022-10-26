@@ -14,7 +14,7 @@ class DateTime extends DataType
     /**
      * Html input type.
      */
-    public $input_type = 'time';
+    public $input_type = 'datetime';
 
     /**
      * Generate seed value.
