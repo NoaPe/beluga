@@ -62,7 +62,7 @@ class BelongsTo extends Relation
         $class = new $this->schema->settings->class;
 
         foreach ($class::all() as $item) {
-            $options[(string) $item->id] = $item->toString();
+            $options[(string) $item->id] = $item->id;
         }
 
         return $options;
