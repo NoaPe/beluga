@@ -25,6 +25,13 @@ class Table extends ComponentWithShell
     protected $lines;
 
     /**
+     * Columns to display. If null, all columns will be displayed.
+     * 
+     * @var array
+     */
+    protected $displayColumns;
+
+    /**
      * Create a new component instance.
      *
      * @param  mixed  $shell
@@ -32,12 +39,15 @@ class Table extends ComponentWithShell
      * @param  mixed  $lines
      * @return void
      */
-    public function __construct($shell, $where = null, $lines = null)
+    public function __construct($shell, $where = null, $lines = null, $displayColumns = null)
     {
         parent::__construct($shell);
 
         $this->where = $where;
         $this->lines = $lines;
+        if ($displayColumns) {
+            $this->displayColumns = explode(',', $displayColumns);
+        }
     }
 
     /**
@@ -58,14 +68,23 @@ class Table extends ComponentWithShell
             $lines = ($this->where)($this->shell)->get();
         }
 
-        $attributes = $this->getAttributesFromGroup($schema);
+        if ($this->displayColumns) {
+            $attributes = [];
+            foreach ($this->displayColumns as $column) {
+                $attributes[$column] = $this->shell->getDataSchema($column);
+            }
+        } else {
+            $attributes = $this->getAttributesFromGroup($schema);
+        }
 
-        return [
+        $datas = [
             'schema' => $schema,
             'lines' => $lines,
             'shell' => $this->shell,
             'data_attributes' => $attributes,
         ];
+
+        return $datas;
     }
 
     /**
