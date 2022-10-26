@@ -46,6 +46,7 @@ class BelugaServiceProvider extends PackageServiceProvider
         ], 'assets');
 
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'beluga');
+        $this->mergeConfigFrom(__DIR__.'/../config/internal.php', 'beluga.internal');
 
         $this->registerRoutes();
 

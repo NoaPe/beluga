@@ -2,6 +2,8 @@
 
 namespace NoaPe\Beluga\Http\Components;
 
+use NoaPe\Beluga\Beluga;
+
 class Table extends ComponentWithShell
 {
     use Concerns\HasAddableDatas;
@@ -37,9 +39,11 @@ class Table extends ComponentWithShell
      * @param  mixed  $shell
      * @param  mixed  $where
      * @param  mixed  $lines
+     * @param  mixed  $displayColumns
+     * @param  mixed  $actions
      * @return void
      */
-    public function __construct($shell, $where = null, $lines = null, $displayColumns = null)
+    public function __construct($shell, $where = null, $lines = null, $displayColumns = null, $actions = null)
     {
         parent::__construct($shell);
 
@@ -47,6 +51,14 @@ class Table extends ComponentWithShell
         $this->lines = $lines;
         if ($displayColumns) {
             $this->displayColumns = explode(',', $displayColumns);
+        }
+
+        if ($actions) {
+            $actions = explode(',', $actions);
+            foreach ($actions as $key => $action) {
+                $actions[$key] = Beluga::qualifyAction($action);
+            }
+            $this->addDatas(['actions' => $actions]);
         }
     }
 

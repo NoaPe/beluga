@@ -107,4 +107,21 @@ class Beluga
             }
         }
     }
+
+    /**
+     * Give an action class from his name and the configuration.
+     * 
+     * @param  string  $name
+     * @return  string
+     */
+    public static function qualifyAction($name)
+    {
+        $class = config('beluga.internal.action_namespace').'\\'.$name;
+
+        if (class_exists($class)) {
+            return $class;
+        }
+
+        return $name;
+    }
 }
