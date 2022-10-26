@@ -33,7 +33,7 @@ class Shell extends Model
 
     /**
      * Schema folder
-     * 
+     *
      * @var string
      */
     protected $schema_folder = '';
