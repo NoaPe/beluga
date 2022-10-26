@@ -26,7 +26,7 @@ class Table extends ComponentWithShell
 
     /**
      * Columns to display. If null, all columns will be displayed.
-     * 
+     *
      * @var array
      */
     protected $displayColumns;
