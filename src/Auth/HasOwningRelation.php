@@ -87,7 +87,7 @@ trait HasOwningRelation
 
     /**
      * Add owner type to the shell.
-     * 
+     *
      * @param  string  $owner
      * @return void
      */
@@ -98,7 +98,7 @@ trait HasOwningRelation
 
     /**
      * Add editor type to the shell.
-     * 
+     *
      * @param  string  $editor
      * @return void
      */
@@ -109,7 +109,7 @@ trait HasOwningRelation
 
     /**
      * Add viewer type to the shell.
-     * 
+     *
      * @param  string  $viewer
      * @return void
      */
