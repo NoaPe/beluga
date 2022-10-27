@@ -48,7 +48,7 @@ abstract class ShellController extends Controller
 
     /**
      * Views
-     * 
+     *
      * @var array
      */
     protected $views = [
@@ -113,7 +113,7 @@ abstract class ShellController extends Controller
 
     /**
      * Get redirection route
-     * 
+     *
      * @param  string  $action
      * @param  array  $parameters
      * @return string
@@ -158,13 +158,13 @@ abstract class ShellController extends Controller
 
     /**
      * Display a listing of the resource. Return view.
-     * 
+     *
      * @return \Illuminate\View\View
      */
     public function index()
     {
         return view($this->views['index'], [
-            'shell' => $this->shell
+            'shell' => $this->shell,
         ]);
     }
 
@@ -210,7 +210,7 @@ abstract class ShellController extends Controller
     public function show($id)
     {
         return view($this->views['show'], [
-            'shell' => $this->shellClass::findOrFail($id)
+            'shell' => $this->shellClass::findOrFail($id),
         ]);
     }
 
@@ -223,7 +223,7 @@ abstract class ShellController extends Controller
     public function edit($id)
     {
         return view($this->views['edit'], [
-            'shell' => $this->shellClass::findOrFail($id)
+            'shell' => $this->shellClass::findOrFail($id),
         ]);
     }
 

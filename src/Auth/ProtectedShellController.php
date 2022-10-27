@@ -2,21 +2,21 @@
 
 namespace NoaPe\Beluga\Auth;
 
-use NoaPe\Beluga\ShellController;
 use Illuminate\Http\Request;
+use NoaPe\Beluga\ShellController;
 
 class ProtectedShellController extends ShellController
 {
     /**
      * Permission prefix
-     * 
+     *
      * @var string
      */
     protected $permission_prefix;
 
     /**
      * Constructor
-     * 
+     *
      * @return void
      */
     public function __construct()
@@ -31,7 +31,7 @@ class ProtectedShellController extends ShellController
 
     /**
      * Check if user has hasPermission method at each call
-     * 
+     *
      * @return mixed
      */
     public function __call($method, $parameters)
@@ -45,7 +45,7 @@ class ProtectedShellController extends ShellController
 
     /**
      * Get permission prefix
-     * 
+     *
      * @return string
      */
     public function getPermissionPrefix()
@@ -55,9 +55,10 @@ class ProtectedShellController extends ShellController
 
     /**
      * Check if user has permission
-     * 
+     *
      * @param  string  $permission
      * @return bool
+     *
      * @throws \Exception
      */
     protected function userHasPermission($permission)
@@ -72,7 +73,7 @@ class ProtectedShellController extends ShellController
 
     /**
      * User can read
-     * 
+     *
      * @return bool
      */
     public function userCanView()
@@ -82,7 +83,7 @@ class ProtectedShellController extends ShellController
 
     /**
      * User can create
-     * 
+     *
      * @return bool
      */
     public function userCanCreate()
@@ -92,7 +93,7 @@ class ProtectedShellController extends ShellController
 
     /**
      * User can update
-     * 
+     *
      * @return bool
      */
     public function userCanUpdate()
@@ -102,7 +103,7 @@ class ProtectedShellController extends ShellController
 
     /**
      * User can delete
-     * 
+     *
      * @return bool
      */
     public function userCanDelete()
@@ -117,7 +118,7 @@ class ProtectedShellController extends ShellController
      */
     public function index()
     {
-        if (!$this->userCanView()) {
+        if (! $this->userCanView()) {
             abort(403);
         }
 
@@ -131,7 +132,7 @@ class ProtectedShellController extends ShellController
      */
     public function create()
     {
-        if (!$this->userCanCreate()) {
+        if (! $this->userCanCreate()) {
             abort(403);
         }
 
@@ -146,7 +147,7 @@ class ProtectedShellController extends ShellController
      */
     public function store(Request $request)
     {
-        if (!$this->userCanCreate()) {
+        if (! $this->userCanCreate()) {
             abort(403);
         }
 
@@ -161,7 +162,7 @@ class ProtectedShellController extends ShellController
      */
     public function show($id)
     {
-        if (!$this->userCanView()) {
+        if (! $this->userCanView()) {
             abort(403);
         }
 
@@ -176,7 +177,7 @@ class ProtectedShellController extends ShellController
      */
     public function edit($id)
     {
-        if (!$this->userCanUpdate()) {
+        if (! $this->userCanUpdate()) {
             abort(403);
         }
 
@@ -192,7 +193,7 @@ class ProtectedShellController extends ShellController
      */
     public function update(Request $request, $id)
     {
-        if (!$this->userCanUpdate()) {
+        if (! $this->userCanUpdate()) {
             abort(403);
         }
 
@@ -207,7 +208,7 @@ class ProtectedShellController extends ShellController
      */
     public function destroy($id)
     {
-        if (!$this->userCanDelete()) {
+        if (! $this->userCanDelete()) {
             abort(403);
         }
 

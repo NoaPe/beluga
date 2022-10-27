@@ -33,7 +33,7 @@ class Table extends ComponentWithShell
 
     /**
      * Actions
-     * 
+     *
      * @var array
      */
     protected $actions;

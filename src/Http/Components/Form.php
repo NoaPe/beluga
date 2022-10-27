@@ -8,18 +8,18 @@ class Form extends ComponentWithShell
 
     /**
      * Method
-     * 
+     *
      * @var string
      */
     protected $method;
-    
+
     /**
      * Constructor
-     * 
-     * @param mixed $shell
-     * @param string $method
+     *
+     * @param  mixed  $shell
+     * @param  string  $method
      */
-    public function __construct($shell, $method = "POST")
+    public function __construct($shell, $method = 'POST')
     {
         parent::__construct($shell);
 
@@ -35,7 +35,7 @@ class Form extends ComponentWithShell
     {
         // Define datas for rendering
         $schema = $this->shell->getSchema();
-        
+
         return [
             'schema' => $schema,
             'shell' => $this->shell,
