@@ -47,6 +47,18 @@ abstract class ShellController extends Controller
     protected $relation_custom_columns = [];
 
     /**
+     * Views
+     * 
+     * @var array
+     */
+    protected $views = [
+        'index' => 'beluga::index',
+        'create' => 'beluga::create',
+        'edit' => 'beluga::edit',
+        'show' => 'beluga::show',
+    ];
+
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -100,11 +112,29 @@ abstract class ShellController extends Controller
     }
 
     /**
+     * Get redirection route
+     * 
+     * @param  string  $action
+     * @param  array  $parameters
+     * @return string
+     */
+    protected function getRedirectionRoute($action, $parameters = null)
+    {
+        $route = $this->shell->getRoute().'.'.$action;
+
+        if (empty($parameters)) {
+            return route($route);
+        }
+
+        return route($route, $parameters);
+    }
+
+    /**
      * Show table from a relation.
      *
      * @param  string  $relation
      * @param  mixed  $id
-     * @return  \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function showRelation($relation, $id)
     {
@@ -113,41 +143,39 @@ abstract class ShellController extends Controller
 
         $foreign_key = isset($settings->foreign_key) ? $settings->foreign_key : $this->shell->getForeignKey();
 
-        return $this->render(Table::class, [
-            'layout' => '',
+        $lines = $settings->class::where($foreign_key, $id);
+        if (isset($settings->where)) {
+            $lines = $lines->where(...$settings->where);
+        }
+
+        return view($this->views['index'], [
+            'shell' => $this->shell,
+            'lines' => $lines->get(),
             'actions' => $this->relation_actions,
             'custom_columns' => $this->relation_custom_columns,
-        ],
-            $settings->class,
-            function ($shell) use ($settings, $id, $foreign_key) {
-                $result = $shell::where($foreign_key, $id);
-                if (isset($settings->where)) {
-                    $result = $result->where(...$settings->where);
-                }
-
-                return $result;
-            },
-        );
+        ]);
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Display a listing of the resource. Return view.
+     * 
+     * @return \Illuminate\View\View
      */
     public function index()
     {
-        return $this->render(Table::class, ['layout' => $this->layout]);
+        return view($this->views['index'], [
+            'shell' => $this->shell
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
-        return $this->render(Form::class, ['layout' => $this->layout]);
+        return view($this->views['create']);
     }
 
     /**
@@ -170,43 +198,33 @@ abstract class ShellController extends Controller
         $model->save();
 
         // Redirect to the index
-        return redirect()->route($this->shell->getRoute().'.index');
+        return redirect($this->getRedirectionRoute('index'));
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function show($id)
     {
-        return $this->render(Show::class,
-            ['layout' => $this->layout],
-            $this->shellClass::findOrFail($id)
-        );
+        return view($this->views['show'], [
+            'shell' => $this->shellClass::findOrFail($id)
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit($id)
     {
-        // Request database
-        $model = $this->shellClass;
-        $model = $model::findOrFail($id);
-
-        return $this->render(
-            Form::class,
-            [
-                'layout' => $this->layout,
-                'method' => 'PUT',
-            ],
-            $this->shellClass::findOrFail($id)
-        );
+        return view($this->views['edit'], [
+            'shell' => $this->shellClass::findOrFail($id)
+        ]);
     }
 
     /**
@@ -233,7 +251,7 @@ abstract class ShellController extends Controller
         $model->save();
 
         // Redirect to the index
-        return redirect()->route($this->shell->getRoute().'.index');
+        return redirect($this->getRedirectionRoute('index'));
     }
 
     /**
@@ -252,25 +270,6 @@ abstract class ShellController extends Controller
         $model->delete();
 
         // Redirect to the index
-        return redirect()->route($this->shell->getRoute().'.index');
-    }
-
-    /**
-     * Render component with datas.
-     *
-     * @param  string  $component
-     * @param  array  $datas
-     * @param  Shell  $shell
-     * @return \Illuminate\Http\Response
-     */
-    public function render($component, $datas = [], $shell = null, $where = null)
-    {
-        $shell = $shell ?? $this->shell;
-
-        $component = new $component($shell, $where);
-
-        $component->addDatas($datas);
-
-        return response($component->render());
+        return redirect($this->getRedirectionRoute('index'));
     }
 }

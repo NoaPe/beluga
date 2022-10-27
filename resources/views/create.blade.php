@@ -3,7 +3,5 @@
 @section('title', 'Creation')
 
 @section('content')
-    <p>Schema creation</p>
-
-    <x-beluga-form shell="Table" :internal="true" />
+    <x-beluga-form :shell="$shell" />
 @endsection

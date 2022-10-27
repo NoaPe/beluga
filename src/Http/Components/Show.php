@@ -4,8 +4,6 @@ namespace NoaPe\Beluga\Http\Components;
 
 class Show extends ComponentWithShell
 {
-    use Concerns\HasAddableDatas;
-
     protected $view = 'beluga::components.show';
 
     /**
@@ -21,7 +19,7 @@ class Show extends ComponentWithShell
      *
      * @return array
      */
-    public function baseDatas()
+    public function getDatas()
     {
         return [
             'shell' => $this->shell,

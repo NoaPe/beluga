@@ -4,5 +4,5 @@
 @section('title', 'Edition')
 
 @section('content')
-    <p>Edition</p>
+    <x-beluga-form :shell="$shell" method="PUT" />
 @endsection

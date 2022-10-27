@@ -6,8 +6,6 @@ use NoaPe\Beluga\Beluga;
 
 class Table extends ComponentWithShell
 {
-    use Concerns\HasAddableDatas;
-
     public $render_settings;
 
     protected $view = 'beluga::components.table';
@@ -34,6 +32,13 @@ class Table extends ComponentWithShell
     protected $displayColumns;
 
     /**
+     * Actions
+     * 
+     * @var array
+     */
+    protected $actions;
+
+    /**
      * Create a new component instance.
      *
      * @param  mixed  $shell
@@ -58,7 +63,7 @@ class Table extends ComponentWithShell
             foreach ($actions as $key => $action) {
                 $actions[$key] = Beluga::qualifyAction($action);
             }
-            $this->addDatas(['actions' => $actions]);
+            $this->actions = $actions;
         }
     }
 
@@ -67,7 +72,7 @@ class Table extends ComponentWithShell
      *
      * @return array
      */
-    public function baseDatas()
+    public function getDatas()
     {
         $schema = $this->shell->getSchema();
 
@@ -94,6 +99,7 @@ class Table extends ComponentWithShell
             'lines' => $lines,
             'shell' => $this->shell,
             'data_attributes' => $attributes,
+            'actions' => $this->actions,
         ];
 
         return $datas;
