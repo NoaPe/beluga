@@ -49,7 +49,7 @@ trait HasJsonSchema
         foreach ($datas as $key => $data) {
             $data->name = $key;
             $data = json_decode(json_encode($data), true);
-            $schema->{$key} = Data::firstOrNew((array) $data);
+            $schema->{$key} = new Data((array) $data);
         }
 
         return $schema;
