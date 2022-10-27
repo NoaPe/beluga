@@ -110,7 +110,7 @@ class Beluga
 
     /**
      * Give an action class from his name and the configuration.
-     * 
+     *
      * @param  string  $name
      * @return  string
      */
