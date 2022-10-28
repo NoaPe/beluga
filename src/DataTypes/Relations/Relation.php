@@ -16,33 +16,30 @@ class Relation extends DataType
      */
     public $relation_function = 'hasOne';
 
-    protected function getRelationInstance()
-    {
-        $settings = $this->shell->getDataSchema($this->name)->settings;
-
-        $foreign_key = isset($settings->foreign_key) ? $settings->foreign_key : $this->shell->getForeignKey();
-
-        $relation = $this->shell->{$this->relation_function}(
-            $settings->class,
-            $foreign_key,
-        );
-        
-        if (isset($settings->where)) {
-            $relation->where(...$settings->where);
-        }
-
-        return $relation;
-    }
-
     /**
      * Register function who add the relation to the shell.
      */
     public function register()
     {
-        $relation = $this->getRelationInstance();
+        $settings = $this->shell->getDataSchema($this->name)->settings;
+
+
+        $relation = $this->relation_function;
+        $class = $settings->class;
+        $foreign_key = isset($settings->foreign_key) ? $settings->foreign_key : $this->shell->getForeignKey();
+        $where = isset($settings->where) ? $settings->where : null;
 
         // Add the method to the shell.
-        ($this->shell)::resolveRelationUsing($this->name, function ($orderModel) use ($relation) {
+        ($this->shell)::resolveRelationUsing($this->name, function ($shell) use ($relation, $class, $foreign_key, $where) {
+            $relation = $shell->{$relation}(
+                $class,
+                $foreign_key
+            );
+
+            if ($where) {
+                $relation->where(...$where);
+            }
+
             return $relation;
         });
     }

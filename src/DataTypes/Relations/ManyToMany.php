@@ -17,15 +17,19 @@ class ManyToMany extends Relation
      */
     public $blueprint_type = false;
     
-    protected function getRelationInstance()
+    public function register()
     {
         $class = $this->shell->getDataSchema($this->name)->settings->class;
+        $relation = $this->relation_function;
 
-        $relation = $this->shell->{$this->relation_function}(
-            $class,
-        );
+        // Add the method to the shell.
+        ($this->shell)::resolveRelationUsing($this->name, function ($shell) use ($relation, $class) {
+            $relation = $shell->{$relation}(
+                $class
+            );
 
-        return $relation;
+            return $relation;
+        });
     }
 
 }
