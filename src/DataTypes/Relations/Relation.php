@@ -26,7 +26,7 @@ class Relation extends DataType
             $settings->class,
             $foreign_key,
         );
-        
+
         if (isset($settings->where)) {
             $relation->where(...$settings->where);
         }

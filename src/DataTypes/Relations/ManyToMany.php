@@ -2,9 +2,6 @@
 
 namespace NoaPe\Beluga\DataTypes\Relations;
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Str;
-
 class ManyToMany extends Relation
 {
     /**
@@ -16,7 +13,7 @@ class ManyToMany extends Relation
      * Remove blueprint column.
      */
     public $blueprint_type = false;
-    
+
     protected function getRelationInstance()
     {
         $class = $this->shell->getDataSchema($this->name)->settings->class;
@@ -27,5 +24,4 @@ class ManyToMany extends Relation
 
         return $relation;
     }
-
 }
