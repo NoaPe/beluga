@@ -13,7 +13,7 @@ class ManyToMany extends Relation
      * Remove blueprint column.
      */
     public $blueprint_type = false;
-    
+
     public function register()
     {
         $class = $this->shell->getDataSchema($this->name)->settings->class;
