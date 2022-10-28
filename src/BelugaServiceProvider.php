@@ -37,8 +37,11 @@ class BelugaServiceProvider extends PackageServiceProvider
             ]);
             $this->publishes([
                 __DIR__.'/../config/config.php' => config_path('beluga.php'),
-                __DIR__.'/../config/permissions.php' => config_path('permissions.php'),
             ], 'config');
+            
+            $this->publishes([
+                __DIR__.'/../config/permissions.php' => config_path('permissions.php'),
+            ], 'permissions');
         }
 
         $this->publishes([

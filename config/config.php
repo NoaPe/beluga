@@ -66,6 +66,7 @@ return [
         'BelongsTo' => NoaPe\Beluga\DataTypes\Relations\BelongsTo::class,
         'HasMany' => NoaPe\Beluga\DataTypes\Relations\HasMany::class,
         'HasOne' => NoaPe\Beluga\DataTypes\Relations\HasOne::class,
+        'ManyToMany' => NoaPe\Beluga\DataTypes\Relations\ManyToMany::class,
 
         'Geo\Position' => NoaPe\Beluga\DataTypes\Geo\Position::class,
         'Geo\Polyline' => NoaPe\Beluga\DataTypes\Geo\Polyline::class,

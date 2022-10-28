@@ -1,4 +1,4 @@
-<select name="{{ $name }}" {{(isset($data->settings->visible) && $data->settings->visible == false) || 
+<select name="{{ $name }}" class="{{ isset($class) ? $class : '' }}" {{(isset($data->settings->visible) && $data->settings->visible == false) || 
         isset($data->hidden) && $data->hidden ? 'hidden' : '' }}>
     @foreach($options as $value => $text)
         @if(is_array($text))
