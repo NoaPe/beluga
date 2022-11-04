@@ -39,6 +39,13 @@ class Table extends ComponentWithShell
     protected $actions;
 
     /**
+     * Custom columns
+     * 
+     * @var array
+     */
+    protected $custom_columns;
+
+    /**
      * Create a new component instance.
      *
      * @param  mixed  $shell
@@ -46,9 +53,10 @@ class Table extends ComponentWithShell
      * @param  mixed  $lines
      * @param  mixed  $displayColumns
      * @param  mixed  $actions
+     * @param  mixed  $customColumns
      * @return void
      */
-    public function __construct($shell, $where = null, $lines = null, $displayColumns = null, $actions = null)
+    public function __construct($shell, $where = null, $lines = null, $displayColumns = null, $actions = null, $customColumns = null)
     {
         parent::__construct($shell);
 
@@ -65,6 +73,7 @@ class Table extends ComponentWithShell
             }
             $this->actions = $actions;
         }
+        $this->custom_columns = $customColumns;
     }
 
     /**
@@ -100,6 +109,7 @@ class Table extends ComponentWithShell
             'shell' => $this->shell,
             'data_attributes' => $attributes,
             'actions' => $this->actions,
+            'custom_columns' => $this->custom_columns,
         ];
 
         return $datas;

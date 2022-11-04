@@ -31,7 +31,7 @@
 
                     @if(isset($custom_columns))
                         @foreach($custom_columns as $name => $custom_column)
-                            <td>{{ $custom_column($line) }}</td>
+                            <td>{!! $custom_column($line) !!}</td>
                         @endforeach
                     @endif
 
