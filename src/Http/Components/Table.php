@@ -40,7 +40,7 @@ class Table extends ComponentWithShell
 
     /**
      * Custom columns
-     * 
+     *
      * @var array
      */
     protected $custom_columns;
